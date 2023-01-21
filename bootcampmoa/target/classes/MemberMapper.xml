@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="members">
+	
+	<select id="searchNick" parameterType="string" resultType="string">
+	SELECT nickname FROM member WHERE nickname = #{input}
+	</select>
+	<select id="searchId" parameterType="string" resultType="string">
+	SELECT id FROM member WHERE id = #{input}
+	</select>
+	<insert id="insertMember"  parameterType="vo.MemberVO">
+	  	<!-- 	<selectKey resultType="int" keyProperty="id" order="BEFORE">
+      		select reply_seq.nextval from dual     
+    	</selectKey>  mlevel처리 어려움. 임의로 회원가입에 0으로 설정함-->
+  		INSERT INTO member(mnum,mlevel,id,pwd,name,email,profile,phone,nickname,question,answer) values (memberseq.nextval,#{mlevel}, #{id}, #{pwd},#{name},#{email},#{profile},#{phone},#{nickname},#{question},#{answer})
+	</insert>
+	
+	<select id="getMemberInfo" parameterType="_int" resultType="vo.MemberVO">
+	SELECT * FROM member WHERE mnum = #{mnum}
+	</select>
+</mapper>

@@ -12,6 +12,7 @@ public class MemberVO {
 	private String nickname;
 	private String question;
 	private String answer;
+	
 	public int getMnum() {
 		return mnum;
 	}

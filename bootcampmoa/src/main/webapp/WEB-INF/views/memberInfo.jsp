@@ -85,52 +85,62 @@
 <body>
 <div class="wrap">
 <c:if test="${ !empty list }" >
-	<h1 onclick="location.href='/bootcampmoa/viewMemberInfo">회원정보 조회</h1>
+	<h2 onclick="location.href='/bootcampmoa/viewMemberInfo">회원정보 조회</h2>
 	<!-- MemberController에서 로그인 후 저장된 addMember된 member을 가져와서 mnum을 넣어줘야 함. 현재는 임의로 getMnum으로 값을 넣은 상태 -->
-
 	<table class="userinfo">
 		<c:forEach var="vo" items="${list}">
 			<tr>
 			<td>아이디</td>
-			<td>${vo.Id}></td>
+			<td>${vo.id}</td>
 			</tr>
 			
 			<tr>
 			<td>비밀번호</td>
-			<td>${vo.Pwd}</td>
+			<td>${vo.pwd}</td>
 			</tr>
 			
 			<tr>
 			<td>이름</td>
-			<td>${vo.Name}</td>
+			<td>${vo.name}</td>
+			</tr>
+			
+			<tr>
+			<td>프로필</td>
+			<td>${vo.profile}</td>
 			</tr>
 			
 			<tr>
 			<td>이메일</td>
-			<td>${vo.Email}</td>
+			<td>${vo.email}</td>
 			</tr>
 			
 			<tr>
 			<td>전화번호</td>
-			<td>${vo.Phone}</td>
+			<td>${vo.phone}</td>
 			</tr>
 			
 			<tr>
 			<td>닉네임</td>
-			<td>${vo.Nickname}</td>
+			<td>${vo.nickname}</td>
 			</tr>
 			
 			<tr>
 			<td>보안 질문</td>
-			<td>${vo.Question}</td>
+			<td>${vo.question}</td>
 			</tr>
 			
 			<tr>
 			<td>답변</td>
-			<td>${vo.Answer}</td>
+			<td>${vo.answer}</td>
 			</tr>
 		</c:forEach>
 	</table>
+</c:if>
+
+<c:if test="${ !empty msg }" >
+	<script>
+		alert('${ msg }');
+	</script>
 </c:if>
 
 	

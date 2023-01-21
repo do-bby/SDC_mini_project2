@@ -5,10 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,12 +30,32 @@ public class MemberController {
 		return mav;
 	}
 	
+	@PostMapping("/updateMemberInfo") /// 회원가입 기능
+	public ModelAndView update(MemberVO vo) {
+		boolean res = dao.updateM(vo);
+		ModelAndView mav = new ModelAndView();
+		if (res) {
+			mav.addObject("msg", "회원정보 수정이 완료되었습니다");
+		} else {
+			mav.addObject("msg", "오류가 발생했습니다.");
+		}
+		mav.setViewName("memberInfo"); // 임의 작성
+		return mav;
+	}
+	
 	
 	@GetMapping(value="/viewMemberInfo")
 	@ResponseBody
-	public List<MemberVO> list_info(@RequestParam(value = "mnum", required = false, defaultValue = "4") int mnum) {
+	public ModelAndView list_info(@RequestParam(value = "mnum", required = false, defaultValue = "4") int mnum) {
         List<MemberVO> list = dao.getMemberInfo(mnum); //test를 위해 4로 임의 설정상태
-        return list;
+        ModelAndView mav = new ModelAndView();
+        if (list.size() != 0) {
+			mav.addObject("list", list);
+		} else {
+			mav.addObject("msg", "등록된 회원정보가 없습니다.");
+		}
+		mav.setViewName("memberInfo");
+		return mav;
     }
 	
 	 @GetMapping("/duplicateCheck") //여기서 input은 id or 닉네임이고 type은 id인지 닉네임인지 구분하기 

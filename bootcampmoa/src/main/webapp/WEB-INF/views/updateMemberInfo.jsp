@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page import = "java.util.ArrayList, vo.MemberVO"%>
 <%@ page import ="dao.MemberMyBatisDao" %>
 <!DOCTYPE html>
@@ -91,18 +92,7 @@
 	}
 
 </style>
-<%	
-			
-			boolean loginCheck = (boolean)session.getAttribute("isLogOn");
-			MemberVO mvo = (MemberVO)session.getAttribute("loginVO");
-			if(loginCheck ==false){
-			%>
-			<script>
-				alert("로그인 후 회원정보 조회가 가능합니다");
-			</script><%
-			response.sendRedirect("/MemberLogin.jsp");
-				}
-			%>
+
 
 <script>
 function openIdCheck(){
@@ -118,50 +108,47 @@ function opennickCheck(){
 </head>
 <body>
 <div class="wrap">
-<%
-	MemberMyBatisDao mdao = new MemberMyBatisDao();
-	ArrayList<MemberVO> info = (ArrayList<MemberVO>)mdao.getMemberInfo(mvo.getMnum()); //test
-	if(info != null){
-%>
-	<h2><%=mvo.getNickname()%>님의 회원정보 수정</h2>
-	<form name="userInfo" action="member" method="post">
-		<input type="hidden" name="input" value="infoRevise"> 
-		<table class="userinfo">
-		
-<%
-		for(MemberVO vo : info){
-%>
-			
+
+<c:if test="${ !empty list }" >
+	<h2 onclick="location.href='/bootcampmoa/updateMemberInfo">회원정보 수정</h2>
+	<!-- MemberController에서 로그인 후 저장된 addMember된 member을 가져와서 mnum을 넣어줘야 함. 현재는 임의로 getMnum으로 값을 넣은 상태 -->
+	<table class="userinfo">
+		<c:forEach var="vo" items="${list}">	
 			<tr>
 			<td>아이디</td>
-			<td><input type="text" name="mid" id ="id" value="<%=vo.getId() %>" style="width:85%;">
+			<td><input type="text" name="mid" id ="id" value=${vo.id} style="width:85%;">
 			<input type="button" value="중복확인" onclick="openIdCheck()">
 			<input type="hidden" name="idDuplication" value="idUncheck"></td>
 			</tr>
 			
 			<tr>
 			<td>비밀번호</td>
-			<td><input type="text" name="mpwd" value="<%=vo.getPwd() %>"></td>
+			<td><input type="text" name="mpwd" value=${vo.pwd}></td>
 			</tr>
 			
 			<tr>
 			<td>이름</td>
-			<td><input type="text" name="mname" value="<%=vo.getName() %>"></td>
+			<td><input type="text" name="mname" value=${vo.name}></td>
+			</tr>
+			
+			<tr>
+			<td>프로필</td>
+			<td><input type="text" name="profile" value=${vo.profile}></td>
 			</tr>
 			
 			<tr>
 			<td>이메일</td>
-			<td><input type="text" name="memail" value="<%=vo.getEmail() %>"></td>
+			<td><input type="text" name="memail" value=${vo.email}></td>
 			</tr>
 			
 			<tr>
 			<td>전화번호</td>
-			<td><input type="text" name="mpnum" value="<%=vo.getPhone() %>"></td>
+			<td><input type="text" name="mpnum" value=${vo.phone}></td>
 			</tr>
 			
 			<tr>
 			<td>닉네임</td>
-			<td><input type="text" name="mnname" id ="nick" value="<%=vo.getNickname() %>" style="width:85%;">
+			<td><input type="text" name="mnname" id ="nick" value=${vo.nickname} style="width:85%;">
 			<input type="button" value="중복확인" onclick="opennickCheck()">
 			<input type="hidden" name="nickDuplication" value="nickUncheck"></td>
 			</tr>
@@ -170,7 +157,7 @@ function opennickCheck(){
 			<td>보안 질문</td>
 			<td>
 			<select name="mquestion" class="q">
-								<option value="<%=vo.getQuestion() %>">"<%=vo.getQuestion() %>"</option>
+								<option value=${vo.question}>${vo.question}</option>
 								<option value="1">어머니의 성함은?</option>
 								<option value="2">아버지의 성함은?</option>
 								<option value="3">나의 보물1호는?</option>
@@ -183,29 +170,25 @@ function opennickCheck(){
 								</td>	
 			</tr>
 			<tr><td>
-			<input type="hidden" name="mnum" value="<%=vo.getMnum() %>">
+			<input type="hidden" name="mnum" value=${vo.mnum}>
 			</td></tr>
 			<tr>
 			<td>답변</td>
-			<td><input type="text" name="manswer" value=<%=vo.getAnswer() %>></td>
+			<td><input type="text" name="manswer" value=${vo.answer}></td>
 			</tr>
-<%
-		}
-	}
-%>
+</c:forEach>
 	</table>
-	
+</c:if>
+
+<c:if test="${ !empty msg }" >
+	<script>
+		alert('${ msg }');
+	</script>
+</c:if>
+
 	<input type="submit" class="infobutton" value="수정 완료">
 	<button type="button" class="infobutton" onclick="location.href='MemberInfo.jsp'">뒤로가기</button>
-	</form> 
-	<%	
-								if (request.getAttribute("msg") != null) { 
-								%>
-								<script>
-									alert('${ msg }');
-								</script> 
-								<% 
-								} 
-								%>
+
+	
 </div>
 </body>

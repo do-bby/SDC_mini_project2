@@ -18,6 +18,12 @@
   		INSERT INTO member(mnum,mlevel,id,pwd,name,email,profile,phone,nickname,question,answer) values (memberseq.nextval,#{mlevel}, #{id}, #{pwd},#{name},#{email},#{profile},#{phone},#{nickname},#{question},#{answer})
 	</insert>
 	
+	<insert id="updateM"  parameterType="vo.MemberVO"> 
+    	<!-- mlevel처리 어려움. 임의로 회원가입에 0으로 설정함--> -->
+  		INSERT INTO member(mnum,mlevel,id,pwd,name,email,profile,phone,nickname,question,answer) values (#{mnum},#{mlevel}, #{id}, #{pwd},#{name},#{email},#{profile},#{phone},#{nickname},#{question},#{answer})
+		UPDATE member SET mnum = #{mnum}, mlevel=#{mlevel}, id=#{id},pwd=#{pwd},name =#{name}, email= #{email}, profile=#{profile}, phone=#{phone},nickname=#{nickname},question=#{question}, answer=#{answer}
+	</insert>
+	
 	<select id="getMemberInfo" parameterType="_int" resultType="vo.MemberVO">
 	SELECT * FROM member WHERE mnum = #{mnum}
 	</select>

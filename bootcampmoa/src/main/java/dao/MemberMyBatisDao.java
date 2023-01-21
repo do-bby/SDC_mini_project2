@@ -38,4 +38,13 @@ public class MemberMyBatisDao {
 		List<MemberVO> list = session.selectList(statement,mnum);//아이디 중복체크
 		return list;
 	}
+	
+	public boolean updateM(MemberVO vo) {
+		boolean res = true;
+		String statement = "members.updatetMember"; //resource의 mapper에 설정필요
+		if(session.insert(statement,vo) != 1) {
+			res = false;
+		}
+		return res;
+	}
 }

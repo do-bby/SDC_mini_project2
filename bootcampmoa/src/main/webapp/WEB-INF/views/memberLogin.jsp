@@ -1,3 +1,4 @@
+<%@ page import="vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -38,5 +39,12 @@
 	<input type="password" name="pwd" id="pwd" placeholder="패스워드를 입력하세요" required/>
 	<input type="submit" name="login" id="login" value="로그인"/>
 </form>
+<c:if test="${ !empty msg }" >
+	<script>
+		alert('${ msg }');
+	</script>
+</c:if>
+<div>
+</div>
 </body>
 </html>

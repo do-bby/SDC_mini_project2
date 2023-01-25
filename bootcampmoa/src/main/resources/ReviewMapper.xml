@@ -4,8 +4,39 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="review">
 	<select id="selectReview"  resultType="vo.ReviewVO">
-		select rnum, good, bad, total, teachsat, edusat, learnsat, rdate, mnum, bnum from review
-	</select> 	
+		select * from review
+	</select>
+	<select id="selectOneReview"  resultType="vo.ReviewVO" parameterType="_int" >
+       select rnum, good, bad, total, teachsat, edusat, learnsat, rdate, mnum, bnum from review where rnum = #{rnum}
+    </select>
+    <select id = "pagingReview">
+    	select rnum,good,bad,total, teachsat, edusat, learnsat,rdate,mnum,bnum,rownum from 
+		(select rnum, good,bad, total, teachsat, edusat, learnsat,rdate,mnum,bnum, rownum from review)
+		where rownum between 1 and 7;
+    </select>
+    <insert id="insertReview"  parameterType="vo.ReviewVO">
+        <selectKey resultType="_int" keyProperty="rnum" order="BEFORE">
+            select reviewseq.nextval from dual     
+       </selectKey>  
+          insert into review (rnum, good, bad, total, teachsat, edusat, learnsat, rdate, mnum, bnum) values 
+          (#{rnum}, #{good}, #{bad}, #{total},#{teachsat},#{edusat},#{learnsat},#{rdate},#{mnum},#{bnum})
+   </insert>
+   <delete id="deleteReview"  parameterType="_int"  >
+       delete from review where rnum = #{rnum}
+   </delete>
+   <update id="updateReview"  parameterType="vo.ReviewVO"  >
+       update review set  
+            good = #{good}, 
+            bad = #{bad},
+            total = #{total},
+            teachsat = #{teachsat},
+            edusat = #{edusat},
+            learnsat = #{learnsat},
+            rdate = #{rdate},
+            mnum = #{mnum},
+            bnum = #{bnum}
+      where rnum = #{rnum}
+   </update>
 </mapper>
 
 

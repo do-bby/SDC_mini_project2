@@ -4,7 +4,7 @@ public class BootcampVO {
 	private int bnum;
 	private String program;
 	private String academy;
-	private String rogo;
+	private String logo;
 	private String img;
 	private String url;
 	private String address;
@@ -28,11 +28,11 @@ public class BootcampVO {
 	public void setAcademy(String academy) {
 		this.academy = academy;
 	}
-	public String getRogo() {
-		return rogo;
+	public String getLogo() {
+		return logo;
 	}
 	public void setRogo(String rogo) {
-		this.rogo = rogo;
+		this.logo = rogo;
 	}
 	public String getImg() {
 		return img;

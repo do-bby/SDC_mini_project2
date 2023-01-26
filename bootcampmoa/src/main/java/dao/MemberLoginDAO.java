@@ -23,4 +23,16 @@ public class MemberLoginDAO {
 		}
 		return count;
 	}
+	
+	//비밀번호찾기
+	public void selectMemberPwd(MemberVO vo) {
+		String statement = "MemberLoginMapper.selectMemberPwd";
+		session.selectOne(statement, vo);
+	}
+	
+	//회원탈퇴
+	public void deleteMember(String id) {
+		String statement = "MemberLoginMapper.deleteMember";
+		session.delete(statement);
+	}
 }

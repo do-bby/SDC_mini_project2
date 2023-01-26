@@ -216,45 +216,44 @@ function openIdCheck() {
 </head>
 <body>
 <div class="wrap">
-	<h2 onload="location.href='/bootcampmoa/viewMemberInfo">회원정보 수정</h2>
-	<form name="userInfo" action="/bootcampmoa/updateMemberInfo" method="POST">
+	<h2>회원정보 수정</h2>
+	<form method="GET" name="userInfo" action="/bootcampmoa/updateMemberInfo" >
 	<table class="userinfo">
-		<c:forEach var="vo" items="${list}">	
 			<tr>
 			<td>아이디</td>
-			<td><input type="text" name="id" id ="id" value="${vo.id}" style="width:85%;">
+			<td><input type="text" name="id" id ="id" value="${val.id}" style="width:85%;">
 			<input type="button" value="중복확인" onclick="openIdCheck()">
 			<input type="hidden" name="idDuplication" value="idUncheck"></td>
 			</tr>
 			
 			<tr>
 			<td>비밀번호</td>
-			<td><input type="text" name="pwd" value="${vo.pwd}"></td>
+			<td><input type="text" name="pwd" value="${val.pwd}"></td>
 			</tr>
 			
 			<tr>
 			<td>이름</td>
-			<td><input type="text" name="name" value="${vo.name}"></td>
+			<td><input type="text" name="name" value="${val.name}"></td>
 			</tr>
 			
 			<tr>
 			<td>프로필</td>
-			<td><input type="text" name="profile" value="${vo.profile}"></td>
+			<td><input type="text" name="profile" value="${val.profile}"></td>
 			</tr>
 			
 			<tr>
 			<td>이메일</td>
-			<td><input type="text" name="email" value="${vo.email}"></td>
+			<td><input type="text" name="email" value="${val.email}"></td>
 			</tr>
 			
 			<tr>
 			<td>전화번호</td>
-			<td><input type="text" name="phone" value="${vo.phone}"></td>
+			<td><input type="text" name="phone" value="${val.phone}"></td>
 			</tr>
 			
 			<tr>
 			<td>닉네임</td>
-			<td><input type="text" name="nickname" id ="nickname" value="${vo.nickname}" style="width:85%;">
+			<td><input type="text" name="nickname" id ="nickname" value="${val.nickname}" style="width:85%;">
 			<input type="button" value="중복확인" onclick="opennickCheck()">
 			<input type="hidden" name="nickDuplication" value="nickUncheck"></td>
 			</tr>
@@ -262,8 +261,25 @@ function openIdCheck() {
 			<tr>
 			<td>보안 질문</td>
 			<td>
-			<select name="mquestion" class="q">
-								<option value="${vo.question}">${vo.question}</option>
+			<c:if test="${val.question == 1}">
+           		<c:set var="now" value="어머니의 성함은?" />
+        	</c:if>
+        	<c:if test="${val.question == 2}">
+            	<c:set var="now" value="아버지의 성함은?" /></c:if>
+            <c:if test="${val.question == 3}">
+            	<c:set var="now" value="나의 보물1호는?" /></c:if>
+            <c:if test="${val.question == 4}">
+            	<c:set var="now" value="기억에 남는 추억의 장소는?" /></c:if>
+            <c:if test="${val.question == 5}">
+            	<c:set var="now" value="기억에 남는 추억의 선물은?" /></c:if>
+            <c:if test="${val.question == 6}">
+            	<c:set var="now" value="인상 깊게 읽은 책 이름은?" /></c:if>
+            <c:if test="${val.question == 7}">
+            	<c:set var="now" value="다시 태어나면 되고 싶은 것은?" /></c:if>
+            <c:if test="${val.question == 8}">
+            	<c:set var="now" value="내가 좋아하는 책 이름은?" /></c:if>	
+			<select name="question" class="q">
+								<option value="${val.question}">${now}</option>
 								<option value="1">어머니의 성함은?</option>
 								<option value="2">아버지의 성함은?</option>
 								<option value="3">나의 보물1호는?</option>
@@ -276,18 +292,17 @@ function openIdCheck() {
 								</td>	
 			</tr>
 			<tr><td>
-			<input type="hidden" name="mnum" value="${vo.mnum}">
+			<input type="hidden" name="mnum" value="${val.mnum}">
 			</td></tr>
 			<tr>
 			<td>답변</td>
-			<td><input type="text" name="manswer" value="${vo.answer}"></td>
+			<td><input type="text" name="answer" value="${val.answer}"></td>
 			</tr>
-			
-		</c:forEach>
+
 	</table>
 
-	<input type="submit" class="infobutton" value="수정 완료" onclick="checkvalue()">
-	<button type="button" class="infobutton" onclick="location.href='memberInfo'">뒤로가기</button>
+	<input type="submit" class="infobutton" value="수정 완료" onclick="return checkvalue()">
+	<button type="button" class="infobutton" onclick="location.href='viewMemberInfo'">뒤로가기</button>
 </form>
 	
 </div>

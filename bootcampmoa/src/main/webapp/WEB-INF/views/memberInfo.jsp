@@ -30,7 +30,7 @@
 	}
 	
 	h2{
-	margin-left:20px;
+	margin-left:40px;
 	color:#ffff;
 	padding: 10px;
 	text-align: center;
@@ -84,9 +84,9 @@
 </head>
 <body>
 <div class="wrap">
+
 <c:if test="${ !empty list }" > 
-	<c:set var="mnum" value="${mnum}" scope="session" />
-	<h2 onload="location.href='/bootcampmoa/viewMemberInfo ? mnum='+${mnum}">회원정보 조회</h2>
+	<h2 onload="location.href='/bootcampmoa/viewMemberInfo">회원정보 조회</h2>
 	<table class="userinfo">
 		<c:forEach var="vo" items="${list}">
 			<tr>
@@ -126,23 +126,36 @@
 			
 			<tr>
 			<td>보안 질문</td>
-			<td>${vo.question}</td>
+			<td>
+			<c:if test="${vo.question == 1}">
+           	 어머니의 성함은?
+        	</c:if>
+        	<c:if test="${vo.question == 2}">
+            	아버지의 성함은?</c:if>
+            <c:if test="${vo.question == 3}">
+            	나의 보물1호는?</c:if>
+            <c:if test="${vo.question == 4}">
+            	기억에 남는 추억의 장소는?</c:if>
+            <c:if test="${vo.question == 5}">
+            	기억에 남는 추억의 선물은?</c:if>
+            <c:if test="${vo.question == 6}">
+            	인상 깊게 읽은 책 이름은?</c:if>
+            <c:if test="${vo.question == 7}">
+            	다시 태어나면 되고 싶은 것은?</c:if>
+            <c:if test="${vo.question == 8}">
+            	내가 좋아하는 책 이름은?</c:if>	
+			</td>
 			</tr>
 			
 			<tr>
 			<td>답변</td>
 			<td>${vo.answer}</td>
 			</tr>
+			<c:set var="mnum" value="${vo.mnum}"/>
 		</c:forEach>
 	</table>
 </c:if>
-<c:if test="${ sessionScope.vo ==null }" >
-<script>
-		alert('로그인이 필요합니다' ,function(){
-			   location.href = "memberLogin";}
-			   );
-	</script>
-</c:if>
+
 <c:if test="${ !empty msg }" >
 	<script>
 		alert('${ msg }');
@@ -150,8 +163,8 @@
 </c:if>
 
 	
-	<a href="${header.referer}">메인페이지로 돌아가기</a>
-	<button type="button" onclick="location.href='updateMemberInfo.jsp'">회원정보 수정</button>
+	<button type="button" onclick= "location.href='bootmoaMain'">메인페이지로 돌아가기</button>
+	<button type="button" onclick="location.href='/bootcampmoa/memberinfo?mnum=${mnum}'">회원정보 수정</button>
 
 </div>
 </body>

@@ -19,21 +19,22 @@
 	
 	
 	select,input{
-	text-align:'center';
-	margin-left: auto;
+	text-align:left;
+	margin-left: 120px;
 	margin-right: auto;
 	padding: 10px;
 	background-color:#FFFFFF;
 	margin: 10px;
-	width: 70%
+	width: 70%;
 	}
 	
 	select{
-	width: 78%;
+	width: 72%;
 	}
 	
 	h1{
-	margin-left:30px;
+	margin-top: 10%;
+	margin-left: 120px;
 	color:#ffff;
 	padding: 10px;
 	text-align: center;
@@ -50,8 +51,6 @@
 	}
 	
 	div.wrap{
-	display: block;
-    text-align: center;
 	margin-left: auto;
 	margin-right:auto;
 	position: relative;
@@ -64,6 +63,7 @@
 	}
 	
 	.button{
+	text-align: center;
 	width: 200px;
 	border:0;
 	font-size:14px;
@@ -73,6 +73,7 @@
 	
 	
 	input[type=button]{
+	text-align: center;
 	height: auto;
 	width: 100px;
 	border:0;
@@ -82,16 +83,15 @@
 	}
 	
 	form{
-	display: inline-block;
-	padding: 20px;
+	padding-left: 120px;
+	padding-top: 20px;
 	margin-left: auto;
 	margin-right:auto;
 	height: auto;
 	text-align: left;
 	}
 	
-	
-	
+
 
 </style>
 
@@ -168,7 +168,6 @@
 
 		if ("${ !empty msg }")
 			alert('${ msg }');
-		
 
 	}
 
@@ -251,13 +250,11 @@
 				<option value="8">내가 좋아하는 책 이름은?</option>
 			</select> <br> 
 			<input placeholder="답변을 입력하세요." name="answer" required><br>
-			<input type="submit" class="button" value="회원가입 완료하기" onclick="checkvalue()">
+			<input type="submit" class="button" value="회원가입 완료하기" onclick="return checkvalue()">
 
 
 		</form>
-		<script>
 	
-	</script>
 
 	</div>
 </body>

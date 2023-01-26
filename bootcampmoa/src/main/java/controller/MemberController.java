@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,7 +26,7 @@ public class MemberController {
 		return mav;
 	}
 	
-
+	
 	
 	@PostMapping("/insertNewmember") /// 회원가입 기능
 	public ModelAndView insert(MemberVO vo) {
@@ -38,36 +37,48 @@ public class MemberController {
 		} else {
 			mav.addObject("msg", "오류가 발생했습니다.");
 		}
-		mav.setViewName("memberSignUp"); // 회원가입 이후 로그인 창 이동
+		mav.setViewName("memberLogin");// 회원가입 이후 로그인 창 이동
 		return mav;
 	}
 	
+	@GetMapping("/memberinfo")
+	public ModelAndView viewinfo(int mnum) {
+		MemberVO vo = dao.getMembervo(mnum);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("val",vo);
+		mav.setViewName("updateMemberInfo");
+		return mav;
+	}
 	
-	@PostMapping("/updateMemberInfo") /// 회원정보 수정 기능
-	public ModelAndView update(MemberVO vo) { 
+	@GetMapping("/updateMemberInfo") /// 회원정보 수정 기능
+	public String update(MemberVO vo) { 
 		boolean res = dao.updateM(vo);
 		ModelAndView mav = new ModelAndView();
 		if (res) {
+			mav.addObject("list",dao.getMemberInfo(vo.getId()));
 			mav.addObject("msg", "회원정보 수정이 완료되었습니다");
 		} else {
 			mav.addObject("msg", "오류가 발생했습니다.");
 		}
-		mav.setViewName("memberInfo"); // 회원정보 수정 후 회원정보 조회창 이동
-		return mav;
+		 // 회원정보 수정 후 회원정보 조회창 이동
+		return "redirect:/viewMemberInfo";
 	}
 	
 	
 	@GetMapping(value="/viewMemberInfo")
 	@ResponseBody
-	public ModelAndView list_info(int mnum) {
-        List<MemberVO> list = dao.getMemberInfo(mnum);
+	public ModelAndView list_info(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        MemberVO vo = (MemberVO) session.getAttribute("vo");
+		List<MemberVO> list = dao.getMemberInfo(vo.getId());
         ModelAndView mav = new ModelAndView();
         if (list.size() != 0) {
 			mav.addObject("list", list);
-		} else {
+			mav.setViewName("memberInfo");
+        } else {
 			mav.addObject("msg", "등록된 회원정보가 없습니다.");
+			mav.setViewName("bootmaoMain");
 		}
-		mav.setViewName("memberInfo");
 		return mav;
     }
 	

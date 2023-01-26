@@ -122,7 +122,10 @@
                             </div>
                          
                         </div>
-                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="/bootcampmoa/memberLogin">Login Now</a>
+                    	<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="loginButton" href="/bootcampmoa/memberLogin" style="margin-right:20px;">로그인</a>
+                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="logoutButton" href="/bootcampmoa/memberlogout" style="margin-right:20px;">로그아웃</a>
+                    	<a href="/bootcampmoa/memberSignup" style="border-style:solid; padding:5px;">회원가입</a>
+                    	
                     </div>
                 </nav>
             </div>

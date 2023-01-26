@@ -33,17 +33,32 @@ public class MemberMyBatisDao {
 		return val;
 	}
 	
-	public List<MemberVO> getMemberInfo(int mnum){
+	public List<MemberVO> getMemberInfo(String id){
 		String statement = "members.getMemberInfo";
-		List<MemberVO> list = session.selectList(statement,mnum);//회원정보가져오기
+		List<MemberVO> list = session.selectList(statement,id);//회원정보가져오기
 		return list;
 	}
 	
+	
+	public MemberVO getMembervo(int mnum) {
+		MemberVO vo = null;
+		try {
+			String statement = "members.getOneMemberInfo";
+			vo = session.selectOne(statement,mnum);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return vo;
+	}
+	
 	public boolean updateM(MemberVO vo) {
-		boolean res = true;
-		String statement = "members.updateMember"; //회원정보 수정
-		if(session.update(statement,vo) != 1) {
-			res = false;
+		boolean res = false;
+		try {
+			String statement = "members.updateMember"; //회원정보 수정
+			session.update(statement,vo);
+			res = true;
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		return res;
 	}

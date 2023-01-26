@@ -84,9 +84,9 @@
 </head>
 <body>
 <div class="wrap">
-<c:if test="${ !empty list }" >
-	<h2 onclick="location.href='/bootcampmoa/viewMemberInfo">회원정보 조회</h2>
-	<!-- MemberController에서 로그인 후 저장된 addMember된 member을 가져와서 mnum을 넣어줘야 함. 현재는 임의로 getMnum으로 값을 넣은 상태 -->
+<c:if test="${ !empty list }" > 
+	<c:set var="mnum" value="${mnum}" scope="session" />
+	<h2 onload="location.href='/bootcampmoa/viewMemberInfo ? mnum='+${mnum}">회원정보 조회</h2>
 	<table class="userinfo">
 		<c:forEach var="vo" items="${list}">
 			<tr>
@@ -136,7 +136,13 @@
 		</c:forEach>
 	</table>
 </c:if>
-
+<c:if test="${ sessionScope.vo ==null }" >
+<script>
+		alert('로그인이 필요합니다' ,function(){
+			   location.href = "memberLogin";}
+			   );
+	</script>
+</c:if>
 <c:if test="${ !empty msg }" >
 	<script>
 		alert('${ msg }');

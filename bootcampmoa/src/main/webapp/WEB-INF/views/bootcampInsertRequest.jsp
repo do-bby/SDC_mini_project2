@@ -107,13 +107,21 @@
                             <a href="/bootcampmoa/bootcampListAll" class="nav-item nav-link">부트캠프 리스트 </a>
                             <a href="course.html" class="nav-item nav-link">부트캠프 검색</a>
                             <a href="/bootcampmoa/bootcampInsertRequest" class="nav-item nav-link">등록요청</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">마이페이지</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="blog.html" class="dropdown-item">회원정보 수정</a>
-                                    <a href="single.html" class="dropdown-item">etc</a>
-                                </div>
-                            </div>
+                            <c:choose>
+                            	<c:when test="${sessionScope.vo != null}">
+                            		<div class="nav-item dropdown">
+                                		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">마이페이지</a>
+                                		<div class="dropdown-menu rounded-0 m-0">
+                                    		<a href="" class="dropdown-item">회원정보 수정</a>
+                                    		<c:choose>
+                                    			<c:when test="${sessionScope.vo.mlevel == 1 }">
+                                    				<a href="" class="dropdown-item">등록 요청 승인 결정</a>
+                                    			</c:when>
+                                    		</c:choose>
+                                		</div>
+                            		</div>
+                            	</c:when>
+                            </c:choose>
                          
                         </div>
                         <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="/bootcampmoa/memberLogin">Login Now</a>
@@ -151,19 +159,22 @@
                 <div class="col-lg-8">
                     <div class="contact-form bg-secondary rounded p-5">
                         <div id="success"></div>
-                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                        <form name="sentMessage" novalidate="novalidate" method="POST" action="/bootcampmoa/bootcampInsertRequest/success">
+                        	<input type="hidden" name="mnum" value="${sessionScope.vo.mnum }"> 
                             <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" id="academy" placeholder="학원 명" required="required" data-validation-required-message="학원 명을 입력해주세요" />
+                                <input type="text" class="form-control border-0 p-4" name="academy" id="academy" placeholder="학원 명" required="required" data-validation-required-message="학원 명을 입력해주세요" />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" id="program" placeholder="부트캠프 프로그램 명" required="required" data-validation-required-message="부트캠프 프로그램 이름을 입력해주세요" />
+                                <input type="text" class="form-control border-0 p-4" name="program" id="program" placeholder="부트캠프 프로그램 명" required="required" data-validation-required-message="부트캠프 프로그램 이름을 입력해주세요" />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="control-group">
-                                <textarea class="form-control border-0 py-3 px-4" rows="5" id="message" placeholder="신청 이유" required="required" data-validation-required-message="신정이유를 작성해주세요"></textarea>
+                                <input type="text" class="form-control border-0 p-4" name="url" id="url" placeholder="부트캠프 학원 사이트 주소" required="required" data-validation-required-message="학원 사이트 주소를입력해주세요" />
                                 <p class="help-block text-danger"></p>
                             </div>
+                            
+                            
                             <div class="text-center">
                                 <button class="btn btn-primary py-3 px-5" type="submit" id="sendMessageButton">등록 요청</button>
                             </div>

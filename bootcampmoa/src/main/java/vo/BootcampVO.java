@@ -10,6 +10,16 @@ public class BootcampVO {
 	private String address;
 	private int visible;
 	private int mnum;
+	
+	
+	/*public BootcampVO() {
+		super();
+	}
+	public BootcampVO(String program, String academy) {
+		this.program = program;
+		this.academy = academy;
+	}*/
+	
 	public int getBnum() {
 		return bnum;
 	}

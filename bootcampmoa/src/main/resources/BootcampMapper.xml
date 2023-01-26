@@ -13,16 +13,26 @@
     	select bnum,program,academy,logo,img,url,address,visible,mnum from bootcamp where bnum = #{bnum} 
  	</select>
  	
- 	<insert id="insertBootcamp"  parameterType="vo.BootcampVO">
+ 	
+ 	<insert id="insertMember"  parameterType="vo.BootcampVO">
+ 		<!-- 회원의 부트캠프 등록 요청 => visible이 무조건 0으로 들어감 -->
   		<selectKey resultType="_int" keyProperty="bnum" order="BEFORE">
       		select bootcampseq.nextval from dual     
     	</selectKey>  
-    		insert into bootcamp (bnum, program, academy, logo, img, url, address, visible, mnum) values (#{bnum}, #{program},#{academy}, #{logo}, #{img}, #{url}, #{address}, #{visible}, #{mnum})
+    		insert into bootcamp (bnum, program, academy, logo, img, url, address, visible, mnum) values (#{bnum}, #{program},#{academy}, #{logo}, #{img}, #{url}, #{address}, 0, #{mnum})
+	</insert>
+	
+	<insert id="insertManager"  parameterType="vo.BootcampVO">
+ 		<!-- 관리자 부트캠프 등록  => visible이 무조건 1으로 들어감 -->
+  		<selectKey resultType="_int" keyProperty="bnum" order="BEFORE">
+      		select bootcampseq.nextval from dual     
+    	</selectKey>  
+    		insert into bootcamp (bnum, program, academy, logo, img, url, address, visible, mnum) values (#{bnum}, #{program},#{academy}, #{logo}, #{img}, #{url}, #{address}, 1, #{mnum})
 	</insert>
 	
 	<select id="searchBootcamp" resultType="vo.BootcampVO" parameterType="java.lang.String">
 		<!-- 부트캠프 과정명으로 검색 -->
-    	select bnum,program,academy,logo,img,url,address,visible,mnum from bootcamp where program LIKE '%'||#{keyword}'%'
+    	select bnum,program,academy,logo,img,url,address,visible,mnum from bootcamp where program LIKE '%'||#{keyword}||'%'
     </select>
     
 	<delete id="deleteBootcamp"  parameterType="_int"  >
@@ -34,5 +44,10 @@
 		<!-- 부트캠프 수정 -->     	
     	update bootcamp set program = #{program}, academy = #{academy}, logo = #{logo}, 
     	img = #{img}, url = #{url}, address = #{address}, visible = #{visible}, mnum = #{mnum} where bnum = #{bnum} 
+ 	</select>
+ 	
+ 	<select id="updateManager"  parameterType="vo.BootcampVO">
+		<!-- 관리자의 승인을 받은 부트캠프를 visible 1로 설정한다. -->     	
+    	update bootcamp set visible = 1 where bnum = #{bnum} 
  	</select>
   </mapper>

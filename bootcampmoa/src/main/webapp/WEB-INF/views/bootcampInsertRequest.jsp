@@ -3,11 +3,9 @@
 <%@ page import="vo.ReviewVO,vo.MemberVO,vo.BootcampVO,java.util.ArrayList"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-
 <head>
     <meta charset="utf-8">
-    <title>부트모아 - 부트캠프 리뷰 리스트</title>
+    <title>부트모아 - 부트캠프 등록 요청</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -39,32 +37,32 @@
                 </a>
             </div>
             <div class="col-lg-3 text-right">
-                <div class="d-inline-flex align-items-center">
-                    <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
-                    <div class="text-left">
-                        <h6 class="font-weight-semi-bold mb-1">Our Office</h6>
-                        <small>서울특별시 서초구 효령로 335</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 text-right">
-                <div class="d-inline-flex align-items-center">
-                    <i class="fa fa-2x fa-envelope text-primary mr-3"></i>
-                    <div class="text-left">
-                        <h6 class="font-weight-semi-bold mb-1">Email Us</h6>
-                        <small>bootmoa@gmail.com</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 text-right">
-                <div class="d-inline-flex align-items-center">
-                    <i class="fa fa-2x fa-phone text-primary mr-3"></i>
-                    <div class="text-left">
-                        <h6 class="font-weight-semi-bold mb-1">Call Us</h6>
-                        <small>+012 345 6789</small>
-                    </div>
-                </div>
-            </div>
+               <div class="d-inline-flex align-items-center">
+                   <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
+                   <div class="text-left">
+                       <h6 class="font-weight-semi-bold mb-1">Our Office</h6>
+                       <small>서울특별시 서초구 효령로 335</small>
+                   </div>
+               </div>
+           </div>
+           <div class="col-lg-3 text-right">
+               <div class="d-inline-flex align-items-center">
+                   <i class="fa fa-2x fa-envelope text-primary mr-3"></i>
+                   <div class="text-left">
+                       <h6 class="font-weight-semi-bold mb-1">Email Us</h6>
+                       <small>bootmoa@gmail.com</small>
+                   </div>
+               </div>
+           </div>
+           <div class="col-lg-3 text-right">
+               <div class="d-inline-flex align-items-center">
+                   <i class="fa fa-2x fa-phone text-primary mr-3"></i>
+                   <div class="text-left">
+                       <h6 class="font-weight-semi-bold mb-1">Call Us</h6>
+                       <small>+012 345 6789</small>
+                   </div>
+               </div>
+           </div>
         </div>
     </div>
     <!-- Topbar End -->
@@ -105,7 +103,7 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav py-0">
-                            <a href="/bootcampmoa/bootmoaMain" class="nav-item nav-link active">홈</a>
+                            <a href="/bootcampmoa/bootcampMain" class="nav-item nav-link active">홈</a>
                             <a href="/bootcampmoa/bootcampListAll" class="nav-item nav-link">부트캠프 리스트 </a>
                             <a href="course.html" class="nav-item nav-link">부트캠프 검색</a>
                             <a href="/bootcampmoa/bootcampInsertRequest" class="nav-item nav-link">등록요청</a>
@@ -116,6 +114,7 @@
                                     <a href="single.html" class="dropdown-item">etc</a>
                                 </div>
                             </div>
+                         
                         </div>
                         <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="/bootcampmoa/memberLogin">Login Now</a>
                     </div>
@@ -130,132 +129,51 @@
     <div class="container-fluid page-header" style="margin-bottom: 90px;">
         <div class="container">
             <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
-                <h3 class="display-4 text-white text-uppercase">부트캠프 후기 한 눈에 모아보기</h3>
+                <h3 class="display-4 text-white text-uppercase">부트캠프 등록 요청</h3>
                 <div class="d-inline-flex text-white">
-                    <p class="m-0 text-uppercase"><a class="text-white" href="/bootcampmoa/bootmoaMain">홈</a></p>
-                    <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                    <p class="m-0 text-uppercase">부트캠프 리스트</p>
+                    <p class="m-0 text-uppercase"><a class="text-white">부트모아에 등록되어 있지 않은 부트캠프가 있나요?</a></p>
+                 
                 </div>
             </div>
         </div>
     </div>
     <!-- Header End -->
 
-    <!-- Blog Start -->
+
+    <!-- Contact Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
-            <div class="row">
+            <div class="text-center mb-5">
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Request</h5>
+                <h1>이 부트캠프의 후기가 궁금해요!</h1>
+            </div>
+            <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="row pb-3">
-                        
-                        
-                        <c:choose>
-            				<c:when test="${ !empty requestScope.bootcampListAll}">
-            					<c:forEach var = "vo" items = "${requestScope.bootcampListAll}">
-									<div class="col-lg-6 mb-4">
-                            			<div class="blog-item position-relative overflow-hidden rounded mb-2">
-                                			<img class="img-fluid" src="resources/images/${vo.logo}">
-                                			<a class="blog-overlay text-decoration-none" href="">
-                                    		<h5 class="text-white mb-3">${vo.academy }</h5>
-                                    		<p class="text-primary m-0">${vo.program }</p>
-                                		</a>
-                            			</div>
-                        			</div>
-								</c:forEach>
-            				</c:when>
-            			</c:choose>
-                
-                        <div class="col-12">
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination pagination-lg justify-content-center mb-0">
-                                  <li class="page-item disabled">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                      <span aria-hidden="true">&laquo;</span>
-                                      <span class="sr-only">Previous</span>
-                                    </a>
-                                  </li>
-                                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                  <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                      <span aria-hidden="true">&raquo;</span>
-                                      <span class="sr-only">Next</span>
-                                    </a>
-                                  </li>
-                                </ul>
-                              </nav>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-lg-4 mt-5 mt-lg-0">
-                    <!-- Author Bio -->
-                    <div class="d-flex flex-column text-center bg-dark rounded mb-5 py-5 px-4">
-                        <img src="resources/img/user.jpg" class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px;">
-                        <h3 class="text-primary mb-3">회원 닉네임</h3>
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
-                        <p class="text-white m-0">Conset elitr erat vero dolor ipsum et diam, eos dolor lorem, ipsum sit no ut est  ipsum erat kasd amet elitr</p>
-                    </div>
-    
-                    <!-- Search Form -->
-                    <div class="mb-5">
-                        <form action="">
-                            <div class="input-group">
-                                <input type="text" class="form-control form-control-lg" placeholder="학원 /부트캠프 명을 검색하세요">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-transparent text-primary"><i
-                                            class="fa fa-search"></i></span>
-                                </div>
+                    <div class="contact-form bg-secondary rounded p-5">
+                        <div id="success"></div>
+                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                            <div class="control-group">
+                                <input type="text" class="form-control border-0 p-4" id="academy" placeholder="학원 명" required="required" data-validation-required-message="학원 명을 입력해주세요" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <input type="text" class="form-control border-0 p-4" id="program" placeholder="부트캠프 프로그램 명" required="required" data-validation-required-message="부트캠프 프로그램 이름을 입력해주세요" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <textarea class="form-control border-0 py-3 px-4" rows="5" id="message" placeholder="신청 이유" required="required" data-validation-required-message="신정이유를 작성해주세요"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-primary py-3 px-5" type="submit" id="sendMessageButton">등록 요청</button>
                             </div>
                         </form>
-                    </div>
-    
-                    <!-- Category List -->
-                    <div class="mb-5">
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Categories</h3>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Web Design</a>
-                                <span class="badge badge-primary badge-pill">150</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Web Development</a>
-                                <span class="badge badge-primary badge-pill">131</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Online Marketing</a>
-                                <span class="badge badge-primary badge-pill">78</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Keyword Research</a>
-                                <span class="badge badge-primary badge-pill">56</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Email Marketing</a>
-                                <span class="badge badge-primary badge-pill">98</span>
-                            </li>
-                        </ul>
-                    </div>
-    
-    
-                    <!-- Tag Cloud -->
-                    <div class="mb-5">
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
-                        <div class="d-flex flex-wrap m-n1">
-                            <a href="" class="btn btn-outline-primary m-1">Design</a>
-                            <a href="" class="btn btn-outline-primary m-1">Development</a>
-                            <a href="" class="btn btn-outline-primary m-1">Marketing</a>
-                            <a href="" class="btn btn-outline-primary m-1">SEO</a>
-                            <a href="" class="btn btn-outline-primary m-1">Writing</a>
-                            <a href="" class="btn btn-outline-primary m-1">Consulting</a>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Blog End -->
+    <!-- Contact End -->
 
 
     <!-- Footer Start -->
@@ -265,11 +183,11 @@
                 <div class="row">
                     <div class="col-md-6 mb-5">
                         <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Get In Touch</h5>
-                        <p><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
+                        <p><i class="fa fa-map-marker-alt mr-2"></i>서울특별시 서초구 효령로 335</p>
                         <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
-                        <p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
+                        <p><i class="fa fa-envelope mr-2"></i>bootmoa@gmail.com</p>
                         <div class="d-flex justify-content-start mt-4">
-                            <a class="btn btn-outline-light btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-square mr-2" href="https://github.com/do-bby/SDC_mini_project2"><i class="fab fa-github"></i></a>
                             <a class="btn btn-outline-light btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-outline-light btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
                             <a class="btn btn-outline-light btn-square" href="#"><i class="fab fa-instagram"></i></a>
@@ -308,7 +226,7 @@
                 </p>
             </div>
             <div class="col-lg-6 text-center text-md-right">
-                <ul class="nav d-inline-flex">
+                <ul class="nav d-inline-flex"> 
                     <li class="nav-item">
                         <a class="nav-link text-white py-0" href="#">Privacy</a>
                     </li>

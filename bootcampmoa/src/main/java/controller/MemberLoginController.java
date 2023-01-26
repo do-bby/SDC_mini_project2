@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,15 +35,17 @@ public class MemberLoginController {
 	
 	//로그인
 	@PostMapping("/selectLoginMember")
-	@ResponseBody
+	@ResponseBody //여기 값을 jsp body로 넘길때 사용
 	public ModelAndView selectLoginMember(HttpServletRequest request ,MemberVO vo) {
 		HttpSession session;
 		ModelAndView mav = new ModelAndView();
+		MemberVO list = mDao.selectMemberInfo(vo);
 		int count = mDao.selectLoginMember(vo);
 		//로그인 성공시 세션에 정보 담아줌
 		if(count==1) {
 			session = request.getSession();
-			session.setAttribute("vo", vo);
+			session.setAttribute("vo", list);
+//			mav.setViewName("memberLoginSuccess");
 			mav.setViewName("bootcampMain");
 		}else {
 			mav.addObject("msg", "아이디 또는 비밀번호를 확인하세요.");
@@ -60,18 +63,23 @@ public class MemberLoginController {
 	    }
 		return "memberLogout";
 	}
-
 	
-//	//회원탈퇴
-//	@PostMapping("/deleteMember")
-//	public String deleteMember(HttpServletRequest request) {
-//		HttpSession session = request.getSession(false);
-//	    if (session != null) {
-//	    	mDao.deleteMember(mVo.getId());
-//	        session.invalidate();
-//	    }
-//		return "memberLogin";
-//	}
+	//비밀번호 찾기
+	@GetMapping("/findPwd")
+	public String findPwd() {
+		return "/memberLogin";
+	}
+	
+	//회원탈퇴
+	@PostMapping("/deleteMember")
+	public String deleteMember(HttpServletRequest request, MemberVO vo) {
+		HttpSession session = request.getSession(false);
+	    if (session != null) {
+	    	mDao.deleteMember(vo.getId());
+	        session.invalidate();
+	    }
+		return "memberLogin";
+	}
 //	
 //	@RequestMapping(value = "/pw_auth.me")
 //	public ModelAndView pw_auth(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -133,4 +141,17 @@ public class MemberLoginController {
 //					return "YM/pw_find";
 //				}
 //		} //이메일 인증번호 확인
+	
+//		@RequestMapping(value = "/pw_new.me", method = RequestMethod.POST)
+//		public String pw_new(MemberVO vo, HttpSession session) throws IOException{
+//			int result = memberSV.pwUpdate_M(vo);
+//			if(result == 1) {
+//				return "jj/loginForm";
+//			}
+//			else {
+//				System.out.println("pw_update"+ result);
+//				return "YM/pw_new";
+//			}
+//		}
+	
 }

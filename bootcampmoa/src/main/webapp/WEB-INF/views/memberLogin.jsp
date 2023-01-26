@@ -8,6 +8,84 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 로그인</title>
+<style>
+
+	
+	body{
+	height:100vh;
+	background: #f5f5f5;
+	}
+	
+	.wrap{
+	overflow:auto;
+	margin-left: auto;
+	margin-right:auto;
+	position: relative;
+    z-index: 0;
+    float: none;
+    padding-top: 40px;
+    width: 60%;
+    height:100%;
+    background: #252934;
+	}
+	
+	h2{
+	margin-left:20px;
+	color:#ffff;
+	padding: 10px;
+	text-align: center;
+	position: relative;
+	display: inline-block;
+	}
+	
+	h2:after{
+	content:'';
+	background:#04BEBD;
+	width:100%;
+	height:2px;
+	display:block;
+	}
+	
+	button{
+	float: right;
+	border:0;
+	font-size:14px;
+	margin-right: 30px;
+	background:#04BEBD;
+	color:#ffff;
+	height: 30px;
+	}
+	
+	table{
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 30px;
+	padding:10px;
+	width:90%;
+	background-color:#FFFFFF;
+	}
+
+	td{
+		border-bottom : 1px solid #ddd;;
+		padding : 8px;
+		text-align:left;
+		font-size:14px;
+	}
+	
+	td:first-child{
+	font-weight: bold;
+	}
+
+	.infobutton{
+	float: right;
+	border:0;
+	font-size:14px;
+	margin-right: 30px;
+	background:#04BEBD;
+	color:#ffff;
+	height: 30px;
+	}
+</style>
 </head>
 <body>
 <!-- <script>  
@@ -34,17 +112,35 @@
             });
         });  
 </script> -->
-<form  method="post" action="/bootcampmoa/selectLoginMember">
-	<input type="text" name="id" id="id" placeholder="아이디를 입력하세요" required/><br>
-	<input type="password" name="pwd" id="pwd" placeholder="패스워드를 입력하세요" required/>
-	<input type="submit" name="login" id="login" value="로그인"/>
-</form>
-<c:if test="${ !empty msg }" >
-	<script>
-		alert('${ msg }');
-	</script>
-</c:if>
-<div>
+<script>
+var input = document.getElementById(id);
+input.value = null;
+</script>
+<div class="wrap">
+	<form method="POST" name="userInfo" action="/bootcampmoa/selectLoginMember">
+	<table class="userinfo">
+		<tr>
+		<td>아이디</td>
+		<td><input type="text" name="id" id="id" placeholder="아이디를 입력하세요" required/></td>
+		<td><input type="submit" class="infobutton" name="login" id="login" value="로그인"/></td>
+		</tr>
+		
+		<tr>
+		<td>비밀번호</td>
+		<td><input type="password" name="pwd" id="pwd" placeholder="패스워드를 입력하세요" required/></td>
+		<td><button type="button" class="infobutton" onclick="location.href='findPwd'">비밀번호찾기</button></td>
+		</tr>
+	</table>
+	</form>
+	<c:if test="${ !empty msg }" >
+		<script>
+			alert('${ msg }');
+		</script>
+	</c:if>
+
+<%-- 	<a href="${header.referer}">메인페이지로 돌아가기</a> --%>
+	<button type="button" class="infobutton" onclick="location.href='bootmoaMain'">메인화면으로</button>
+
 </div>
 </body>
 </html>

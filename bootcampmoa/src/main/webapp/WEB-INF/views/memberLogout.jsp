@@ -11,7 +11,7 @@
 </head>
 <body>
 <a>로그아웃 되었습니다.</a>
-<a href="/bootcampmoa/memberLogin" >로그인 페이지로</a>
+<a href="/bootcampmoa/bootmoaMain" >메인 페이지로</a>
 ${sessionScope.vo == null}
 ${sessionScope.vo != null}
 </body>

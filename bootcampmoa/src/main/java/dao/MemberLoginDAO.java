@@ -35,4 +35,16 @@ public class MemberLoginDAO {
 		String statement = "MemberLoginMapper.deleteMember";
 		session.delete(statement);
 	}
+
+	//멤버정보 불러오기
+	public MemberVO selectMemberInfo(MemberVO vo) {
+		MemberVO list = null;
+		try {
+			String statement = "MemberLoginMapper.selectMemberInfo";
+			 list = session.selectOne(statement, vo);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

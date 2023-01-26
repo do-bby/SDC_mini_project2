@@ -10,6 +10,7 @@
 <title>회원 로그인</title>
 </head>
 <body>
+
 ${sessionScope.vo == null}
 ${sessionScope.vo != null}
 <% 
@@ -20,11 +21,11 @@ ${sessionScope.vo != null}
 <input type="button" name="deleteMember" id="deleteMember" value="회원탈퇴" onClick="javascript:withdrawal()"/>
 <script>
 	function logout(){
-    let form = document.createElement('form');//여기서 폼태그 만듬
-    form.setAttribute('method', 'post'); //메서드는 포스트로
-    form.setAttribute('action', 'memberlogout');//PostMapping 괄호안 값을 넣으면됨
-    document.body.appendChild(form);
-    form.submit();
+	    let form = document.createElement('form');//여기서 폼태그 만듬
+	    form.setAttribute('method', 'post'); //메서드는 포스트로
+	    form.setAttribute('action', 'memberlogout');//PostMapping 괄호안 값을 넣으면됨
+	    document.body.appendChild(form);
+	    form.submit();
 	}
 	
 	function withdrawal(){

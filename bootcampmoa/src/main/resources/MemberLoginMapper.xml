@@ -4,9 +4,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MemberLoginMapper">
-	
+
+	<!-- 로그인 -->
 	<select id="selectMemberLogin" parameterType="vo.MemberVO" resultType="int">
 	select count(*) from member where id = #{id} and pwd = #{pwd}
 	</select>
+	
+	<!-- 회원정보조회 -->
+	<select id="selectMemberInfo" parameterType="vo.MemberVO" resultType="vo.MemberVO">
+	select mnum, mlevel, id, name, email, profile, phone, nickname, question from member where id = #{id}
+	</select>
 
+	<!-- 회원탈퇴 -->
+	<delete id="deleteMember" parameterType="vo.MemberVO">
+	delete from member where id = #{id}
+	</delete>
+	
 </mapper>

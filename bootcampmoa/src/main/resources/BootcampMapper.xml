@@ -13,7 +13,7 @@
     	select bnum,program,academy,logo,img,url,address,visible,mnum from bootcamp where bnum = #{bnum} 
  	</select>
  	
- 	
+ 	   
  	<insert id="insertMember"  parameterType="vo.BootcampVO">
  		<!-- 회원의 부트캠프 등록 요청 => visible이 무조건 0으로 들어감 -->
   		<selectKey resultType="_int" keyProperty="bnum" order="BEFORE">

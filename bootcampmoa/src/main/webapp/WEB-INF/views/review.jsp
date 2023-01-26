@@ -36,6 +36,17 @@
 		alert('${ msg }');
 	</script>
 </c:if>
+<a href="reviews?curPage=1">&laquo;</a>
+<a href="reviews?curPage=${paging.curPage-1 }">&lt;</a>
+<c:forEach begin="${paging.firstPage }"  end="${paging.lastPage }" var="i">
+   	<a href="reviews?curPage=${i }"  >  
+   		<c:if test="${i eq paging.curPage }">  <span style="color: red">  ${i } </span> </c:if>
+   		<c:if test="${i ne paging.curPage }">  ${i } </c:if> 
+   	</a>
+</c:forEach>
+<a href="reviews?curPage=${paging.curPage+1 }">&gt;</a>
+<a href="reviews?curPage=${paging.totalPageCount }">&raquo;</a>
+
 <form method = "post" action = "/bootcampmoa/review/insert">
  <input type="hidden" name="rnum" value="0">
  굿  :<input id="good" type="text"  name="good">

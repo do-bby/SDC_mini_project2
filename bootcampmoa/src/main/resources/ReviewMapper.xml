@@ -3,8 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="review">
-	<select id="selectReview"  resultType="vo.ReviewVO">
-		select * from review
+	<select id = "totalRowCount" parameterType="vo.ReviewVO" resultType="int">
+    	select count(*) from review
+    </select>
+	<select id="selectReview"  resultType="vo.ReviewVO" parameterType = "vo.PagingVO">
+		select rnum,good,bad,total, teachsat, edusat, learnsat,rdate,mnum,bnum,rw from 
+		(select rnum, good,bad, total, teachsat, edusat, learnsat,rdate,mnum,bnum, rownum rw from review)
+		where rw between #{firstRow} and #{lastRow}
 	</select>
 	<select id="selectOneReview"  resultType="vo.ReviewVO" parameterType="_int" >
        select rnum, good, bad, total, teachsat, edusat, learnsat, rdate, mnum, bnum from review where rnum = #{rnum}

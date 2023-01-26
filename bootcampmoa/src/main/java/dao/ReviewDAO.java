@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import vo.PagingVO;
 import vo.ReviewVO;
 
 @Repository
@@ -13,12 +14,21 @@ public class ReviewDAO {
 	
 	@Autowired
 	SqlSession session = null;	
-	
-	public List<ReviewVO> selectall(){
+	public int getTotalRowCount(PagingVO paging)
+	{	int cnt = 0;
+		String statement = "review.totalRowCount";
+		cnt = session.selectOne(statement);
+		
+		return cnt;
+	}
+	public List<ReviewVO> selectall(PagingVO paging){
 		List<ReviewVO> list = null;
 		try {
 			String statement = "review.selectReview";
-			list = session.selectList(statement);
+			list = session.selectList(statement, paging);
+			System.out.println(paging.getFirstRow());
+			System.out.println(paging.getLastRow());
+			System.out.println(list);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -8,7 +8,7 @@
     </select>
 	<select id="selectReview"  resultType="vo.ReviewVO" parameterType = "vo.PagingVO">
 		select rnum,good,bad,total, teachsat, edusat, learnsat,rdate,mnum,bnum,rw from 
-		(select rnum, good,bad, total, teachsat, edusat, learnsat,rdate,mnum,bnum, rownum rw from review)
+		(select rnum, good,bad, total, teachsat, edusat, learnsat,rdate,mnum,bnum, rownum rw from review where bnum=#{bnum})
 		where rw between #{firstRow} and #{lastRow}
 	</select>
 	<select id="selectOneReview"  resultType="vo.ReviewVO" parameterType="_int" >

@@ -3,8 +3,8 @@ package vo;
 public class PagingVO {
 
 		private int curPage=1;           // 현재 페이지 번호
-		private int rowSizePerPage=10;   // 한 페이지당 레코드 수      
-		private int pageSize=10;         // 페이지 리스트에서 보여줄 페이지 갯수   
+		private int rowSizePerPage=5;   // 한 페이지당 레코드 수      
+		private int pageSize=5;         // 페이지 리스트에서 보여줄 페이지 갯수   
 		private int totalRowCount ;      // 총 레코드 건수
 		
 		
@@ -14,7 +14,7 @@ public class PagingVO {
 		private int totalPageCount;      // 총 페이지 건수
 		private int firstPage; 	         // 페이지 리스트에서 시작  페이지 번호 
 		private int lastPage;            // 페이지 리스트에서 마지막 페이지 번호 
-		
+		private int bnum;
 
 		public void pageSetting() {
 			totalPageCount = (totalRowCount-1)/rowSizePerPage+ 1;
@@ -121,5 +121,11 @@ public class PagingVO {
 
 		public void setLastPage(int lastPage) {
 			this.lastPage = lastPage;
+		}
+		public int getBnum() {
+			return bnum;
+		}
+		public void setBnum(int bnum) {
+			this.bnum = bnum;
 		}
 }

@@ -1,9 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="vo.ReviewVO,vo.MemberVO,vo.BootcampVO,java.util.ArrayList"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8">
-    <title>ECOURSES - Online Courses HTML Template</title>
+    <title>부트모아 - 부트캠프 리뷰 리스트</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -30,8 +34,8 @@
     <div class="container-fluid d-none d-lg-block">
         <div class="row align-items-center py-4 px-xl-5">
             <div class="col-lg-3">
-                <a href="" class="text-decoration-none">
-                    <h1 class="m-0"><span class="text-primary">E</span>COURSES</h1>
+                <a href="/bootcampmoa/bootmoaMain" class="text-decoration-none">
+                    <h1 class="m-0"><span class="text-primary">B</span>ootMoA</h1>
                 </a>
             </div>
             <div class="col-lg-3 text-right">
@@ -39,7 +43,7 @@
                     <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
                     <div class="text-left">
                         <h6 class="font-weight-semi-bold mb-1">Our Office</h6>
-                        <small>123 Street, New York, USA</small>
+                        <small>서울특별시 서초구 효령로 335</small>
                     </div>
                 </div>
             </div>
@@ -48,7 +52,7 @@
                     <i class="fa fa-2x fa-envelope text-primary mr-3"></i>
                     <div class="text-left">
                         <h6 class="font-weight-semi-bold mb-1">Email Us</h6>
-                        <small>info@example.com</small>
+                        <small>bootmoa@gmail.com</small>
                     </div>
                 </div>
             </div>
@@ -94,27 +98,26 @@
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
                     <a href="" class="text-decoration-none d-block d-lg-none">
-                        <h1 class="m-0"><span class="text-primary">E</span>COURSES</h1>
+                        <h1 class="m-0"><span class="text-primary">B</span>ootMoA</h1>
                     </a>
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav py-0">
-                            <a href="index.html" class="nav-item nav-link">Home</a>
-                            <a href="about.html" class="nav-item nav-link">About</a>
-                            <a href="course.html" class="nav-item nav-link">Courses</a>
-                            <a href="teacher.html" class="nav-item nav-link">Teachers</a>
+                            <a href="/bootcampmoa/bootmoaMain" class="nav-item nav-link active">홈</a>
+                            <a href="/bootcampmoa/bootcampListAll" class="nav-item nav-link">부트캠프 리스트 </a>
+                            <a href="course.html" class="nav-item nav-link">부트캠프 검색</a>
+                            <a href="/bootcampmoa/bootcampInsertRequest" class="nav-item nav-link">등록요청</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Blog</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">마이페이지</a>
                                 <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                                    <a href="single.html" class="dropdown-item active">Blog Detail</a>
+                                    <a href="blog.html" class="dropdown-item">회원정보 수정</a>
+                                    <a href="single.html" class="dropdown-item">etc</a>
                                 </div>
                             </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
                         </div>
-                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="">Join Now</a>
+                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="/bootcampmoa/memberLogin">Login Now</a>
                     </div>
                 </nav>
             </div>
@@ -127,66 +130,97 @@
     <div class="container-fluid page-header" style="margin-bottom: 90px;">
         <div class="container">
             <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
-                <h3 class="display-4 text-white text-uppercase">Single</h3>
+                <h3 class="display-4 text-white text-uppercase">${bvo.academy }</h3>
                 <div class="d-inline-flex text-white">
-                    <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
+                    <p class="m-0 text-uppercase"><a class="text-white" href="/bootcampmoa/bootmoaMain">홈</a></p>
                     <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                    <p class="m-0 text-uppercase">Single</p>
+                    <p class="m-0 text-uppercase">${bvo.program }</p>
                 </div>
             </div>
         </div>
     </div>
     <!-- Header End -->
 
-
-    <!-- Detail Start -->
+    <!-- Blog Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="row">
                 <div class="col-lg-8">
-                    <!-- review update Form -->
-                    <div class="bg-secondary rounded p-5">
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Leave a comment</h3>
-                        <form>
-                            <div class="form-group">
-                                <label for="name">Name *</label>
-                                <input type="text" class="form-control border-0" id="name">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email *</label>
-                                <input type="email" class="form-control border-0" id="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="website">Website</label>
-                                <input type="url" class="form-control border-0" id="website">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="message">Message *</label>
-                                <textarea id="message" cols="30" rows="5" class="form-control border-0"></textarea>
-                            </div>
-                            <div class="form-group mb-0">
-                                <input type="submit" value="Leave Comment" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold">
-                            </div>
-                        </form>
+                    <div class="row pb-3">                        
+						<c:if test="${ !empty list }" >
+            				<c:forEach var = "vo" items = "${list}">            						
+		            			<div class="col-lg-6 mb-4">
+		                            <div class="blog-item position-relative overflow-hidden rounded mb-2">
+		                            	<img class="img-fluid" src="/bootcampmoa/resources/images/플레이데이터로고.png">		          
+		                                <a class="blog-overlay text-decoration-none" href="">
+		                                <h5 class="text-white mb-3">장점 : ${vo.good }</h5>
+		                                <h5 class="text-white mb-3">단점 : ${vo.bad }</h5>		                                
+		                                <p class="text-primary m-0">총점 : ${vo.total }</p>
+		                                <p class="text-primary m-0">강사진 : ${vo.teachsat }</p>
+		                                <p class="text-primary m-0">교육 환경: ${vo.edusat }</p>
+		                                <p class="text-primary m-0">교육 : ${vo.learnsat }</p>
+		                                <p class="text-primary m-0">작성 날짜 : ${vo.rdate }</p>		                                
+										</a>										
+		                            </div>
+		                            <a href="/bootcampmoa/review/delete?id=${vo.rnum}" class="btn btn-outline-primary m-1">삭제</a>
+		                            <a href="/bootcampmoa/review?id=${vo.rnum}" class="btn btn-outline-primary m-1">수정</a>
+		                        </div>		                     
+							</c:forEach>
+            			</c:if>
+            	
+                        <div class="col-12">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination pagination-lg justify-content-center mb-0">
+                                  <li class="page-item">
+                                    <a class="page-link" href="reviews?curPage=1" aria-label="Start">
+                                      <span aria-hidden="true">&laquo;</span>
+                                      <span class="sr-only">Start</span>                                     
+                                    </a>                                    
+                                  </li>
+                                  <li class="page-item">
+                                  	<a class="page-link" href="reviews?curPage=${paging.curPage-1 }" aria-label="prev">
+                                      <span aria-hidden="true">&lt;</span>
+                                      <span class="sr-only">prev</span>
+                                    </a>
+                                  </li>
+                                  
+                                  	<c:forEach begin="${paging.firstPage }"  end="${paging.lastPage }" var="i">
+								   		<a href="reviews?curPage=${i }"  >  
+								   		</a>
+									</c:forEach>
+                                  <li class="page-item">
+                                  	<a class="page-link" href="reviews?curPage=${paging.curPage+1 }" aria-label="Next">
+                                      <span aria-hidden="true">&gt;</span>
+                                      <span class="sr-only">Next</span>
+                                    </a>
+                                  </li>
+                                  
+                                  <li class="page-item">
+                                    <a class="page-link" href="reviews?curPage=${paging.totalPageCount }" aria-label="End">
+                                      <span aria-hidden="true">&raquo;</span>
+                                      <span class="sr-only">End</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </nav>
+                        </div>
                     </div>
                 </div>
-
+    
                 <div class="col-lg-4 mt-5 mt-lg-0">
                     <!-- Author Bio -->
                     <div class="d-flex flex-column text-center bg-dark rounded mb-5 py-5 px-4">
-                        <img src="img/user.jpg" class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px;">
-                        <h3 class="text-primary mb-3">John Doe</h3>
+                        <img src="/bootcampmoa/resources/images/${sessionScope.vo.profile }.png" class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px;">
+                        <h3 class="text-primary mb-3">${sessionScope.vo.nickname }</h3>
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
-                        <p class="text-white m-0">Conset elitr erat vero dolor ipsum et diam, eos dolor lorem, ipsum sit
-                            no ut est ipsum erat kasd amet elitr</p>
+                        <p class="text-white m-0">Conset elitr erat vero dolor ipsum et diam, eos dolor lorem, ipsum sit no ut est  ipsum erat kasd amet elitr</p>
                     </div>
-
+    
                     <!-- Search Form -->
                     <div class="mb-5">
                         <form action="">
                             <div class="input-group">
-                                <input type="text" class="form-control form-control-lg" placeholder="Keyword">
+                                <input type="text" class="form-control form-control-lg" placeholder="학원 /부트캠프 명을 검색하세요">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-transparent text-primary"><i
                                             class="fa fa-search"></i></span>
@@ -194,7 +228,7 @@
                             </div>
                         </form>
                     </div>
-
+    
                     <!-- Category List -->
                     <div class="mb-5">
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Categories</h3>
@@ -221,33 +255,8 @@
                             </li>
                         </ul>
                     </div>
-
-                    <!-- Recent Post -->
-                    <div class="mb-5">
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Recent Post</h3>
-                        <a class="d-flex align-items-center text-decoration-none mb-3" href="">
-                            <img class="img-fluid rounded" src="img/blog-80x80.jpg" alt="">
-                            <div class="pl-3">
-                                <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
-                                <small>Jan 01, 2050</small>
-                            </div>
-                        </a>
-                        <a class="d-flex align-items-center text-decoration-none mb-3" href="">
-                            <img class="img-fluid rounded" src="img/blog-80x80.jpg" alt="">
-                            <div class="pl-3">
-                                <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
-                                <small>Jan 01, 2050</small>
-                            </div>
-                        </a>
-                        <a class="d-flex align-items-center text-decoration-none mb-3" href="">
-                            <img class="img-fluid rounded" src="img/blog-80x80.jpg" alt="">
-                            <div class="pl-3">
-                                <h6 class="m-1">Diam lorem dolore justo eirmod lorem dolore</h6>
-                                <small>Jan 01, 2050</small>
-                            </div>
-                        </a>
-                    </div>
-
+    
+    
                     <!-- Tag Cloud -->
                     <div class="mb-5">
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
@@ -264,7 +273,7 @@
             </div>
         </div>
     </div>
-    <!-- Detail End -->
+    <!-- Blog End -->
 
 
     <!-- Footer Start -->

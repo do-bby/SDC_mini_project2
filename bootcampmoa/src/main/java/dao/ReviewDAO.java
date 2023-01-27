@@ -25,10 +25,7 @@ public class ReviewDAO {
 		List<ReviewVO> list = null;
 		try {
 			String statement = "review.selectReview";
-			list = session.selectList(statement, paging);
-			System.out.println(paging.getFirstRow());
-			System.out.println(paging.getLastRow());
-			System.out.println(list);
+			list = session.selectList(statement, paging);			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -74,10 +71,7 @@ public class ReviewDAO {
 		boolean result = false;
 		try {			
 			String statement = "review.updateReview";
-			session.update(statement, vo);
-			System.out.println(vo.getRnum());
-			System.out.println(vo.getBad());
-			System.out.println(vo.getGood());
+			session.update(statement, vo);			
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();

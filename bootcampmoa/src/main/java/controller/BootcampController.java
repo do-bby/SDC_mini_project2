@@ -2,7 +2,6 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +13,6 @@ import dao.BootcampDAO;
 import dao.MemberMyBatisDao;
 import vo.BootcampVO;
 import vo.MemberVO;
-
 
 
 
@@ -61,7 +59,7 @@ public class BootcampController {
 		boolean result = bootcampDao.insertMember(bootcamp);
 		ModelAndView mav = new ModelAndView();
 		if (result) {
-			mav.addObject("msg", "등록 요청이 완료되었습니다. ");
+			mav.addObject("msg", "등록 요청 접수가 완료되었습니다. ");
 		} else {
 			mav.addObject("msg", "등록 요청에 문제가 발생하였습니다.");
 		}

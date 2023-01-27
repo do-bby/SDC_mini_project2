@@ -73,7 +73,7 @@
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a class="d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none" data-toggle="collapse" href="#navbar-vertical" style="height: 67px; padding: 0 30px;">
-                    <h5 class="text-primary m-0"><i class="fa fa-book-open mr-2"></i>Subjects</h5>
+                    <h5 class="text-primary m-0"><i class="fa fa-book-open mr-2"></i>BootMoA</h5>
                     <i class="fa fa-angle-down text-primary"></i>
                 </a>
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 9;">
@@ -112,10 +112,10 @@
                             		<div class="nav-item dropdown">
                                 		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">마이페이지</a>
                                 		<div class="dropdown-menu rounded-0 m-0">
-                                    		<a href="" class="dropdown-item">회원정보 수정</a>
+                                    		<a href="viewMemberInfo" class="dropdown-item">회원정보 수정</a>
                                     		<c:choose>
                                     			<c:when test="${sessionScope.vo.mlevel == 1 }">
-                                    				<a href="" class="dropdown-item">등록 요청 승인 결정</a>
+                                    				<a href="/bootcampmoa/bootcampInsertResponse" class="dropdown-item">등록 요청 승인 결정</a>
                                     			</c:when>
                                     		</c:choose>
                                 		</div>

@@ -117,7 +117,7 @@
                             		<div class="nav-item dropdown">
                                 		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">마이페이지</a>
                                 		<div class="dropdown-menu rounded-0 m-0">
-                                    		<a href="viewMemberInfo" class="dropdown-item">회원정보 수정</a>
+                                    		<a href="" class="dropdown-item">회원정보 수정</a>
                                     		<c:choose>
                                     			<c:when test="${sessionScope.vo.mlevel == 1 }">
                                     				<a href="/bootcampmoa/bootcampInsertResponse" class="dropdown-item">등록 요청 승인 결정</a>
@@ -128,8 +128,16 @@
                             	</c:when>
                             </c:choose>
                         </div>
-                    	<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="loginButton" href="/bootcampmoa/memberLogin" style="margin-right:20px;">로그인</a>
-                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="logoutButton" href="/bootcampmoa/memberlogout" style="margin-right:20px;">로그아웃</a>
+                        <c:choose>
+                        	<c:when test="${sessionScope.vo == null }">
+                    			<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="loginButton" href="/bootcampmoa/memberLogin" style="margin-right:20px;">로그인</a>	
+                        	</c:when>
+                        </c:choose>
+                        <c:choose>
+                        	<c:when test="${sessionScope.vo != null }">
+                        		<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="logoutButton" style="margin-right:20px;" onClick="logout()">로그아웃</a>
+                        	</c:when>
+                        </c:choose>
                     	<a href="/bootcampmoa/memberSignup" style="border-style:solid; padding:5px;">회원가입</a>
                     	
                     </div>
@@ -165,7 +173,7 @@
                         <div class="p-5" style="width: 100%; max-width: 900px;">
                             <h5 class="text-white text-uppercase mb-md-3">나한테 딱 맞는 부트캠프 찾는 지름길</h5>
                             <h1 class="display-3 text-white mb-md-4">부트캠프 후기 한 눈에 <br> 모아보자</h1>
-                            <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
+                            <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">전체 수강평 보러가기</a>
                         </div>
                     </div>
                 </div>
@@ -173,9 +181,9 @@
                     <img class="position-relative w-100" src="resources/img/carousel-3.jpg" style="min-height: 300px; object-fit: cover;">
                     <div class="carousel-caption d-flex align-items-center justify-content-center">
                         <div class="p-5" style="width: 100%; max-width: 900px;">
-                            <h5 class="text-white text-uppercase mb-md-3">Best Online Courses</h5>
-                            <h1 class="display-3 text-white mb-md-4">New Way To Learn From Home</h1>
-                            <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
+                            <h5 class="text-white text-uppercase mb-md-3">나한테 딱 맞는 부트캠프 찾는 지름길</h5>
+                            <h1 class="display-3 text-white mb-md-4">부트캠프 후기 한 눈에 <br> 모아보자</h1>
+                            <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">전체 수강평 보러가기</a>
                         </div>
                     </div>
                 </div>
@@ -215,7 +223,7 @@
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
                         <img class="img-fluid" src="resources/img/cat-1.jpg" alt="">
                         <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">Web Design</h4>
+                            <h4 class="text-white font-weight-medium">프론트엔드</h4>
                             <span>100 Courses</span>
                         </a>
                     </div>
@@ -224,7 +232,7 @@
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
                         <img class="img-fluid" src="resources/img/cat-2.jpg" alt="">
                         <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">Development</h4>
+                            <h4 class="text-white font-weight-medium">백엔드</h4>
                             <span>100 Courses</span>
                         </a>
                     </div>
@@ -233,7 +241,7 @@
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
                         <img class="img-fluid" src="resources/img/cat-3.jpg" alt="">
                         <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">Game Design</h4>
+                            <h4 class="text-white font-weight-medium">빅데이터</h4>
                             <span>100 Courses</span>
                         </a>
                     </div>
@@ -242,7 +250,7 @@
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
                         <img class="img-fluid" src="resources/img/cat-4.jpg" alt="">
                         <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">Apps Design</h4>
+                            <h4 class="text-white font-weight-medium">인공지능</h4>
                             <span>100 Courses</span>
                         </a>
                     </div>
@@ -251,7 +259,7 @@
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
                         <img class="img-fluid" src="resources/img/cat-5.jpg" alt="">
                         <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">Marketing</h4>
+                            <h4 class="text-white font-weight-medium">IoT</h4>
                             <span>100 Courses</span>
                         </a>
                     </div>
@@ -260,7 +268,7 @@
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
                         <img class="img-fluid" src="resources/img/cat-6.jpg" alt="">
                         <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">Research</h4>
+                            <h4 class="text-white font-weight-medium"></h4>
                             <span>100 Courses</span>
                         </a>
                     </div>
@@ -269,7 +277,7 @@
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
                         <img class="img-fluid" src="resources/img/cat-7.jpg" alt="">
                         <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">Content Writing</h4>
+                            <h4 class="text-white font-weight-medium"></h4>
                             <span>100 Courses</span>
                         </a>
                     </div>
@@ -278,7 +286,7 @@
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
                         <img class="img-fluid" src="resources/img/cat-8.jpg" alt="">
                         <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">SEO</h4>
+                            <h4 class="text-white font-weight-medium"></h4>
                             <span>100 Courses</span>
                         </a>
                     </div>
@@ -462,5 +470,15 @@
 
     <!-- Template Javascript -->
     <script src="resources/js/main.js"></script>
+    
+    <script>
+	function logout(){
+	    let form = document.createElement('form');//여기서 폼태그 만듬
+	    form.setAttribute('method', 'post'); //메서드는 포스트로
+	    form.setAttribute('action', 'memberlogout');//PostMapping 괄호안 값을 넣으면됨
+	    document.body.appendChild(form);
+	    form.submit();
+	}
+	</script>
 </body>
 </html>

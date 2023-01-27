@@ -109,13 +109,21 @@
                             <a href="/bootcampmoa/bootcampListAll" class="nav-item nav-link">부트캠프 리스트 </a>
                             <a href="course.html" class="nav-item nav-link">부트캠프 검색</a>
                             <a href="/bootcampmoa/bootcampInsertRequest" class="nav-item nav-link">등록요청</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">마이페이지</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="blog.html" class="dropdown-item">회원정보 수정</a>
-                                    <a href="single.html" class="dropdown-item">etc</a>
-                                </div>
-                            </div>
+                            <c:choose>
+                            	<c:when test="${sessionScope.vo != null}">
+                            		<div class="nav-item dropdown">
+                                		<a href="viewMemberInfo" class="nav-link dropdown-toggle" data-toggle="dropdown">마이페이지</a>
+                                		<div class="dropdown-menu rounded-0 m-0">
+                                    		<a href="viewMemberInfo" class="dropdown-item">회원정보 수정</a>
+                                    		<c:choose>
+                                    			<c:when test="${sessionScope.vo.mlevel == 1 }">
+                                    				<a href="/bootcampmoa/bootcampInsertResponse" class="dropdown-item">등록 요청 승인 결정</a>
+                                    			</c:when> 
+                                    		</c:choose> 
+                                		</div>
+                            		</div>
+                            	</c:when>
+                            </c:choose>
                         </div>
                         <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="/bootcampmoa/memberLogin">Login Now</a>
                     </div>

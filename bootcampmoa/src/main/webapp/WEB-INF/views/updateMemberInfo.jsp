@@ -222,14 +222,16 @@ function confirmDelete() {
         	$.ajax({
                 type: "POST",
                 url: "/bootcampmoa/deleteMember",
-                //headers: {'Content-Type': 'application/json'},
                 data: {password: password},
-                complete: function(response) {
-                	alert(res.msg);
-                	if(res.msg.equals("계정이 성공적으로 삭제되었습니다")){
+                success: function(response) {
+                	if(response ==1){
+                		alert("계정이 성공적으로 삭제되었습니다");
                 		window.location.replace('/bootcampmoa/bootmoaMain');
+                	}else if(response==2){
+                		alert("비밀번호가 맞지 않습니다.");
+                		location.reload();
                 	}else{
-                	location.reload();
+                		alert("세션이 유효하지 않습니다");
                 	}
                 }
                 })

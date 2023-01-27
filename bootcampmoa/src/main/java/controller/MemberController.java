@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -66,33 +68,27 @@ public class MemberController {
 	}
 	
 	
-	//@PostMapping(value = "/deleteMember", produces = "application/json")
 	
-	@PostMapping("/deleteMember")
+	@PostMapping(value = "/deleteMember", produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String deleteMember(HttpServletRequest request, @RequestParam("password") String password) {
+	public int deleteMember(HttpServletRequest request, @RequestParam("password") String password) {
 		HttpSession session = request.getSession(false);
-		String res;
+		int res = 0;
 		if (session != null) {
 			MemberVO svo = (MemberVO) session.getAttribute("vo");
 			MemberVO val = dao.getMembervo(svo.getMnum());
-			System.out.println(password);
 			String actualPassword = val.getPwd(); // password출력
-			System.out.println(actualPassword);
 			if (actualPassword.equals(password)) { // 실제 비번과 입력비번 비교
-				System.out.println("if문 안");
 				dao.deleteMember(svo.getId());
-				System.out.println("delete실행됨");
 				session.invalidate();
-				System.out.println("invalidate 실행됨");
-				res = "{ \"msg\":계정이 성공적으로 삭제되었습니다}";
-				System.out.println("msg 입력");
+				res = 1; //성공
 			} else {
-				res = "{ \"msg\": 비밀번호가 맞지 않습니다.삭제에 실패했습니다.}";
+				res =2; //비밀번호 오류
 			}
 		} else {
-			res = "{ \"msg\": 세션이 유효하지 않습니다. }";
-		}
+			res=3; //세션 유효하지 않음
+	
+			}
 		return res;
 	}
 	

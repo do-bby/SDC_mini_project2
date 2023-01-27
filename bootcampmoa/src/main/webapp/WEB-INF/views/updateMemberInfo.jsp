@@ -222,6 +222,7 @@ function confirmDelete() {
         	$.ajax({
                 type: "POST",
                 url: "/bootcampmoa/deleteMember",
+                //headers: {'Content-Type': 'application/json'},
                 data: {password: password},
                 complete: function(response) {
                 	alert(res.msg);

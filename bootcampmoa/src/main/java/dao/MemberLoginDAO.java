@@ -25,11 +25,16 @@ public class MemberLoginDAO {
 	}
 	
 	//비밀번호찾기
-	public void selectMemberPwd(MemberVO vo) {
-		String statement = "MemberLoginMapper.selectMemberPwd";
-		session.selectOne(statement, vo);
+	public String selectMemberPwd(MemberVO vo) {
+		String count = null;
+		try {
+			String statement = "MemberLoginMapper.selectMemberPwd";
+			count = session.selectOne(statement, vo);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
-	
 
 	//멤버정보 불러오기
 	public MemberVO selectMemberInfo(MemberVO vo) {
@@ -42,4 +47,5 @@ public class MemberLoginDAO {
 		}
 		return list;
 	}
+
 }

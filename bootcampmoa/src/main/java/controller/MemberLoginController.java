@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import dao.BootcampDAO;
 import dao.MemberLoginDAO;
+import vo.BootcampVO;
 import vo.MemberVO;
 
 @Controller
@@ -26,6 +28,9 @@ public class MemberLoginController {
 
 	@Autowired
 	MemberLoginDAO mDao;
+	
+	@Autowired
+	BootcampDAO bootcampDao;
 	
 	//로그인 페이지 보여주기
 	@GetMapping("/memberLogin")
@@ -39,37 +44,72 @@ public class MemberLoginController {
 	public ModelAndView selectLoginMember(HttpServletRequest request ,MemberVO vo) {
 		HttpSession session;
 		ModelAndView mav = new ModelAndView();
-		MemberVO list = mDao.selectMemberInfo(vo);
+		List<BootcampVO> list = bootcampDao.selectList();
+		MemberVO voList = mDao.selectMemberInfo(vo);
 		int count = mDao.selectLoginMember(vo);
 		//로그인 성공시 세션에 정보 담아줌
 		if(count==1) {
 			session = request.getSession();
-			session.setAttribute("vo", list);
-//			mav.setViewName("memberLoginSuccess");
+			session.setAttribute("vo", voList);
+			//부트캠프 리스트가 있으면
+			if(list.size() != 0) {
+				mav.addObject("bootcampList",list);
+			}
 			mav.setViewName("bootcampMain");
+//			mav.setViewName("memberLoginSuccess");
 		}else {
 			mav.addObject("msg", "아이디 또는 비밀번호를 확인하세요.");
 			mav.setViewName("memberLogin");
 		}
 		return mav;
+
 	}
 	
 	//로그아웃
 	@PostMapping("/memberlogout")
-	public String logout(HttpServletRequest request) {
+	public ModelAndView logout(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession(false);
+		List<BootcampVO> list = bootcampDao.selectList();
 	    if (session != null) {
 	        session.invalidate();
 	    }
-		return "memberLogout";
+	    if(list.size() != 0) {
+			mav.addObject("bootcampList",list);
+		}
+		mav.setViewName("bootcampMain");
+	    return mav;
+	}
+	
+//	//아이디 찾기
+//	@PostMapping("/memberFindId")
+//	public ModelAndView memberFindId(MemberVO vo) {
+//		ModelAndView mav = new ModelAndView();
+//		String count = mDao.selectMemberPwd(vo);
+//		if(count==1) {
+//			mav.setViewName("memberFindId");
+//		}else {
+//			mav.addObject("msg", "이름 또는 전화번호를 확인하세요.");
+//			mav.setViewName("memberLogin");
+//		}
+//		return mav;
+//	}
+	
+	//비밀번호 찾기창 이동
+	@GetMapping("/findPwdPage")
+	public String findPwd() {
+		return "/memberFindPwd";
 	}
 	
 	//비밀번호 찾기
-	@GetMapping("/findPwd")
-	public String findPwd() {
-		return "/memberLogin";
+	@PostMapping("/memberFindPwd")
+	public ModelAndView memberFindPwd(MemberVO vo) {
+		ModelAndView mav = new ModelAndView();
+		String question = mDao.selectMemberPwd(vo);
+			mav.addObject("question", question);
+			mav.setViewName("memberAnswer");
+		return mav;
 	}
-	
 	
 //	
 //	@RequestMapping(value = "/pw_auth.me")
@@ -132,7 +172,7 @@ public class MemberLoginController {
 //					return "YM/pw_find";
 //				}
 //		} //이메일 인증번호 확인
-	
+//	
 //		@RequestMapping(value = "/pw_new.me", method = RequestMethod.POST)
 //		public String pw_new(MemberVO vo, HttpSession session) throws IOException{
 //			int result = memberSV.pwUpdate_M(vo);

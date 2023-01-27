@@ -30,11 +30,6 @@ public class MemberLoginDAO {
 		session.selectOne(statement, vo);
 	}
 	
-	//회원탈퇴
-	public void deleteMember(String id) {
-		String statement = "MemberLoginMapper.deleteMember";
-		session.delete(statement);
-	}
 
 	//멤버정보 불러오기
 	public MemberVO selectMemberInfo(MemberVO vo) {

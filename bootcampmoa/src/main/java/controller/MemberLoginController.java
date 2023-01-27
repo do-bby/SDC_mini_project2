@@ -70,16 +70,7 @@ public class MemberLoginController {
 		return "/memberLogin";
 	}
 	
-	//회원탈퇴
-	@PostMapping("/deleteMember")
-	public String deleteMember(HttpServletRequest request, MemberVO vo) {
-		HttpSession session = request.getSession(false);
-	    if (session != null) {
-	    	mDao.deleteMember(vo.getId());
-	        session.invalidate();
-	    }
-		return "memberLogin";
-	}
+	
 //	
 //	@RequestMapping(value = "/pw_auth.me")
 //	public ModelAndView pw_auth(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {

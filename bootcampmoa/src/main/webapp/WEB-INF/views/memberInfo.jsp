@@ -105,11 +105,6 @@
 			</tr>
 			
 			<tr>
-			<td>프로필</td>
-			<td>${vo.profile}</td>
-			</tr>
-			
-			<tr>
 			<td>이메일</td>
 			<td>${vo.email}</td>
 			</tr>
@@ -126,25 +121,7 @@
 			
 			<tr>
 			<td>보안 질문</td>
-			<td>
-			<c:if test="${vo.question == 1}">
-           	 어머니의 성함은?
-        	</c:if>
-        	<c:if test="${vo.question == 2}">
-            	아버지의 성함은?</c:if>
-            <c:if test="${vo.question == 3}">
-            	나의 보물1호는?</c:if>
-            <c:if test="${vo.question == 4}">
-            	기억에 남는 추억의 장소는?</c:if>
-            <c:if test="${vo.question == 5}">
-            	기억에 남는 추억의 선물은?</c:if>
-            <c:if test="${vo.question == 6}">
-            	인상 깊게 읽은 책 이름은?</c:if>
-            <c:if test="${vo.question == 7}">
-            	다시 태어나면 되고 싶은 것은?</c:if>
-            <c:if test="${vo.question == 8}">
-            	내가 좋아하는 책 이름은?</c:if>	
-			</td>
+			<td>${vo.question}</td>
 			</tr>
 			
 			<tr>
@@ -164,7 +141,12 @@
 
 	
 	<button type="button" onclick= "location.href='bootmoaMain'">메인페이지로 돌아가기</button>
-	<button type="button" onclick="location.href='/bootcampmoa/memberinfo?mnum=${mnum}'">회원정보 수정</button>
+	<%-- <button type="button" onclick="location.href='/bootcampmoa/memberinfo?mnum=${mnum}'">회원정보 수정</button> --%>
+	<form action="/bootcampmoa/memberinfo" method="post">
+  <input type="hidden" name="mnum" value="${mnum}">
+  <button type="submit">회원정보 수정</button>
+</form>
+	
 
 </div>
 </body>

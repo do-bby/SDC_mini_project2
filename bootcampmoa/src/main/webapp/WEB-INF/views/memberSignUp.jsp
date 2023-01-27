@@ -134,11 +134,6 @@
 			form.nickname.focus();
 			return false;
 		}
-		if (form.profile.value == "") {
-			alert("프로필을 입력하세요");
-			form.profile.focus();
-			return false;
-		}
 
 		if (form.question.value == "") {
 			alert("보안 질문을 입력하세요");
@@ -237,17 +232,16 @@
 				<input type="text" name="nickname" id="nickname" autocomplete="off" placeholder="닉네임을 입력하세요" required>
 			<input type="button" value="중복확인" onclick="opennickCheck()"> 
 			<input type="hidden" name="nickDuplication" value="nickUncheck">
-			<input type="text" name="profile" placeholder="프로필 문구를 작성해주세요">
 			<select name="question">
 				<option value="none">== 보안질문 1개 선택 ==</option>
-				<option value="1">어머니의 성함은?</option>
-				<option value="2">아버지의 성함은?</option>
-				<option value="3">나의 보물1호는?</option>
-				<option value="4">기억에 남는 추억의 장소는?</option>
-				<option value="5">기억에 남는 추억의 선물은?</option>
-				<option value="6">인상 깊게 읽은 책 이름은?</option>
-				<option value="7">다시 태어나면 되고 싶은 것은?</option>
-				<option value="8">내가 좋아하는 책 이름은?</option>
+				<option value="어머니의 성함은?">어머니의 성함은?</option>
+				<option value="아버지의 성함은?">아버지의 성함은?</option>
+				<option value="나의 보물1호는?">나의 보물1호는?</option>
+				<option value="기억에 남는 추억의 장소는?">기억에 남는 추억의 장소는?</option>
+				<option value="기억에 남는 추억의 선물은?">기억에 남는 추억의 선물은?</option>
+				<option value="인상 깊게 읽은 책 이름은?">인상 깊게 읽은 책 이름은?</option>
+				<option value="다시 태어나면 되고 싶은 것은?">다시 태어나면 되고 싶은 것은?</option>
+				<option value="내가 좋아하는 책 이름은?">내가 좋아하는 책 이름은?</option>
 			</select> <br> 
 			<input placeholder="답변을 입력하세요." name="answer" required><br>
 			<input type="submit" class="button" value="회원가입 완료하기" onclick="return checkvalue()">

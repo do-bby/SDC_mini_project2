@@ -1,17 +1,21 @@
 package controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import dao.MemberMyBatisDao;
 import vo.MemberVO;
 
@@ -41,7 +45,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	@GetMapping("/memberinfo")
+	@PostMapping("/memberinfo")
 	public ModelAndView viewinfo(int mnum) {
 		MemberVO vo = dao.getMembervo(mnum);
 		ModelAndView mav = new ModelAndView();
@@ -50,21 +54,44 @@ public class MemberController {
 		return mav;
 	}
 	
-	@GetMapping("/updateMemberInfo") /// 회원정보 수정 기능
-	public String update(MemberVO vo) { 
+	@PostMapping("/updateMemberInfo") /// 회원정보 수정 기능
+	public ModelAndView update(MemberVO vo) { 
 		boolean res = dao.updateM(vo);
 		ModelAndView mav = new ModelAndView();
 		if (res) {
 			mav.addObject("list",dao.getMemberInfo(vo.getId()));
 			mav.addObject("msg", "회원정보 수정이 완료되었습니다");
+			mav.setViewName("memberInfo"); // 회원정보 수정 후 회원정보 조회창 이동
 		} else {
 			mav.addObject("msg", "오류가 발생했습니다.");
 		}
-		 // 회원정보 수정 후 회원정보 조회창 이동
-		return "redirect:/viewMemberInfo";
+		return mav;
 	}
 	
 	
+	 @PostMapping("/deleteMember") 
+		public String deleteMember(HttpServletRequest request, @RequestParam("password") String enteredPassword) {
+			HttpSession session = request.getSession(false);
+			String res;
+			if (session != null) {
+				MemberVO svo = (MemberVO) session.getAttribute("vo");
+				MemberVO val = dao.getMembervo(svo.getMnum());
+				String actualPassword = val.getPwd();
+				if (actualPassword.equals(enteredPassword)) { // 실제 비번과 입력비번 비교
+					dao.deleteMember(svo.getId());
+					session.invalidate();
+					res = "{ \"msg\":계정이 성공적으로 삭제되었습니다}";
+				} else {
+					res = "{ \"msg\": 비밀번호가 맞지 않습니다.삭제에 실패했습니다.}";
+				}
+			} else {
+				res = "{ \"msg\": 세션이 유효하지 않습니다. }";
+			}
+			return res;
+		}
+	
+
+
 	@GetMapping(value="/viewMemberInfo")
 	@ResponseBody
 	public ModelAndView list_info(HttpServletRequest request) {
@@ -77,7 +104,7 @@ public class MemberController {
 			mav.setViewName("memberInfo");
         } else {
 			mav.addObject("msg", "등록된 회원정보가 없습니다.");
-			mav.setViewName("bootmaoMain");
+			mav.setViewName("bootmoaMain");
 		}
 		return mav;
     }

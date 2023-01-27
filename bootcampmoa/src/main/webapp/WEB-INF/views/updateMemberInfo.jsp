@@ -3,9 +3,11 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page import = "java.util.ArrayList, vo.MemberVO"%>
 <%@ page import ="dao.MemberMyBatisDao" %>
+
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <meta charset="UTF-8">
 <title>회원정보 수정</title>
 <style>
@@ -93,7 +95,8 @@
 
 </style>
 
-
+<c:set var="nickname" value="${val.nickname}" />
+<c:set var="id" value="${val.id}" />
 <script type="text/javascript">
 function checkvalue() {
 	var form = document.userInfo;
@@ -133,12 +136,7 @@ function checkvalue() {
 		form.nickname.focus();
 		return false;
 	}
-	if (form.profile.value == "") {
-		alert("프로필을 입력하세요");
-		form.profile.focus();
-		return false;
-	}
-
+	
 	if (form.question.value == "") {
 		alert("보안 질문을 입력하세요");
 		form.question.focus();
@@ -150,23 +148,26 @@ function checkvalue() {
 		form.answer.focus();
 		return false;
 	}
-
-	if (form.idDuplication.value != "idCheck") {
-		alert("아이디 중복체크를 해주세요");
-		form.id.focus();
-		return false;
+	
+	var nickname = '<c:out value="${nickname}" />';
+	if(form.nickname.value != nickname){
+		if (form.idDuplication.value != "idCheck") {
+			alert("아이디 중복체크를 해주세요");
+			form.id.focus();
+			return false;
+		}
 	}
-
+	
+	var id = '<c:out value="${id}" />';
+	if(form.id.value != id){
 	if (form.nickDuplication.value != "nickCheck") {
 		alert("닉네임 중복체크를 해주세요");
 		form.nickname.focus();
 		return false;
+		}
 	}
 	
 	form.submit();
-
-	if ("${ !empty msg }")
-		alert('${ msg }');
 	
 
 }
@@ -212,12 +213,35 @@ function openIdCheck() {
 	xhr.send();		
 	}
 }
-</script>
+
+
+function confirmDelete() {
+    if(confirm('탈퇴 후 서비스 이용 및  계정 복구가 불가합니다. 계정을 정말 삭제하시겠습니까?')){
+        var password = prompt("본인 확인을 위해 비밀번호를 재입력 해주세요:");
+        if (password != null) {
+        	$.ajax({
+                type: "POST",
+                url: "/bootcampmoa/deleteMember",
+                data: {password: password},
+                complete: function(response) {
+                	alert(res.msg);
+                	if(res.msg.equals("계정이 성공적으로 삭제되었습니다")){
+                		window.location.replace('/bootcampmoa/bootmoaMain');
+                	}else{
+                	location.reload();
+                	}
+                }
+                })
+      	  }
+      }
+  }
+
+ </script>
 </head>
 <body>
 <div class="wrap">
 	<h2>회원정보 수정</h2>
-	<form method="GET" name="userInfo" action="/bootcampmoa/updateMemberInfo" >
+	<form method="POST" name="userInfo" action="/bootcampmoa/updateMemberInfo" >
 	<table class="userinfo">
 			<tr>
 			<td>아이디</td>
@@ -234,11 +258,6 @@ function openIdCheck() {
 			<tr>
 			<td>이름</td>
 			<td><input type="text" name="name" value="${val.name}"></td>
-			</tr>
-			
-			<tr>
-			<td>프로필</td>
-			<td><input type="text" name="profile" value="${val.profile}"></td>
 			</tr>
 			
 			<tr>
@@ -261,33 +280,16 @@ function openIdCheck() {
 			<tr>
 			<td>보안 질문</td>
 			<td>
-			<c:if test="${val.question == 1}">
-           		<c:set var="now" value="어머니의 성함은?" />
-        	</c:if>
-        	<c:if test="${val.question == 2}">
-            	<c:set var="now" value="아버지의 성함은?" /></c:if>
-            <c:if test="${val.question == 3}">
-            	<c:set var="now" value="나의 보물1호는?" /></c:if>
-            <c:if test="${val.question == 4}">
-            	<c:set var="now" value="기억에 남는 추억의 장소는?" /></c:if>
-            <c:if test="${val.question == 5}">
-            	<c:set var="now" value="기억에 남는 추억의 선물은?" /></c:if>
-            <c:if test="${val.question == 6}">
-            	<c:set var="now" value="인상 깊게 읽은 책 이름은?" /></c:if>
-            <c:if test="${val.question == 7}">
-            	<c:set var="now" value="다시 태어나면 되고 싶은 것은?" /></c:if>
-            <c:if test="${val.question == 8}">
-            	<c:set var="now" value="내가 좋아하는 책 이름은?" /></c:if>	
 			<select name="question" class="q">
-								<option value="${val.question}">${now}</option>
-								<option value="1">어머니의 성함은?</option>
-								<option value="2">아버지의 성함은?</option>
-								<option value="3">나의 보물1호는?</option>
-								<option value="4">기억에 남는 추억의 장소는?</option>
-								<option value="5">기억에 남는 추억의 선물은?</option>
-								<option value="6">인상 깊게 읽은 책 이름은?</option>
-								<option value="7">다시 태어나면 되고 싶은 것은?</option>
-								<option value="8">내가 좋아하는 책 이름은?</option>
+								<option value="${val.question}">${val.question}</option>
+								<option value="어머니의 성함은?">어머니의 성함은?</option>
+								<option value="아버지의 성함은?">아버지의 성함은?</option>
+								<option value="나의 보물1호는?">나의 보물1호는?</option>
+								<option value="기억에 남는 추억의 장소는?">기억에 남는 추억의 장소는?</option>
+								<option value="기억에 남는 추억의 선물은?">기억에 남는 추억의 선물은?</option>
+								<option value="인상 깊게 읽은 책 이름은?">인상 깊게 읽은 책 이름은?</option>
+								<option value="다시 태어나면 되고 싶은 것은?">다시 태어나면 되고 싶은 것은?</option>
+								<option value="내가 좋아하는 책 이름은?">내가 좋아하는 책 이름은?</option>
 								</select>
 								</td>	
 			</tr>
@@ -300,10 +302,16 @@ function openIdCheck() {
 			</tr>
 
 	</table>
-
+	
 	<input type="submit" class="infobutton" value="수정 완료" onclick="return checkvalue()">
+	<input type="button" class="infobutton" name="deleteMember" id="deleteMember" style="background-color:#5F5F5F;" value="회원탈퇴" onClick="confirmDelete()"/>
 	<button type="button" class="infobutton" onclick="location.href='viewMemberInfo'">뒤로가기</button>
 </form>
-	
+<c:if test="${ !empty msg }" >
+	<script>
+		alert('${ msg }');
+	</script>
+</c:if>
+
 </div>
 </body>

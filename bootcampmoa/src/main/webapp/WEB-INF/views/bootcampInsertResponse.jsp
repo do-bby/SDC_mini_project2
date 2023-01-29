@@ -21,10 +21,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/bootcampmoa/resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="resources/css/style.css" rel="stylesheet">
+    <link href="/bootcampmoa/resources/css/style.css" rel="stylesheet">
     
     <style>
     #permitTable {
@@ -40,7 +40,7 @@
 </head>
 
 <body>
-    <!-- Topbar Start -->
+	 <!-- Topbar Start -->
     <div class="container-fluid d-none d-lg-block">
         <div class="row align-items-center py-4 px-xl-5">
             <div class="col-lg-3">
@@ -49,32 +49,32 @@
                 </a>
             </div>
             <div class="col-lg-3 text-right">
-               <div class="d-inline-flex align-items-center">
-                   <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
-                   <div class="text-left">
-                       <h6 class="font-weight-semi-bold mb-1">Our Office</h6>
-                       <small>서울특별시 서초구 효령로 335</small>
-                   </div>
-               </div>
-           </div>
-           <div class="col-lg-3 text-right">
-               <div class="d-inline-flex align-items-center">
-                   <i class="fa fa-2x fa-envelope text-primary mr-3"></i>
-                   <div class="text-left">
-                       <h6 class="font-weight-semi-bold mb-1">Email Us</h6>
-                       <small>bootmoa@gmail.com</small>
-                   </div>
-               </div>
-           </div>
-           <div class="col-lg-3 text-right">
-               <div class="d-inline-flex align-items-center">
-                   <i class="fa fa-2x fa-phone text-primary mr-3"></i>
-                   <div class="text-left">
-                       <h6 class="font-weight-semi-bold mb-1">Call Us</h6>
-                       <small>+012 345 6789</small>
-                   </div>
-               </div>
-           </div>
+                <div class="d-inline-flex align-items-center">
+                    <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
+                    <div class="text-left">
+                        <h6 class="font-weight-semi-bold mb-1">Our Office</h6>
+                        <small>서울특별시 서초구 효령로 335</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right">
+                <div class="d-inline-flex align-items-center">
+                    <i class="fa fa-2x fa-envelope text-primary mr-3"></i>
+                    <div class="text-left">
+                        <h6 class="font-weight-semi-bold mb-1">Email Us</h6>
+                        <small>bootmoa@gmail.com</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right">
+                <div class="d-inline-flex align-items-center">
+                    <i class="fa fa-2x fa-phone text-primary mr-3"></i>
+                    <div class="text-left">
+                        <h6 class="font-weight-semi-bold mb-1">Call Us</h6>
+                        <small>+012 345 6789</small>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Topbar End -->
@@ -91,17 +91,17 @@
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 9;">
                     <div class="navbar-nav w-100">
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">Web Design <i class="fa fa-angle-down float-right mt-1"></i></a>
+                            <a href="#" class="nav-link" data-toggle="dropdown">백엔드 <i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                                 <a href="" class="dropdown-item">HTML</a>
                                 <a href="" class="dropdown-item">CSS</a>
                                 <a href="" class="dropdown-item">jQuery</a>
                             </div>
                         </div>
-                        <a href="" class="nav-item nav-link">Apps Design</a>
-                        <a href="" class="nav-item nav-link">Marketing</a>
-                        <a href="" class="nav-item nav-link">Research</a>
-                        <a href="" class="nav-item nav-link">SEO</a>
+                        <a href="" class="nav-item nav-link">프론트엔드</a>
+                        <a href="" class="nav-item nav-link">AI</a>
+                        <a href="" class="nav-item nav-link">클라우드</a>
+                        <a href="" class="nav-item nav-link">빅데이터</a> 
                     </div>
                 </nav>
             </div>
@@ -117,33 +117,43 @@
                         <div class="navbar-nav py-0">
                             <a href="/bootcampmoa/bootcampMain" class="nav-item nav-link active">홈</a>
                             <a href="/bootcampmoa/bootcampListAll" class="nav-item nav-link">부트캠프 리스트 </a>
-                            <a href="course.html" class="nav-item nav-link">부트캠프 검색</a>
+                            <a href="/bootcampmoa/bootcampSearch" class="nav-item nav-link">부트캠프 검색</a>
                             <a href="/bootcampmoa/bootcampInsertRequest" class="nav-item nav-link">등록요청</a>
                             <c:choose>
                             	<c:when test="${sessionScope.vo != null}">
                             		<div class="nav-item dropdown">
                                 		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">마이페이지</a>
                                 		<div class="dropdown-menu rounded-0 m-0">
-                                    		<a href="" class="dropdown-item">회원정보 수정</a>
+                                    		<a href="viewMemberInfo" class="dropdown-item">회원정보 수정</a>
                                     		<c:choose>
                                     			<c:when test="${sessionScope.vo.mlevel == 1 }">
-                                    				<a href="" class="dropdown-item">등록 요청 승인 결정</a>
-                                    			</c:when>
-                                    		</c:choose>
+                                    				<a href="/bootcampmoa/bootcampInsertResponse" class="dropdown-item">등록 요청 승인 관리</a>
+                                    				<a href="/bootcampmoa/bootcampManagement" class="dropdown-item"> 설정 </a>
+                                    			</c:when> 
+                                    		</c:choose> 
                                 		</div>
                             		</div>
                             	</c:when>
                             </c:choose>
-                         
                         </div>
-                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="/bootcampmoa/memberLogin">Login Now</a>
+                        <c:choose>
+                        	<c:when test="${sessionScope.vo == null }">
+                    			<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="loginButton" href="/bootcampmoa/memberLogin" style="margin-right:20px;">로그인</a>	
+                        	</c:when>
+                        </c:choose>
+                        <c:choose>
+                        	<c:when test="${sessionScope.vo != null }">
+                        		<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="logoutButton" style="margin-right:20px;" onClick="logout()">로그아웃</a>
+                        	</c:when>
+                        </c:choose>
+                    	<a href="/bootcampmoa/memberSignup" style="border-style:solid; padding:5px;">회원가입</a>
+                    	
                     </div>
                 </nav>
             </div>
         </div>
     </div>
     <!-- Navbar End -->
-
  
     <!-- Header Start -->
     <div class="container-fluid page-header" style="margin-bottom: 90px;">
@@ -175,13 +185,12 @@
 								<table id="permitTable">
 								<c:forEach var = "vo" items = "${requestScope.invisibleList }">
 									<tr>
-										<td class="permitTd">${vo.mnum }</td>
-										<td class="permitTd">${vo.academy }</td>					
+										<td class="permitTd">${vo.mnum }</td>					
 										<td class="permitTd">${vo.academy }</td>
 										<td class="permitTd">${vo.program }</td>
-										<td class="permitTd"><a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="permit" href="" style="margin-right:20px;">등록</a>
+										<td class="permitTd"><a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="permit" href="/bootcampmoa/insertManager?bnum=${vo.bnum }" style="margin-right:20px;" target="_blank" onClick="window.open(this.href, '', 'width=400, height=430');">등록</a>
 										</td>
-										<td class="permitTd"><a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="permit" href="" style="margin-right:20px;">삭제</a>
+										<td class="permitTd"><a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="permit" href="/bootcampmoa/requestDelete?bnum=${vo.bnum}" style="margin-right:20px;">삭제</a>
 									</tr>
 								</c:forEach>
 								</table>
@@ -279,11 +288,21 @@
     <script src="resources/lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Contact Javascript File -->
-    <script src="resources/mail/jqBootstrapValidation.min.js"></script>
-    <script src="resources/mail/contact.js"></script>
+    <script src="/bootcampmoa/resources/mail/jqBootstrapValidation.min.js"></script>
+    <script src="/bootcampmoa/resources/mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="resources/js/main.js"></script>
+    <script src="/bootcampmoa/resources/js/main.js"></script>
+    
+     <script>
+	function logout(){
+	    let form = document.createElement('form');//여기서 폼태그 만듬
+	    form.setAttribute('method', 'post'); //메서드는 포스트로
+	    form.setAttribute('action', 'memberlogout');//PostMapping 괄호안 값을 넣으면됨
+	    document.body.appendChild(form);
+	    form.submit();
+	}
+	</script>
 </body>
 
 </html>

@@ -30,7 +30,7 @@
 </head>
 
 <body>
-    <!-- Topbar Start -->
+	 <!-- Topbar Start -->
     <div class="container-fluid d-none d-lg-block">
         <div class="row align-items-center py-4 px-xl-5">
             <div class="col-lg-3">
@@ -75,23 +75,23 @@
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a class="d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none" data-toggle="collapse" href="#navbar-vertical" style="height: 67px; padding: 0 30px;">
-                    <h5 class="text-primary m-0"><i class="fa fa-book-open mr-2"></i>Subjects</h5>
+                    <h5 class="text-primary m-0"><i class="fa fa-book-open mr-2"></i>BootMoA</h5>
                     <i class="fa fa-angle-down text-primary"></i>
                 </a>
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 9;">
                     <div class="navbar-nav w-100">
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">Web Design <i class="fa fa-angle-down float-right mt-1"></i></a>
+                            <a href="#" class="nav-link" data-toggle="dropdown">백엔드 <i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                                 <a href="" class="dropdown-item">HTML</a>
                                 <a href="" class="dropdown-item">CSS</a>
                                 <a href="" class="dropdown-item">jQuery</a>
                             </div>
                         </div>
-                        <a href="" class="nav-item nav-link">Apps Design</a>
-                        <a href="" class="nav-item nav-link">Marketing</a>
-                        <a href="" class="nav-item nav-link">Research</a>
-                        <a href="" class="nav-item nav-link">SEO</a>
+                        <a href="" class="nav-item nav-link">프론트엔드</a>
+                        <a href="" class="nav-item nav-link">AI</a>
+                        <a href="" class="nav-item nav-link">클라우드</a>
+                        <a href="" class="nav-item nav-link">빅데이터</a> 
                     </div>
                 </nav>
             </div>
@@ -105,19 +105,20 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav py-0">
-                            <a href="/bootcampmoa/bootmoaMain" class="nav-item nav-link active">홈</a>
+                            <a href="/bootcampmoa/bootcampMain" class="nav-item nav-link active">홈</a>
                             <a href="/bootcampmoa/bootcampListAll" class="nav-item nav-link">부트캠프 리스트 </a>
-                            <a href="course.html" class="nav-item nav-link">부트캠프 검색</a>
+                            <a href="/bootcampmoa/bootcampSearch" class="nav-item nav-link">부트캠프 검색</a>
                             <a href="/bootcampmoa/bootcampInsertRequest" class="nav-item nav-link">등록요청</a>
                             <c:choose>
                             	<c:when test="${sessionScope.vo != null}">
                             		<div class="nav-item dropdown">
-                                		<a href="viewMemberInfo" class="nav-link dropdown-toggle" data-toggle="dropdown">마이페이지</a>
+                                		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">마이페이지</a>
                                 		<div class="dropdown-menu rounded-0 m-0">
                                     		<a href="viewMemberInfo" class="dropdown-item">회원정보 수정</a>
                                     		<c:choose>
                                     			<c:when test="${sessionScope.vo.mlevel == 1 }">
-                                    				<a href="/bootcampmoa/bootcampInsertResponse" class="dropdown-item">등록 요청 승인 결정</a>
+                                    				<a href="/bootcampmoa/bootcampInsertResponse" class="dropdown-item">등록 요청 승인 관리</a>
+                                    				<a href="/bootcampmoa/bootcampManagement" class="dropdown-item"> 설정 </a>
                                     			</c:when> 
                                     		</c:choose> 
                                 		</div>
@@ -125,14 +126,24 @@
                             	</c:when>
                             </c:choose>
                         </div>
-                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="/bootcampmoa/memberLogin">Login Now</a>
+                        <c:choose>
+                        	<c:when test="${sessionScope.vo == null }">
+                    			<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="loginButton" href="/bootcampmoa/memberLogin" style="margin-right:20px;">로그인</a>	
+                        	</c:when>
+                        </c:choose>
+                        <c:choose>
+                        	<c:when test="${sessionScope.vo != null }">
+                        		<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="logoutButton" style="margin-right:20px;" onClick="logout()">로그아웃</a>
+                        	</c:when>
+                        </c:choose>
+                    	<a href="/bootcampmoa/memberSignup" style="border-style:solid; padding:5px;">회원가입</a>
+                    	
                     </div>
                 </nav>
             </div>
         </div>
     </div>
     <!-- Navbar End -->
-
 
     <!-- Header Start -->
     <div class="container-fluid page-header" style="margin-bottom: 90px;">
@@ -164,7 +175,7 @@
             							<c:when test="${vo.visible == 1}">
             								<div class="col-lg-6 mb-4">
                             					<div class="blog-item position-relative overflow-hidden rounded mb-2">
-                                					<img class="img-fluid" src="resources/images/${vo.logo}">
+                                					<img class="img-fluid" src="/bootcampmoa/resources/images/${vo.logo}">
                                 					<a class="blog-overlay text-decoration-none" href="">
                                     				<h5 class="text-white mb-3">${vo.academy }</h5>
                                     				<p class="text-primary m-0">${vo.program }</p>
@@ -214,7 +225,7 @@
                     <div class="mb-5">
                         <form action="">
                             <div class="input-group">
-                                <input type="text" class="form-control form-control-lg" placeholder="학원 /부트캠프 명을 검색하세요">
+                                <input type="text" class="form-control form-control-lg" placeholder="부트캠프 명을 검색하세요 ex)인공지능">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-transparent text-primary"><i
                                             class="fa fa-search"></i></span>
@@ -356,6 +367,16 @@
 
     <!-- Template Javascript -->
     <script src="resources/js/main.js"></script>
+    
+     <script>
+	function logout(){
+	    let form = document.createElement('form');//여기서 폼태그 만듬
+	    form.setAttribute('method', 'post'); //메서드는 포스트로
+	    form.setAttribute('action', 'memberlogout');//PostMapping 괄호안 값을 넣으면됨
+	    document.body.appendChild(form);
+	    form.submit();
+	}
+	</script>
 </body>
 
 </html>

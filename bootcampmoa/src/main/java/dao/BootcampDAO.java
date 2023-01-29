@@ -116,7 +116,7 @@ public class BootcampDAO {
 		List<BootcampVO> list = null;
 		try {
 			String statement = "resource.BootcampMapper.searchBootcamp";
-			session.selectList(statement,keyword);
+			list = session.selectList(statement,keyword);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -1,5 +1,7 @@
 package vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BootcampVO {
 	private int bnum;
 	private String program;
@@ -10,7 +12,8 @@ public class BootcampVO {
 	private String address;
 	private int visible;
 	private int mnum;
-	
+	private MultipartFile logoFile;
+	private MultipartFile imgFile;
 	
 	/*public BootcampVO() {
 		super();
@@ -37,12 +40,6 @@ public class BootcampVO {
 	}
 	public void setAcademy(String academy) {
 		this.academy = academy;
-	}
-	public String getLogo() {
-		return logo;
-	}
-	public void setRogo(String rogo) {
-		this.logo = rogo;
 	}
 	public String getImg() {
 		return img;
@@ -74,5 +71,30 @@ public class BootcampVO {
 	public void setMnum(int mnum) {
 		this.mnum = mnum;
 	}
+	public String getLogo() {
+		return logo;
+	}
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+	public MultipartFile getLogoFile() {
+		return logoFile;
+	}
+	public void setLogoFile(MultipartFile logoFile) {
+		this.logoFile = logoFile;
+	}
+	public MultipartFile getImgFile() {
+		return imgFile;
+	}
+	public void setImgFile(MultipartFile imgFile) {
+		this.imgFile = imgFile;
+	}
+	@Override
+	public String toString() {
+		return "BootcampVO [bnum=" + bnum + ", program=" + program + ", academy=" + academy + ", logo=" + logo
+				+ ", img=" + img + ", url=" + url + ", address=" + address + ", visible=" + visible + ", mnum=" + mnum
+				+ ", logoFile=" + logoFile + ", imgFile=" + imgFile + "]";
+	}
+	
 	
 }

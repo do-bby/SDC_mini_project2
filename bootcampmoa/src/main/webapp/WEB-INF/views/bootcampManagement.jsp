@@ -21,10 +21,22 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/bootcampmoa/resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="resources/css/style.css" rel="stylesheet">
+    <link href="/bootcampmoa/resources/css/style.css" rel="stylesheet">
+    
+    <style>
+    #permitTable {
+		margin : 5px auto;
+		
+	}
+	.permitTd{
+		border-bottom: 1px dotted black;
+		padding : 10px;
+		text-align : left;
+	}
+    </style>
 </head>
 
 <body>
@@ -142,14 +154,14 @@
         </div>
     </div>
     <!-- Navbar End -->
-
+ 
     <!-- Header Start -->
     <div class="container-fluid page-header" style="margin-bottom: 90px;">
         <div class="container">
             <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
-                <h3 class="display-4 text-white text-uppercase">부트캠프 등록 요청</h3>
+                <h3 class="display-4 text-white text-uppercase">부트캠프 관리</h3>
                 <div class="d-inline-flex text-white">
-                    <p class="m-0 text-uppercase"><a class="text-white">부트모아에 등록되어 있지 않은 부트캠프가 있나요?</a></p>
+                    <p class="m-0 text-uppercase"><a class="text-white"> </a>부트캠프 정보 수정/삭제</p>
                  
                 </div>
             </div>
@@ -162,33 +174,31 @@
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center mb-5">
-                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Request</h5>
-                <h1>이 부트캠프의 후기가 궁금해요!</h1>
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Management</h5>
+            
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="contact-form bg-secondary rounded p-5">
-                        <div id="success"></div>
-                        <form name="sentMessage" novalidate="novalidate" method="POST" action="/bootcampmoa/bootcampInsertRequest/success">
-                        	<input type="hidden" name="mnum" value="${sessionScope.vo.mnum }"> 
-                            <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" name="academy" id="academy" placeholder="학원 명" required="required" data-validation-required-message="학원 명을 입력해주세요" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" name="program" id="program" placeholder="부트캠프 프로그램 명" required="required" data-validation-required-message="부트캠프 프로그램 이름을 입력해주세요" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" name="url" id="url" placeholder="부트캠프 학원 사이트 주소" required="required" data-validation-required-message="학원 사이트 주소를입력해주세요" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            
-                            
-                            <div class="text-center">
-                                <button class="btn btn-primary py-3 px-5" type="submit" id="sendMessageButton">등록 요청</button>
-                            </div>
-                        </form>
+                       <c:choose>
+					   		<c:when test="${ !empty requestScope.visibleList}">
+								<table id="permitTable">
+								<c:forEach var = "vo" items = "${requestScope.visibleList }">
+									<tr>
+													
+										<td class="permitTd">${vo.academy }</td>
+										<td class="permitTd">${vo.program }</td>
+										<td class="permitTd"><a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="permit" href="/bootcampmoa/updateManager?bnum=${vo.bnum }" style="margin-right:20px;" target="_blank" onClick="window.open(this.href, '', 'width=400, height=430');">수정</a>
+										</td>
+										<td class="permitTd"><a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="permit" href="/bootcampmoa/bootcampDelete?bnum=${vo.bnum}" style="margin-right:20px;">삭제</a>
+									</tr>
+								</c:forEach>
+								</table>
+							</c:when>
+							<c:otherwise>
+							<h3>${requestScope.msg }</h3>
+							</c:otherwise>
+						</c:choose>
                     </div>
                 </div>
             </div>
@@ -278,11 +288,11 @@
     <script src="resources/lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Contact Javascript File -->
-    <script src="resources/mail/jqBootstrapValidation.min.js"></script>
-    <script src="resources/mail/contact.js"></script>
+    <script src="/bootcampmoa/resources/mail/jqBootstrapValidation.min.js"></script>
+    <script src="/bootcampmoa/resources/mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="resources/js/main.js"></script>
+    <script src="/bootcampmoa/resources/js/main.js"></script>
     
      <script>
 	function logout(){

@@ -32,7 +32,7 @@
 	
 	<select id="searchBootcamp" resultType="vo.BootcampVO" parameterType="java.lang.String">
 		<!-- 부트캠프 과정명으로 검색 -->
-    	select bnum,program,academy,logo,img,url,address,visible,mnum from bootcamp where program LIKE '%'||#{keyword}||'%'
+    	select bnum,program,academy,logo,img,url,address,visible,mnum from bootcamp where program like '%'||#{keyword}||'%'
     </select>
     
 	<delete id="deleteBootcamp"  parameterType="_int"  >

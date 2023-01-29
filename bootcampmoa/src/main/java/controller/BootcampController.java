@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import dao.BootcampDAO;
 import dao.MemberMyBatisDao;
 import vo.BootcampVO;
 import vo.MemberVO;
+
 
 
 
@@ -48,14 +52,14 @@ public class BootcampController {
 	}
 	
 	@GetMapping("/bootcampInsertRequest") //부트캠프 등록 요청 페이지로 이동
-	public ModelAndView insertRequest() {
+	public ModelAndView insertMember() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("bootcampInsertRequest");
 		return mav;
 	} 
 	
 	@PostMapping("/bootcampInsertRequest/success") //부트캠프 등록 요청 =>  
-	public ModelAndView insertRequestSuccess(BootcampVO bootcamp) {
+	public ModelAndView insertMemberResult(BootcampVO bootcamp) {
 		boolean result = bootcampDao.insertMember(bootcamp);
 		ModelAndView mav = new ModelAndView();
 		if (result) {
@@ -89,7 +93,196 @@ public class BootcampController {
 		
 	}
 	
+	@GetMapping("/requestDelete") // 등록 요청 삭제
+	public ModelAndView requestDelete(BootcampVO bootcamp) {
+		List<BootcampVO> list = bootcampDao.selectList();
+		List<BootcampVO> invisibleList = new ArrayList<BootcampVO>();
+		ModelAndView mav = new ModelAndView();
+		boolean result = bootcampDao.delete(bootcamp.getBnum());
+		if(result) {
+			if(list.size() != 0) {
+				for(BootcampVO vo: list) {
+					if(vo.getVisible() == 0) {
+						
+						invisibleList.add(vo);
+					}
+				}
+				mav.addObject("invisibleList",invisibleList);
+			}else {
+				mav.addObject("msg", "등록 요청이 없습니다.");
+			}
+			
+			mav.setViewName("bootcampInsertResponse");
+		}	
+		return mav;
+	}
+	
+	@GetMapping("/insertManager") // 등록 요청 버튼 => 부트캠프 등록 창
+	public ModelAndView insertManager(BootcampVO bootcamp) {
+		ModelAndView mav = new ModelAndView();
+		BootcampVO vo = bootcampDao.selectOne(bootcamp.getBnum());
+		mav.addObject("vo", vo);
+		mav.setViewName("insertManager");
+		return mav;
+	}
+	
+	@PostMapping("/insertManager/result")// 부트캠프 등록 창 => 등록 버튼 클릭 => 사이트 메인 페이지에 등록
+	public void InsertManagerResult(BootcampVO bootcamp) {
+		
+		String logoFile = bootcamp.getLogoFile().getOriginalFilename(); // 넘겨 받은 파일 이름 추출
+		String imgFile = bootcamp.getImgFile().getOriginalFilename();
+		bootcamp.setLogo(logoFile);
+		bootcamp.setImg(imgFile);
+		
+		byte[] logoContent = null;
+		byte[] imgContent = null;
+		
+		System.out.println(bootcamp.toString());
+		// 파일을 images 폴더 아래에 저장
+		try {
+			logoContent = logoFile.getBytes();
+			imgContent = imgFile.getBytes();
+			File logo = new File("C:/Users/YB/git/SDC_mini_project2/bootcampmoa/src/main/webapp/resources/images/"+logoFile);
+			File img = new File("C:/Users/YB/git/SDC_mini_project2/bootcampmoa/src/main/webapp/resources/images/"+imgFile);
+			FileOutputStream fos1 = new FileOutputStream(logo);
+			FileOutputStream fos2 = new FileOutputStream(img);
+			
+   		 	fos1.write(logoContent);
+   		 	fos2.write(imgContent);
+   		 	
+   		 	fos1.close();
+   		 	fos2.close();
+   		 	
+   		// 등록된 정보를 DB에 저장
+   		bootcampDao.update(bootcamp);	
+   		
+   		// 넘겨받은 bnum 값으로 요청 리스트에서 삭제 + 메인화면에 등록(= visible 0 => 1) 
+   		bootcampDao.updateManager(bootcamp);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	@GetMapping("/updateManager") // 수정 버튼 => 부트캠프 등록 창
+	public ModelAndView updateManager(BootcampVO bootcamp) {
+		ModelAndView mav = new ModelAndView();
+		BootcampVO vo = bootcampDao.selectOne(bootcamp.getBnum());
+		mav.addObject("vo", vo);
+		mav.setViewName("updateManager");
+		return mav;
+	}
 	
 	
+	@PostMapping("/updateManager/result")// 부트캠프 등록 창 => 등록 버튼 클릭 => 사이트 메인 페이지에 등록
+	public void updateManagerResult(BootcampVO bootcamp) {
+		
+		String logoFile = bootcamp.getLogoFile().getOriginalFilename(); // 넘겨 받은 파일 이름 추출
+		String imgFile = bootcamp.getImgFile().getOriginalFilename();
+		bootcamp.setLogo(logoFile);
+		bootcamp.setImg(imgFile);
+		
+		byte[] logoContent = null;
+		byte[] imgContent = null;
+		
+		System.out.println(bootcamp.toString());
+		// 파일을 images 폴더 아래에 저장
+		try {
+			logoContent = logoFile.getBytes();
+			imgContent = imgFile.getBytes();
+			File logo = new File("C:/Users/YB/git/SDC_mini_project2/bootcampmoa/src/main/webapp/resources/images/"+logoFile);
+			File img = new File("C:/Users/YB/git/SDC_mini_project2/bootcampmoa/src/main/webapp/resources/images/"+imgFile);
+			FileOutputStream fos1 = new FileOutputStream(logo);
+			FileOutputStream fos2 = new FileOutputStream(img);
+			
+   		 	fos1.write(logoContent);
+   		 	fos2.write(imgContent);
+   		 	
+   		 	fos1.close();
+   		 	fos2.close();
+   		 	
+   		// 등록된 정보를 DB에 저장
+   		bootcampDao.update(bootcamp);	
+   		
+   		// 넘겨받은 bnum 값으로 요청 리스트에서 삭제 + 메인화면에 등록(= visible 0 => 1) 
+   		bootcampDao.updateManager(bootcamp);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	@GetMapping("/bootcampDelete") // 등록 요청 삭제
+	public ModelAndView bootcampDelete(BootcampVO bootcamp) {
+		List<BootcampVO> list = bootcampDao.selectList();
+		List<BootcampVO> visibleList = new ArrayList<BootcampVO>();
+		ModelAndView mav = new ModelAndView();
+		boolean result = bootcampDao.delete(bootcamp.getBnum());
+		if(result) {
+			if(list.size() != 0) {
+				for(BootcampVO vo: list) {
+					if(vo.getVisible() == 1) {
+						
+						visibleList.add(vo);
+					}
+				}
+				mav.addObject("visibleList",visibleList);
+			}else {
+				mav.addObject("msg", "등록 요청이 없습니다.");
+			}
+			
+			mav.setViewName("bootcampManagement");
+		}	
+		return mav;
+	}
+	
+	@GetMapping("/bootcampSearch") // 등록 요청 버튼 => 부트캠프 등록 창 & 메인화면 카테고리 
+	public ModelAndView bootcampSearch(String keyword) {
+		ModelAndView mav = new ModelAndView();
+		if(keyword==null) {
+			mav.setViewName("bootcampSearch");
+			
+		}else {
+			List<BootcampVO> list = bootcampDao.search(keyword);
+			
+			if (list.size() != 0) {
+				mav.addObject("msg1", "'"+keyword+"'"+"에 대한 검색결과 입니다.");
+				mav.addObject("searchList", list);
+				
+			}else {
+				mav.addObject("msg2", "'"+keyword+"'"+"에 대한 검색 결과가 없어요😭");
+				
+			}
+			mav.setViewName("bootcampSearch");
+			
+		}
+		
+		return mav;
+	}
+	
+	
+	@GetMapping("/bootcampManagement") //관리자 로그인 시 관리 페이지 에서 등록된 부트캠프만 볼 수 있음   
+	public ModelAndView bootcampManagement(BootcampVO bootcamp) {
+		List<BootcampVO> visibleList = new ArrayList<BootcampVO>();
+		List<BootcampVO> list = bootcampDao.selectList();
+		ModelAndView mav = new ModelAndView();
+		if(list.size() != 0) {
+			for(BootcampVO vo: list) {
+				if(vo.getVisible() == 1) {
+					
+					visibleList.add(vo);
+				}
+			}
+			mav.addObject("visibleList",visibleList);
+		}else {
+			mav.addObject("msg", "등록된 부트캠프가 없습니다.");
+		}
+		mav.setViewName("bootcampManagement");
+		return mav;
+		
+	}
+
 
 }

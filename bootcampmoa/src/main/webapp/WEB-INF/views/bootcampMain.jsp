@@ -25,7 +25,7 @@
     <link href="resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="resources/css/style.css" rel="stylesheet">
+    <link href="resources/css/style.css?after" rel="stylesheet">
     
     <!-- 한글 폰트 -->
     <style type="text/css">
@@ -110,7 +110,7 @@
                         <div class="navbar-nav py-0">
                             <a href="/bootcampmoa/bootcampMain" class="nav-item nav-link active">홈</a>
                             <a href="/bootcampmoa/bootcampListAll" class="nav-item nav-link">부트캠프 리스트 </a>
-                            <a href="course.html" class="nav-item nav-link">부트캠프 검색</a>
+                            <a href="/bootcampmoa/bootcampSearch" class="nav-item nav-link">부트캠프 검색</a>
                             <a href="/bootcampmoa/bootcampInsertRequest" class="nav-item nav-link">등록요청</a>
                             <c:choose>
                             	<c:when test="${sessionScope.vo != null}">
@@ -120,7 +120,9 @@
                                     		<a href="viewMemberInfo" class="dropdown-item">회원정보 수정</a>
                                     		<c:choose>
                                     			<c:when test="${sessionScope.vo.mlevel == 1 }">
-                                    				<a href="/bootcampmoa/bootcampInsertResponse" class="dropdown-item">등록 요청 승인 결정</a>
+                                    				<a href="/bootcampmoa/bootcampInsertResponse" class="dropdown-item">등록 요청 승인 관리</a>
+                                    				<a href="/bootcampmoa/bootcampManagement" class="dropdown-item"> 설정 </a>
+                                    				
                                     			</c:when> 
                                     		</c:choose> 
                                 		</div>
@@ -172,8 +174,8 @@
                     <div class="carousel-caption d-flex align-items-center justify-content-center">
                         <div class="p-5" style="width: 100%; max-width: 900px;">
                             <h5 class="text-white text-uppercase mb-md-3">나한테 딱 맞는 부트캠프 찾는 지름길</h5>
-                            <h1 class="display-3 text-white mb-md-4">부트캠프 후기 한 눈에 <br> 모아보자</h1>
-                            <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">전체 수강평 보러가기</a>
+                            <h1 class="display-3 text-white mb-md-4">찾으시는 부트캠프 <br>수강평 있으신가요?</h1>
+                            <a href="/bootcampmoa/bootcampSearch" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">수강평 검색하러 가기</a>
                         </div>
                     </div>
                 </div>
@@ -182,8 +184,8 @@
                     <div class="carousel-caption d-flex align-items-center justify-content-center">
                         <div class="p-5" style="width: 100%; max-width: 900px;">
                             <h5 class="text-white text-uppercase mb-md-3">나한테 딱 맞는 부트캠프 찾는 지름길</h5>
-                            <h1 class="display-3 text-white mb-md-4">부트캠프 후기 한 눈에 <br> 모아보자</h1>
-                            <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">전체 수강평 보러가기</a>
+                            <h1 class="display-3 text-white mb-md-4">이 부트캠프도  <br>등록해주세요!</h1>
+                            <a href="/bootcampmoa/bootcampInsertRequest" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">부트캠프 등록 요청 </a>
                         </div>
                     </div>
                 </div>
@@ -191,56 +193,56 @@
         </div>
     </div>
     <!-- Carousel End -->
-    <!-- About Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="row align-items-center">
-                <div class="col-lg-5">
-                    <img class="img-fluid rounded mb-4 mb-lg-0" src="resources/img/about.jpg" alt="">
-                </div>
-                <div class="col-lg-7">
-                    <div class="text-left mb-4">
-                        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">About Us</h5>
-                        <h1>Innovative Way To Learn</h1>
-                    </div>
-                    <p>Aliquyam accusam clita nonumy ipsum sit sea clita ipsum clita, ipsum dolores amet voluptua duo dolores et sit ipsum rebum, sadipscing et erat eirmod diam kasd labore clita est. Diam sanctus gubergren sit rebum clita amet, sea est sea vero sed et. Sadipscing labore tempor at sit dolor clita consetetur diam. Diam ut diam tempor no et, lorem dolore invidunt no nonumy stet ea labore, dolor justo et sit gubergren diam sed sed no ipsum. Sit tempor ut nonumy elitr dolores justo aliquyam ipsum stet</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- About End -->
 
 
     <!-- Category Start -->
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <div class="text-center mb-5">
-                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Subjects</h5>
-                <h1>Explore Top Subjects</h1>
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Category</h5>
+                <h1>과정 한 눈에 보기</h1>
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="resources/img/cat-1.jpg" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="">
+                        <img class="img-fluid" src="/bootcampmoa/resources/images/프론트엔드.png" alt="">
+                        <a class="cat-overlay text-white text-decoration-none" href="/bootcampmoa/bootcampSearch?keyword=프론트엔드">
                             <h4 class="text-white font-weight-medium">프론트엔드</h4>
-                            <span>100 Courses</span>
+                            <span></span>
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="resources/img/cat-2.jpg" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="">
+                        <img class="img-fluid" src="/bootcampmoa/resources/images/백엔드.png" alt="">
+                        <a class="cat-overlay text-white text-decoration-none" href="/bootcampmoa/bootcampSearch?keyword=벡엔드">
                             <h4 class="text-white font-weight-medium">백엔드</h4>
-                            <span>100 Courses</span>
+                            <span></span>
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="resources/img/cat-3.jpg" alt="">
+                        <img class="img-fluid" src="/bootcampmoa/resources/images/풀스택.png"  alt="">
                         <a class="cat-overlay text-white text-decoration-none" href="">
+                            <h4 class="text-white font-weight-medium">풀스텍</h4>
+                            <span></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                        <img class="img-fluid" src="/bootcampmoa/resources/images/인공지능.png" alt="">
+                        <a class="cat-overlay text-white text-decoration-none" href="/bootcampmoa/bootcampSearch?keyword=풀스택">
+                            <h4 class="text-white font-weight-medium">인공지능</h4>
+                            <span></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                        <img class="img-fluid" src="/bootcampmoa/resources/images/빅데이터.png" alt="">
+                        <a class="cat-overlay text-white text-decoration-none" href="/bootcampmoa/bootcampSearch?keyword=빅데이터">
                             <h4 class="text-white font-weight-medium">빅데이터</h4>
                             <span>100 Courses</span>
                         </a>
@@ -248,17 +250,17 @@
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="resources/img/cat-4.jpg" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium">인공지능</h4>
+                        <img class="img-fluid" src="/bootcampmoa/resources/images/클라우드.png">
+                        <a class="cat-overlay text-white text-decoration-none" href="/bootcampmoa/bootcampSearch?keyword=클라우드">
+                            <h4 class="text-white font-weight-medium">클라우드</h4>
                             <span>100 Courses</span>
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="resources/img/cat-5.jpg" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="">
+                        <img class="img-fluid" src="/bootcampmoa/resources/images/IoT.png" alt="">
+                        <a class="cat-overlay text-white text-decoration-none" href="/bootcampmoa/bootcampSearch?keyword=IoT">
                             <h4 class="text-white font-weight-medium">IoT</h4>
                             <span>100 Courses</span>
                         </a>
@@ -266,35 +268,17 @@
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="resources/img/cat-6.jpg" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium"></h4>
-                            <span>100 Courses</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="resources/img/cat-7.jpg" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium"></h4>
-                            <span>100 Courses</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="resources/img/cat-8.jpg" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="">
-                            <h4 class="text-white font-weight-medium"></h4>
-                            <span>100 Courses</span>
+                        <img class="img-fluid" src="/bootcampmoa/resources/images/앱.png" alt="">
+                        <a class="cat-overlay text-white text-decoration-none" href="/bootcampmoa/bootcampSearch?keyword=앱">
+                            <h4 class="text-white font-weight-medium">안드로이드/iOS</h4>
+                            
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Category Start -->
+    <!-- Category End -->
 
 
     <!-- Courses Start -->
@@ -346,32 +330,29 @@
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center mb-5">
-                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Testimonial</h5>
-                <h1>What Say Our Students</h1>
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">BootMoA</h5>
+                <h1>궁금한 부트캠프 정보 부트모아에서 전부 찾아보세요!</h1>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="owl-carousel testimonial-carousel">
                         <div class="text-center">
                             <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
-                            <h4 class="font-weight-normal mb-4">Dolor eirmod diam stet kasd sed. Aliqu rebum est eos. Rebum elitr dolore et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</h4>
-                            <img class="img-fluid mx-auto mb-3" src="resources/img/testimonial-1.jpg" alt="">
-                            <h5 class="m-0">Client Name</h5>
-                            <span>Profession</span>
+                            <h4 class="font-weight-normal mb-4">비전공자인데 부트캠프로 취업할 수 있을까요? <br>취업기간은 대략 얼마나 걸릴까요?</h4>
+                            <img class="img-fluid mx-auto mb-3" src="/bootcampmoa/resources/images/appleYebin.png" >
+                         
                         </div>
                         <div class="text-center">
                             <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
-                            <h4 class="font-weight-normal mb-4">Dolor eirmod diam stet kasd sed. Aliqu rebum est eos. Rebum elitr dolore et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</h4>
+                            <h4 class="font-weight-normal mb-4">프론트엔드 백엔드...<br>어떤게 더 저한테 잘 맞는지 모르겠어요</h4>
                             <img class="img-fluid mx-auto mb-3" src="resources/img/testimonial-2.jpg" alt="">
-                            <h5 class="m-0">Client Name</h5>
-                            <span>Profession</span>
+                            
                         </div>
                         <div class="text-center">
                             <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
-                            <h4 class="font-weight-normal mb-4">Dolor eirmod diam stet kasd sed. Aliqu rebum est eos. Rebum elitr dolore et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</h4>
+                            <h4 class="font-weight-normal mb-4">데이터 사이언스 <br>대학원 말고 부트캠프로도 취업 가능할까요?</h4>
                             <img class="img-fluid mx-auto mb-3" src="resources/img/testimonial-3.jpg" alt="">
-                            <h5 class="m-0">Client Name</h5>
-                            <span>Profession</span>
+                           
                         </div>
                     </div>
                 </div>

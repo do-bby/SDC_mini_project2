@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>부트모아 - 부트캠프 등록 요청</title>
+    <title>부트모아 - 부트캠프 검색</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -147,9 +147,9 @@
     <div class="container-fluid page-header" style="margin-bottom: 90px;">
         <div class="container">
             <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
-                <h3 class="display-4 text-white text-uppercase">부트캠프 등록 요청</h3>
+                <h3 class="display-4 text-white text-uppercase">부트캠프 검색</h3>
                 <div class="d-inline-flex text-white">
-                    <p class="m-0 text-uppercase"><a class="text-white">부트모아에 등록되어 있지 않은 부트캠프가 있나요?</a></p>
+                    <p class="m-0 text-uppercase"><a class="text-white">수강후기가 궁금한 부트캠프를 검색해보세요</a></p>
                  
                 </div>
             </div>
@@ -158,44 +158,79 @@
     <!-- Header End -->
 
 
-    <!-- Contact Start -->
+    <!-- find section -->
+	  <section class="find_section ">
+	    <div class="container">
+	     <div class="mb-5">
+	     	<form action="/bootcampmoa/bootcampSearch">
+	        	<div class="input-group">
+	            	<input type="text" name="keyword" class="form-control form-control-lg" placeholder="부트캠프 명을 검색하세요 ex)인공지능,백엔드">
+	                <button type="submit" class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block">
+	              			search
+	            	</button>
+	           </div>
+	     	</form>
+	     </div>
+	    </div>
+	   
+	  </section>
+	<!-- find section End -->
+  	
+  	
+    <!-- Courses Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center mb-5">
-                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Request</h5>
-                <h1>이 부트캠프의 후기가 궁금해요!</h1>
+               
+                <h2>검색 결과</h2>
+                <h5>${requestScope.msg1 }</h5>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="contact-form bg-secondary rounded p-5">
-                        <div id="success"></div>
-                        <form name="sentMessage" novalidate="novalidate" method="POST" action="/bootcampmoa/bootcampInsertRequest/success">
-                        	<input type="hidden" name="mnum" value="${sessionScope.vo.mnum }"> 
-                            <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" name="academy" id="academy" placeholder="학원 명" required="required" data-validation-required-message="학원 명을 입력해주세요" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" name="program" id="program" placeholder="부트캠프 프로그램 명" required="required" data-validation-required-message="부트캠프 프로그램 이름을 입력해주세요" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" name="url" id="url" placeholder="부트캠프 학원 사이트 주소" required="required" data-validation-required-message="학원 사이트 주소를입력해주세요" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            
-                            
-                            <div class="text-center">
-                                <button class="btn btn-primary py-3 px-5" type="submit" id="sendMessageButton">등록 요청</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+            
+            <div class="row">
+            
+            	<c:choose>
+            		<c:when test="${ !empty requestScope.searchList}">
+            			<c:forEach var = "vo" items = "${requestScope.searchList}">
+							<c:choose>
+								<c:when test="${vo.visible == 1 }">
+									<div class="col-lg-4 col-md-6 mb-4" >
+								<div class="rounded overflow-hidden mb-2">
+									<a href=""><img class="img-fluid" src="resources/images/${vo.img}"></a>
+									<div class="bg-secondary p-4">
+										<div class="d-flex justify-content-between mb-3">
+			                                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>${vo.academy }</small>
+			                                <small class="m-0"></i></small>
+                           	 			</div>
+                            			<a class="h5" href="/bootcampmoa/bootcamp/${vo.bnum}/reviews">${vo.program }</a>
+                            			<div class="border-top mt-4 pt-4">
+                                			<div class="d-flex justify-content-between">
+                                    			<h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(리뷰 개수)</small></h6>
+                                    			<h5 class="m-0"></h5>
+                                			</div>
+                            			</div>
+									</div>
+								</div>
+							</div>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+            		</c:when>
+            		<c:otherwise>
+            		<div style="margin:auto;">
+                		<h5 style="text-align:center;">${requestScope.msg2 }</h5><br><br><br>
+                		
+                		<button style="margin:auto;"type="submit" class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" onclick="location.href='/bootcampmoa/bootcampInsertRequest'">
+	              			  부트캠프 등록 요청 하러 가기  
+	            		</button>
+            		</div>
+					</c:otherwise>
+            	</c:choose>
+                
             </div>
         </div>
     </div>
-    <!-- Contact End -->
-
+    <!-- Courses End -->
+                    
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white py-5 px-sm-3 px-lg-5" style="margin-top: 90px;">

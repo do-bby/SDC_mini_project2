@@ -105,7 +105,7 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav py-0">
-                            <a href="/bootcampmoa/bootcampMain" class="nav-item nav-link active">홈</a>
+                            <a href="/bootcampmoa/bootmoaMain" class="nav-item nav-link active">홈</a>
                             <a href="/bootcampmoa/bootcampListAll" class="nav-item nav-link">부트캠프 리스트 </a>
                             <a href="/bootcampmoa/bootcampSearch" class="nav-item nav-link">부트캠프 검색</a>
                             <a href="/bootcampmoa/bootcampInsertRequest" class="nav-item nav-link">등록요청</a>

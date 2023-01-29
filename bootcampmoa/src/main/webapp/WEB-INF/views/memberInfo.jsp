@@ -89,6 +89,11 @@
 	<h2 onload="location.href='/bootcampmoa/viewMemberInfo">회원정보 조회</h2>
 	<table class="userinfo">
 		<c:forEach var="vo" items="${list}">
+		<tr>
+			<td>프로필 사진</td>	
+			<td>${vo.profile}</td>
+		</tr>
+		
 			<tr>
 			<td>아이디</td>
 			<td>${vo.id}</td>

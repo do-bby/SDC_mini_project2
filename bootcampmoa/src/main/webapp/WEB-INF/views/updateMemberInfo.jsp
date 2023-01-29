@@ -244,8 +244,20 @@ function confirmDelete() {
 <body>
 <div class="wrap">
 	<h2>회원정보 수정</h2>
+	
 	<form method="POST" name="userInfo" action="/bootcampmoa/updateMemberInfo" >
 	<table class="userinfo">
+
+			<tr>
+			<td>프로필 사진</td>
+			<td>
+			<input type="file" name="uploadProfile" accept="image/*" />
+			<button id="upload-profile-btn">업로드</button>
+			<input type="hidden" name="profile" value='<%= request.getParameter("profileContent") %>'>
+			
+			</td>	
+		</tr>
+		
 			<tr>
 			<td>아이디</td>
 			<td><input type="text" name="id" id ="id" value="${val.id}" style="width:85%;">
@@ -310,6 +322,49 @@ function confirmDelete() {
 	<input type="button" class="infobutton" name="deleteMember" id="deleteMember" style="background-color:#5F5F5F;" value="회원탈퇴" onClick="confirmDelete()"/>
 	<button type="button" class="infobutton" onclick="location.href='viewMemberInfo'">뒤로가기</button>
 </form>
+<script>
+
+function handleDate(data){
+	console.log(data);
+	//var profileContent = "<c:out value='${data}'/>";
+	var profileContent=data; 
+	<%-- <c:set var="profileContent" value='<%= request.getParameter("profileContent") %>' /> --%>
+	//document.location.href = "updateMemberInfo.jsp?profileContent="+profileContent;
+}
+
+
+$(document).ready(function() {
+	$('#upload-profile-btn').click(function(e) {
+		e.preventDefault();
+
+		var formData = new FormData();
+		formData.append('uploadProfile', $('input[name="uploadProfile"]')[0].files[0]);
+
+		$.ajax({
+			url: '/bootcampmoa/uploadProfile',
+			type: 'POST',
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function(result) {
+				if(result.res==1){
+					alert("파일 변환 중 예외가 발생했습니다");
+				}else if(result.res==2){
+					alert("이미 존재하는 파일입니다");
+				}else if(result.res==3){
+					alert("파일 업로드를 완료했습니다");
+				}else{
+					alert("파일 저장 중 오류가 발생했습니다");
+				}
+				
+			    alert(result.vo.profile); 
+			    handleData(result.vo.profile);
+			} 
+		});
+	});
+	
+});
+</script>
 <c:if test="${ !empty msg }" >
 	<script>
 		alert('${ msg }');

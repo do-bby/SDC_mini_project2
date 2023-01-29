@@ -1,22 +1,31 @@
 package controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import dao.MemberMyBatisDao;
 import vo.MemberVO;
-import vo.PagingVO;
 
 @Controller
 public class MemberController {
@@ -127,5 +136,46 @@ public class MemberController {
 		    } 
 		    return res;
 		}
+	 	
+		
+	 	
+	 @RequestMapping("/uploadProfile")
+	 @ResponseBody
+	 public Map<String, Object> saveFile(MemberVO vo, @RequestParam("uploadProfile") MultipartFile profile) {
+	     String fileName = profile.getOriginalFilename();
+	     int res = 0;
 
+	     byte[] byteArray; 
+	     Map<String, Object> result = new HashMap<String, Object>();
+	     
+	     try {
+	         byteArray = profile.getBytes(); //파일 변환
+	     } catch (IOException e) {
+	         e.printStackTrace();
+	         res = 1;
+	         result.put("res", res);
+	         return result;
+	     }
+	     
+	     String uploadDirectory ="c:/uploadtest/" + fileName;
+	     File f = new File(uploadDirectory);
+	     Path path = Paths.get(uploadDirectory);
+	     if (f.exists()) { //파일이 존재할 때
+	         res = 2;
+	         result.put("res", res);
+	     } else {
+	         try {
+	             Files.write(path, byteArray); //파일 저장
+	             vo.setProfile(uploadDirectory);
+	             res = 3;
+	             result.put("res", res);
+	             result.put("vo", vo);
+	         } catch (IOException e) { //파일 저장 중 예외 발생
+	             e.printStackTrace();
+	             res = 4;
+	             result.put("res", res);
+	         }
+	     }
+	     return result;
+	 }
 }

@@ -63,6 +63,7 @@ public class MemberMyBatisDao {
 		return res;
 	}
 	
+	
 	//회원탈퇴
 		public void deleteMember(String id) {
 			String statement = "MemberLoginMapper.deleteMember";

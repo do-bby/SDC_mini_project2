@@ -52,7 +52,7 @@ public class MemberLoginController {
 		//로그인 성공시 세션에 정보 담아줌
 		if(count==1) {
 			session = request.getSession();
-			session.setAttribute("vo", voList);
+			session.setAttribute("svo", voList);
 			//부트캠프 리스트가 있으면
 			if(list.size() != 0) {
 				mav.addObject("bootcampList",list);
@@ -93,8 +93,9 @@ public class MemberLoginController {
 	@PostMapping("/memberFindId")
 	public ModelAndView memberFindId(MemberVO vo) {
 		ModelAndView mav = new ModelAndView();
-		String id = mDao.selectMemberId(vo);
-		if(id.equals(null)) {
+		String id = null;
+		id = mDao.selectMemberId(vo);
+		if(id == null) {
 			mav.addObject("msg", "일치하는 정보가 없습니다.");
 			mav.setViewName("memberFindId");
 		}else {

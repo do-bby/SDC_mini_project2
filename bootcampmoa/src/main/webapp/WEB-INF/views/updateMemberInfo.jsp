@@ -267,7 +267,7 @@ function confirmDelete() {
 			
 			<tr>
 			<td>비밀번호</td>
-			<td><input type="text" name="pwd" value="${val.pwd}"></td>
+			<td><input type="password" name="pwd" value="${val.pwd}"></td>
 			</tr>
 			
 			<tr>

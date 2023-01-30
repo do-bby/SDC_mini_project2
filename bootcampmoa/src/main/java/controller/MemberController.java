@@ -1,13 +1,10 @@
 package controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -166,7 +163,9 @@ public class MemberController {
 	     } else {
 	         try {
 	             Files.write(path, byteArray); //파일 저장
-	             vo.setProfile(uploadDirectory);
+	             int startIndex = uploadDirectory.indexOf("/SDC_mini_project2") + "/SDC_mini_project2".length();
+	             String shortcut = uploadDirectory.substring(startIndex);
+	             vo.setProfile(shortcut);
 	             res = 3;
 	             result.put("res", res);
 	             result.put("vo", vo);

@@ -251,9 +251,9 @@ function confirmDelete() {
 			<tr>
 			<td>프로필 사진</td>
 			<td>
-			<input type="file" name="uploadProfile" accept="image/*" />
+			<input type="file" id = "a" name="uploadProfile" accept="image/*" />
 			<button id="upload-profile-btn">업로드</button>
-			<input type="hidden" name="profile" value='<%= request.getParameter("profileContent") %>'>
+			<input type="hidden" id = "b" name="profile" value=''>
 			
 			</td>	
 		</tr>
@@ -324,12 +324,12 @@ function confirmDelete() {
 </form>
 <script>
 
-function handleDate(data){
+function handleData(data){
 	console.log(data);
-	//var profileContent = "<c:out value='${data}'/>";
 	var profileContent=data; 
-	<%-- <c:set var="profileContent" value='<%= request.getParameter("profileContent") %>' /> --%>
-	//document.location.href = "updateMemberInfo.jsp?profileContent="+profileContent;
+	$("#a").attr("name", "");
+	$("#b").attr("value", data);
+	
 }
 
 
@@ -357,7 +357,6 @@ $(document).ready(function() {
 					alert("파일 저장 중 오류가 발생했습니다");
 				}
 				
-			    alert(result.vo.profile); 
 			    handleData(result.vo.profile);
 			} 
 		});

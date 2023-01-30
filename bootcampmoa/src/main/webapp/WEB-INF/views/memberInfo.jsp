@@ -91,7 +91,7 @@
 		<c:forEach var="vo" items="${list}">
 		<tr>
 			<td>프로필 사진</td>	
-			<td>${vo.profile}</td>
+			<td><img src="${vo.profile}"></img></td>
 		</tr>
 		
 			<tr>

@@ -157,7 +157,7 @@ public class MemberController {
 	         return result;
 	     }
 	     
-	     String uploadDirectory ="c:/uploadtest/" + fileName;
+	     String uploadDirectory ="C:/Users/ss263/git/SDC_mini_project2/bootcampmoa/src/main/webapp/resources/profiles/" + fileName;
 	     File f = new File(uploadDirectory);
 	     Path path = Paths.get(uploadDirectory);
 	     if (f.exists()) { //파일이 존재할 때

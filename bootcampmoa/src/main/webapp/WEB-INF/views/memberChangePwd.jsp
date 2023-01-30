@@ -92,7 +92,8 @@
 function checkPwd() {
 	  var pwd = document.getElementById("pwd").value;
 	  var chkPwd = document.getElementById("chkPwd").value;
-	  
+	  var id = document.getElementById("id").value;
+	  alert(pwd);
 	  if (pwd !== chkPwd) {
 	    alert("비밀번호가 일치하지 않습니다.");
 	    return false;
@@ -106,6 +107,12 @@ function checkPwd() {
 	  pwdInput.setAttribute("name", "pwd");
 	  pwdInput.setAttribute("value", pwd);
 	  form.appendChild(pwdInput);
+	  
+	  let idInput = document.createElement("input");
+	  idInput.setAttribute("type", "hidden");
+	  idInput.setAttribute("name", "id");
+	  idInput.setAttribute("value", id);
+	  form.appendChild(idInput);
 	  
 	  document.body.appendChild(form);
 	  form.submit();
@@ -125,7 +132,7 @@ input.value = null;
 		<td><input type="button" class="infobutton" name="chkPwdButton" id="chkPwdButton" value="확인" onClick="javascript:checkPwd()"/></td>
 		</tr>
 	</table>
-	<input type="hidden" name="id" id="id" value="${id}"/>
+	<input type="text" name="id" id="id" value="${id}"/>
 
 	<c:if test="${ !empty msg }" >
 		<script>

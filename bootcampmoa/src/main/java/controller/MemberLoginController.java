@@ -120,15 +120,15 @@ public class MemberLoginController {
 	//질문 확인
 	@PostMapping("/memberAnswer")//질문 완료하고 다음페이지 호출임
 	public ModelAndView memberAnswer(MemberVO vo) {
-		System.out.println(vo.getId());
-		System.out.println(vo.getAnswer()); //답변가져옴
 		ModelAndView mav = new ModelAndView();
+		System.out.println(vo.getAnswer());
 		//이전 비밀번호랑 같은지 체크
 		int count = mDao.selectAnswerCheck(vo); // 아이디랑 답변을 넣어줌
 		if(count == 1) { //답변이 일치할경우 
 			mav.addObject("id",vo.getId());// 아이디 넘겨줌
 			mav.setViewName("memberChangePwd"); //비밀번호 변경페이지로 이동
 		}else { //답변이 다를경우
+			mav.addObject("answer",vo.getAnswer());
 			mav.addObject("msg", "답변이 일치하지 않습니다.");
 			mav.setViewName("memberAnswer"); //질문페이지로 이동
 		}
@@ -145,15 +145,15 @@ public class MemberLoginController {
 		int count = mDao.selectPwdCheck(vo); // 아이디랑 비밀번호를 넣어줘야됨
 		if(count == 1) { // 같은 비밀번호를 입력했을 경우
 			mav.addObject("msg", "이전 비밀번호와 같습니다.");
+			mav.addObject("id",vo.getId());
 			mav.setViewName("memberChangePwd");
 		}else {
 			int num = mDao.updatePwd(vo);
+			System.out.println(num);
 			if(num == 1) { //수정된 컬럼의 갯수를 가져온다고 함
-				mav.addObject("msg", "비밀번호 변경이 완료되었습니다.");
-				mav.setViewName("memberLogin");
-			}else {
-				
+				mav.addObject("msg", "비밀번호 변경이 완료되었습니다.");	
 			}
+			mav.setViewName("memberLogin");
 		}
 		
 		return mav;

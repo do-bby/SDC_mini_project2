@@ -176,7 +176,7 @@
             								<div class="col-lg-6 mb-4">
                             					<div class="blog-item position-relative overflow-hidden rounded mb-2">
                                 					<img class="img-fluid" src="/bootcampmoa/resources/images/${vo.logo}">
-                                					<a class="blog-overlay text-decoration-none" href="">
+                                					<a class="blog-overlay text-decoration-none" href="/bootcampmoa/bootcamp/${vo.bnum}">
                                     				<h5 class="text-white mb-3">${vo.academy }</h5>
                                     				<p class="text-primary m-0">${vo.program }</p>
                                 					</a>

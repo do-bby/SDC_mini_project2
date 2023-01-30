@@ -85,6 +85,16 @@
 	color:#ffff;
 	height: 30px;
 	}
+	
+	.signupButton{
+	margin-right: 40px;
+	float: right;
+	padding: 5px;
+	border:0;
+	font-size:14px;
+	background: #4aa8d8 ;
+	color:#ffff;
+	}
 </style>
 </head>
 <body>
@@ -141,7 +151,8 @@ input.value = null;
 	</c:if>
 
 <%-- 	<a href="${header.referer}">메인페이지로 돌아가기</a> --%>
-	<button type="button" class="infobutton" onclick="location.href='bootmoaMain'">메인화면으로</button>
+	<a href="/bootcampmoa/bootmoaMain" class="signupButton">메인화면으로</a>
+	<a href="/bootcampmoa/memberSignup" class="signupButton">회원가입</a>
 
 </div>
 </body>

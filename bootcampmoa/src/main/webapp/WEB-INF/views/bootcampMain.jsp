@@ -140,7 +140,7 @@
                         		<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="logoutButton" style="margin-right:20px;" onClick="logout()">로그아웃</a>
                         	</c:when>
                         </c:choose>
-                    	<a href="/bootcampmoa/memberSignup" style="border-style:solid; padding:5px;">회원가입</a>
+                    	<!-- <a href="/bootcampmoa/memberSignup" style="border-style:solid; padding:5px;">회원가입</a> -->
                     	
                     </div>
                 </nav>

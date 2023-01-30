@@ -133,7 +133,8 @@ input.value = null;
 		<tr>
 		<td>아이디</td>
 		<td><input type="text" name="id" id="id" placeholder="아이디를 입력하세요" required/></td>
-		<td><input type="submit" class="infobutton" name="login" id="login" value="로그인"/></td>
+		<td><input type="submit" class="infobutton" name="login" id="login" value="   로그인    "/></td>
+		<td><button type="button" class="infobutton" onclick="location.href='memberSignup'">&nbsp&nbsp&nbsp회원가입&nbsp&nbsp&nbsp&nbsp</button></td>
 		</tr>
 		
 		<tr>
@@ -142,6 +143,7 @@ input.value = null;
 		<td><button type="button" class="infobutton" onclick="location.href='findIdPage'">아이디찾기</button></td>
 		<td><button type="button" class="infobutton" onclick="location.href='findPwdPage'">비밀번호찾기</button></td>
 		</tr>
+
 	</table>
 	</form>
 	<c:if test="${ !empty msg }" >
@@ -152,7 +154,7 @@ input.value = null;
 
 <%-- 	<a href="${header.referer}">메인페이지로 돌아가기</a> --%>
 	<a href="/bootcampmoa/bootmoaMain" class="signupButton">메인화면으로</a>
-	<a href="/bootcampmoa/memberSignup" class="signupButton">회원가입</a>
+	
 
 </div>
 </body>

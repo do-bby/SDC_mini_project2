@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>ECOURSES - Online Courses HTML Template</title>
+    <title>부트모아 리뷰 수정</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -147,32 +147,32 @@
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Modify a Review</h3>
                         <form method = "post" action = "/bootcampmoa/review/updatereview">                        	
                             <div class="form-group">
-                            	<input type="hidden" name="rnum" value="${vo.rnum}">
+                            	<input type="hidden" name="rnum" value="${rvo.rnum}">
                                 <label for="good">good</label>                                
-                                <input id="good" type="text"  name="good" value="${ vo.good }" class="form-control border-0">
+                                <input id="good" type="text"  name="good" value="${ rvo.good }" class="form-control border-0">
                             </div>
                             <div class="form-group">
                                 <label for="bad">bad</label>                                
-                                <input id="bad" type="text"  name="bad" value="${ vo.bad }" class="form-control border-0">
+                                <input id="bad" type="text"  name="bad" value="${ rvo.bad }" class="form-control border-0">
                             </div>
                             <div class="form-group">
                                 <label for="total">total</label>
-                                <input id="total" type="text" name="total" value="${ vo.total }" class="form-control border-0">
+                                <input id="total" type="text" name="total" value="${ rvo.total }" class="form-control border-0">
                             </div>
 							<div class="form-group">
                                 <label for="teachsat">teach</label>
-                                <input id="teachsat" type="text" name="teachsat" value="${ vo.teachsat }" class="form-control border-0">
+                                <input id="teachsat" type="text" name="teachsat" value="${ rvo.teachsat }" class="form-control border-0">
                             </div>
                             <div class="form-group">
                                 <label for="edusat">edu</label>
-                                <input id="edusat" type="text" name="edusat" value="${ vo.edusat }" class="form-control border-0">
+                                <input id="edusat" type="text" name="edusat" value="${ rvo.edusat }" class="form-control border-0">
                             </div>
                             <div class="form-group">
                                 <label for="learnsat">learn</label>
-                                <input id="learnsat" type="text" name="learnsat" value="${ vo.learnsat }" class="form-control border-0">
+                                <input id="learnsat" type="text" name="learnsat" value="${ rvo.learnsat }" class="form-control border-0">
                             </div>                            
-                            <input type="hidden" name="bnum" value="${ vo.bnum }">
-                            <input type="hidden" name="mnum" value="${ vo.mnum }">                                                       
+                            <input type="hidden" name="bnum" value="${ rvo.bnum }">
+                            <input type="hidden" name="mnum" value="${ rvo.mnum }">                                                       
                             <div class="form-group mb-0">
                                 <input type="submit" value="Modify Review" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold">
                             </div>

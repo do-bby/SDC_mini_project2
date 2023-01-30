@@ -149,22 +149,22 @@
                 <div class="col-lg-8">
                     <div class="row pb-3">                        
 						<c:if test="${ !empty list }" >
-            				<c:forEach var = "vo" items = "${list}">            						
+            				<c:forEach var = "rvo" items = "${list}">            						
 		            			<div class="col-lg-6 mb-4">
 		                            <div class="blog-item position-relative overflow-hidden rounded mb-2">
 		                            	<img class="img-fluid" src="/bootcampmoa/resources/images/${bvo.logo}">		          
 		                                <a class="blog-overlay text-decoration-none" href="">
-		                                <h5 class="text-white mb-3">장점 : ${vo.good }</h5>
-		                                <h5 class="text-white mb-3">단점 : ${vo.bad }</h5>		                                
-		                                <p class="text-primary m-0">총점 : ${vo.total }</p>
-		                                <p class="text-primary m-0">강사진 : ${vo.teachsat }</p>
-		                                <p class="text-primary m-0">교육 환경: ${vo.edusat }</p>
-		                                <p class="text-primary m-0">교육 : ${vo.learnsat }</p>
-		                                <p class="text-primary m-0">작성 날짜 : ${vo.rdate }</p>		                                
+		                                <p class="text-primary m-0">장점 : ${rvo.good }</p>
+		                                <p class="text-primary m-0">단점 : ${rvo.bad }</p>		                                
+		                                <p class="text-primary m-0">총점 : ${rvo.total }</p>
+		                                <p class="text-primary m-0">강사진 : ${rvo.teachsat }</p>
+		                                <p class="text-primary m-0">교육 환경: ${rvo.edusat }</p>
+		                                <p class="text-primary m-0">교육 : ${rvo.learnsat }</p>
+		                                <p class="text-primary m-0">작성 날짜 : ${rvo.rdate }</p>		                                
 										</a>										
 		                            </div>
-		                            <a href="/bootcampmoa/review/deletereview?id=${vo.rnum}" class="btn btn-outline-primary m-1">삭제</a>
-		                            <a href="/bootcampmoa/review?id=${vo.rnum}" class="btn btn-outline-primary m-1">수정</a>
+		                            <a href="/bootcampmoa/review/deletereview?id=${rvo.rnum}" class="btn btn-outline-primary m-1">삭제</a>
+		                            <a href="/bootcampmoa/review?id=${rvo.rnum}" class="btn btn-outline-primary m-1">수정</a>
 		                        </div>		                     
 							</c:forEach>
             			</c:if>
@@ -173,33 +173,33 @@
                             <nav aria-label="Page navigation">
                                 <ul class="pagination pagination-lg justify-content-center mb-0">
                                   <li class="page-item">
-                                    <a class="page-link" href="${vo.bnum}?curPage=1" aria-label="Start">
+                                    <a class="page-link" href="${rvo.rnum}?curPage=1" aria-label="Start">
                                       <span aria-hidden="true">&laquo;</span>
                                       <span class="sr-only">Start</span>                                     
                                     </a>                                    
                                   </li>
                                   <li class="page-item">
-                                     <a class="page-link" href="${vo.bnum}?curPage=${paging.curPage-1 }" aria-label="prev">
+                                     <a class="page-link" href="${rvo.rnum}?curPage=${paging.curPage-1 }" aria-label="prev">
                                       <span aria-hidden="true">&lt;</span>
                                       <span class="sr-only">prev</span>
                                     </a>
                                   </li>
                                   
                                      <c:forEach begin="${paging.firstPage }"  end="${paging.lastPage }" var="i">
-                                 <a class="page-link" href="${vo.bnum}?curPage=${i }"  >  
+                                 <a class="page-link" href="${rvo.rnum}?curPage=${i }"  >  
                                     <c:if test="${i eq paging.curPage }">  <span style="color: red">  ${i } </span> </c:if>
                                     <c:if test="${i ne paging.curPage }">  ${i } </c:if> 
                                  </a>
                            </c:forEach>
                                   <li class="page-item">
-                                     <a class="page-link" href="${vo.bnum}?curPage=${paging.curPage+1 }" aria-label="Next">
+                                     <a class="page-link" href="${rvo.rnum}?curPage=${paging.curPage+1 }" aria-label="Next">
                                       <span aria-hidden="true">&gt;</span>
                                       <span class="sr-only">Next</span>
                                     </a>
                                   </li>
                                   
                                   <li class="page-item">
-                                    <a class="page-link" href="${vo.bnum}?curPage=${paging.totalPageCount }" aria-label="End">
+                                    <a class="page-link" href="${rvo.rnum}?curPage=${paging.totalPageCount }" aria-label="End">
                                       <span aria-hidden="true">&raquo;</span>
                                       <span class="sr-only">End</span>
                                     </a>

@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>ECOURSES - Online Courses HTML Template</title>
+    <title>부트모아 리뷰 페이지</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -177,7 +177,8 @@
                                 <input id="learnsat" type="text" name="learnsat" class="form-control border-0">
                             </div>                            
                             <input type="hidden" name="bnum" value="${bvo.bnum}">
-                            <input type="hidden" name="mnum" value="1">                                                       
+                            <input type="hidden" name="mnum" value="1">
+                            <input type="text" name="mnum2" value="${sessionScope.rvo.mnum}">                                                        
                             <div class="form-group mb-0">
                                 <input type="submit" value="Leave Review" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold">
                             </div>

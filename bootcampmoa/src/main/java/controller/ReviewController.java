@@ -45,9 +45,9 @@ public class ReviewController {
 	}
 	@GetMapping("/review")
 	public ModelAndView one(int id) {
-		ReviewVO vo = dao.selectone(id);
+		ReviewVO rvo = dao.selectone(id);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("vo",vo);
+		mav.addObject("rvo",rvo);
 		mav.setViewName("updateReview");
 		return mav;
 	}
@@ -66,14 +66,14 @@ public class ReviewController {
 		return mav;
 	}
 	@PostMapping("/review/insertreview")
-	public String insert(ReviewVO vo) {
-		dao.insert(vo);		
+	public String insert(ReviewVO rvo) {
+		dao.insert(rvo);		
 		return "redirect:/bootmoaMain";
 	}
 
 	@PostMapping("/review/updatereview")
-	public String update(ReviewVO vo) {
-		dao.update(vo);				
+	public String update(ReviewVO rvo) {
+		dao.update(rvo);				
 		return "redirect:/bootmoaMain";
 	}
 

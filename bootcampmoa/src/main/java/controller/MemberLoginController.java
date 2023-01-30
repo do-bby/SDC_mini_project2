@@ -83,19 +83,26 @@ public class MemberLoginController {
 	    return mav;
 	}
 	
-//	//아이디 찾기
-//	@PostMapping("/memberFindId")
-//	public ModelAndView memberFindId(MemberVO vo) {
-//		ModelAndView mav = new ModelAndView();
-//		String count = mDao.selectMemberPwd(vo);
-//		if(count==1) {
-//			mav.setViewName("memberFindId");
-//		}else {
-//			mav.addObject("msg", "이름 또는 전화번호를 확인하세요.");
-//			mav.setViewName("memberLogin");
-//		}
-//		return mav;
-//	}
+	//아이디 찾기 페이지 이동
+	@GetMapping("/findIdPage")
+	public String findId() {
+		return "/memberFindId";
+	}
+	
+	//아이디 찾기
+	@PostMapping("/memberFindId")
+	public ModelAndView memberFindId(MemberVO vo) {
+		ModelAndView mav = new ModelAndView();
+		String id = mDao.selectMemberId(vo);
+		if(id.equals(null)) {
+			mav.addObject("msg", "일치하는 정보가 없습니다.");
+			mav.setViewName("memberFindId");
+		}else {
+			mav.addObject("id",id);
+			mav.setViewName("memberViewId");
+		}
+		return mav;
+	}
 	
 	//비밀번호 찾기 페이지 이동
 	@GetMapping("/findPwdPage")

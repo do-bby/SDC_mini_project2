@@ -39,5 +39,9 @@
 	<select id="selectPwdCheck" parameterType="vo.MemberVO" resultType="_int">
 	select count(*) from member where id = #{id} and pwd = #{pwd}
 	</select>
-	
+		
+	<!-- 아이디조회 -->
+	<select id="selectMemberId" parameterType="vo.MemberVO" resultType="String">
+	select id from member where name = #{name} and phone = #{phone}
+	</select>
 </mapper>

@@ -84,4 +84,16 @@ public class MemberLoginDAO {
 		return num;
 	}
 
+	//아이디 찾기
+	public String selectMemberId(MemberVO vo) {
+		String id = null;
+		try {
+			String statement = "MemberLoginMapper.selectMemberId";
+			id = session.selectOne(statement, vo);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+
 }

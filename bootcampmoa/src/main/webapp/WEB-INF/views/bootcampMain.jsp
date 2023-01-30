@@ -326,7 +326,7 @@
     <!-- Courses End -->
 
   
-    <!-- Testimonial Start -->
+        <!-- Testimonial Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center mb-5">
@@ -345,14 +345,13 @@
                         <div class="text-center">
                             <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
                             <h4 class="font-weight-normal mb-4">프론트엔드 백엔드...<br>어떤게 더 저한테 잘 맞는지 모르겠어요</h4>
-                            <img class="img-fluid mx-auto mb-3" src="resources/img/testimonial-2.jpg" alt="">
+                            <img class="img-fluid mx-auto mb-3" src="/bootcampmoa/resources/images/test.jpg">
                             
                         </div>
                         <div class="text-center">
                             <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
                             <h4 class="font-weight-normal mb-4">데이터 사이언스 <br>대학원 말고 부트캠프로도 취업 가능할까요?</h4>
-                            <img class="img-fluid mx-auto mb-3" src="resources/img/testimonial-3.jpg" alt="">
-                           
+                            <img class="img-fluid mx-auto mb-3" src="/bootcampmoa/resources/images/test2.png">
                         </div>
                     </div>
                 </div>
@@ -360,8 +359,7 @@
         </div>
     </div>
     <!-- Testimonial End -->
-
-
+    
    
 
 

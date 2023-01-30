@@ -5,6 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +27,8 @@ import vo.MemberVO;
 public class BootcampController {
 	@Autowired
 	BootcampDAO bootcampDao;
-	
+	@Autowired
+	ServletContext context;
 	@GetMapping("/bootmoaMain") // 최신 등록된 부트캠프 리스트 6개 출력  - 아직 구현 x
 	public ModelAndView selectRecentList() {
 		
@@ -127,43 +131,38 @@ public class BootcampController {
 	}
 	
 	@PostMapping("/insertManager/result")// 부트캠프 등록 창 => 등록 버튼 클릭 => 사이트 메인 페이지에 등록
-	public void InsertManagerResult(BootcampVO bootcamp) {
-		
-		String logoFile = bootcamp.getLogoFile().getOriginalFilename(); // 넘겨 받은 파일 이름 추출
-		String imgFile = bootcamp.getImgFile().getOriginalFilename();
-		bootcamp.setLogo(logoFile);
-		bootcamp.setImg(imgFile);
-		
-		byte[] logoContent = null;
-		byte[] imgContent = null;
-		
-		System.out.println(bootcamp.toString());
-		// 파일을 images 폴더 아래에 저장
-		try {
-			logoContent = logoFile.getBytes();
-			imgContent = imgFile.getBytes();
-			File logo = new File("C:/Users/YB/git/SDC_mini_project2/bootcampmoa/src/main/webapp/resources/images/"+logoFile);
-			File img = new File("C:/Users/YB/git/SDC_mini_project2/bootcampmoa/src/main/webapp/resources/images/"+imgFile);
-			FileOutputStream fos1 = new FileOutputStream(logo);
-			FileOutputStream fos2 = new FileOutputStream(img);
-			
-   		 	fos1.write(logoContent);
-   		 	fos2.write(imgContent);
-   		 	
-   		 	fos1.close();
-   		 	fos2.close();
-   		 	
-   		// 등록된 정보를 DB에 저장
-   		bootcampDao.update(bootcamp);	
-   		
-   		// 넘겨받은 bnum 값으로 요청 리스트에서 삭제 + 메인화면에 등록(= visible 0 => 1) 
-   		bootcampDao.updateManager(bootcamp);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-	}
+	   public void InsertManagerResult(BootcampVO bootcamp) {
+	      
+	      String logoName = bootcamp.getLogoFile().getOriginalFilename(); // 넘겨 받은 파일 이름 추출
+	      String imgName = bootcamp.getImgFile().getOriginalFilename();
+	      bootcamp.setLogo(logoName);
+	      bootcamp.setImg(imgName);
+	      
+	      System.out.println(bootcamp.toString());
+	      // 파일을 images 폴더 아래에 저장
+	      try {
+	         //String path = "C:/Users/YB/git/SDC_mini_project2/bootcampmoa/src/main/webapp/resources/images/";
+	         String logoInfo = context.getRealPath("/") + "resources/images/"+logoName;
+	         String imgInfo = context.getRealPath("/") + "resources/images/"+imgName;
+	         
+	         File logo = new File(logoInfo);
+	         File img = new File(imgInfo);
+	         
+	         bootcamp.getLogoFile().transferTo(logo);
+	         bootcamp.getImgFile().transferTo(img);
+	             
+	         // 등록된 정보를 DB에 저장
+	         bootcampDao.update(bootcamp);   
+	         
+	         // 넘겨받은 bnum 값으로 요청 리스트에서 삭제 + 메인화면에 등록(= visible 0 => 1) 
+	         bootcampDao.updateManager(bootcamp);
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      }
+	      
+	      
+	   }
+	   
 	
 	@GetMapping("/updateManager") // 수정 버튼 => 부트캠프 등록 창
 	public ModelAndView updateManager(BootcampVO bootcamp) {

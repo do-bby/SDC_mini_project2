@@ -215,7 +215,7 @@
                 <div class="col-lg-4 mt-5 mt-lg-0">
                     <!-- Author Bio -->
                     <div class="d-flex flex-column text-center bg-dark rounded mb-5 py-5 px-4">
-                        <img src="resources/images/${sessionScope.vo.profile }.png" class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px;">
+                        <img src="resources/images/${sessionScope.vo.profile }.png" class=" rounded-circle mx-auto mb-3" style="width: 100px;">
                         <h3 class="text-primary mb-3">${sessionScope.vo.nickname }</h3>
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
                         <p class="text-white m-0">Conset elitr erat vero dolor ipsum et diam, eos dolor lorem, ipsum sit no ut est  ipsum erat kasd amet elitr</p>

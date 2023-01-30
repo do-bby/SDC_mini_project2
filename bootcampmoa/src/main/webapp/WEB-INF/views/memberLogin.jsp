@@ -128,7 +128,7 @@ input.value = null;
 		<tr>
 		<td>비밀번호</td>
 		<td><input type="password" name="pwd" id="pwd" placeholder="패스워드를 입력하세요" required/></td>
-		<td><button type="button" class="infobutton" onclick="location.href='findPwd'">비밀번호찾기</button></td>
+		<td><button type="button" class="infobutton" onclick="location.href='findPwdPage'">비밀번호찾기</button></td>
 		</tr>
 	</table>
 	</form>

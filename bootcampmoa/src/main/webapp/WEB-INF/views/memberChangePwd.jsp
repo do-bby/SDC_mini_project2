@@ -89,19 +89,44 @@
 </head>
 <body>
 <script>
+function checkPwd() {
+	  var pwd = document.getElementById("pwd").value;
+	  var chkPwd = document.getElementById("chkPwd").value;
+	  
+	  if (pwd !== chkPwd) {
+	    alert("비밀번호가 일치하지 않습니다.");
+	    return false;
+	  }
+	  let form = document.createElement("form");
+	  form.setAttribute("method", "post");
+	  form.setAttribute("action", "memberChangePwd");
+	  
+	  let pwdInput = document.createElement("input");
+	  pwdInput.setAttribute("type", "hidden");
+	  pwdInput.setAttribute("name", "pwd");
+	  pwdInput.setAttribute("value", pwd);
+	  form.appendChild(pwdInput);
+	  
+	  document.body.appendChild(form);
+	  form.submit();
+	}
 var input = document.getElementById(id);
 input.value = null;
 </script>
 <div class="wrap">
-	<form method="POST" action="/bootcampmoa/memberFindPwd">
 	<table>
 		<tr>
-		<td>아이디</td>
-		<td><input type="text" name="id" id="id" placeholder="아이디를 입력하세요" required/></td>
-		<td><input type="submit" class="infobutton" name="findPwd" id="findPwd" value="확인"/></td>
+		<td>새 비밀번호</td>
+		<td><input type="password" name="pwd" id="pwd" placeholder="새 비밀번호 입력" required/></td>
+		</tr>
+		<tr>
+		<td>새 비밀번호 확인</td>
+		<td><input type="password" name="chkPwd" id="chkPwd" placeholder="새 비밀번호 확인" required/></td>
+		<td><input type="button" class="infobutton" name="chkPwdButton" id="chkPwdButton" value="확인" onClick="javascript:checkPwd()"/></td>
 		</tr>
 	</table>
-	</form>
+	<input type="hidden" name="id" id="id" value="${id}"/>
+
 	<c:if test="${ !empty msg }" >
 		<script>
 			alert('${ msg }');

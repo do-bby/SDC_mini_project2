@@ -95,19 +95,67 @@ public class MemberLoginController {
 //		return mav;
 //	}
 	
-	//비밀번호 찾기창 이동
+	//비밀번호 찾기 페이지 이동
 	@GetMapping("/findPwdPage")
 	public String findPwd() {
 		return "/memberFindPwd";
 	}
 	
-	//비밀번호 찾기
+	//비밀번호 질문불러오기
 	@PostMapping("/memberFindPwd")
 	public ModelAndView memberFindPwd(MemberVO vo) {
 		ModelAndView mav = new ModelAndView();
-		String question = mDao.selectMemberPwd(vo);
-			mav.addObject("question", question);
-			mav.setViewName("memberAnswer");
+		String question = mDao.selectMemberAnswer(vo);//질문불러옴
+		if(question != null) {
+			mav.addObject("id", vo.getId());
+			mav.addObject("question", question);// jsp에서 ${question}으로 가져다 쓰면됨
+			mav.setViewName("memberAnswer");//질문페이지로 이동
+		}else {
+			mav.addObject("msg", "일치하는 아이디가 없습니다.");
+			mav.setViewName("memberFindPwd");
+		}
+		return mav;
+	}
+	
+	//질문 확인
+	@PostMapping("/memberAnswer")//질문 완료하고 다음페이지 호출임
+	public ModelAndView memberAnswer(MemberVO vo) {
+		System.out.println(vo.getId());
+		System.out.println(vo.getAnswer()); //답변가져옴
+		ModelAndView mav = new ModelAndView();
+		//이전 비밀번호랑 같은지 체크
+		int count = mDao.selectAnswerCheck(vo); // 아이디랑 답변을 넣어줌
+		if(count == 1) { //답변이 일치할경우 
+			mav.addObject("id",vo.getId());// 아이디 넘겨줌
+			mav.setViewName("memberChangePwd"); //비밀번호 변경페이지로 이동
+		}else { //답변이 다를경우
+			mav.addObject("msg", "답변이 일치하지 않습니다.");
+			mav.setViewName("memberAnswer"); //질문페이지로 이동
+		}
+		
+		return mav;
+	}
+	
+	//비밀번호 수정
+	@PostMapping("/memberChangePwd")
+	public ModelAndView memberChangePwd(MemberVO vo) {
+		System.out.println(vo.getId());
+		ModelAndView mav = new ModelAndView();
+		//이전 비밀번호랑 같은지 체크
+		int count = mDao.selectPwdCheck(vo); // 아이디랑 비밀번호를 넣어줘야됨
+		if(count == 1) { // 같은 비밀번호를 입력했을 경우
+			mav.addObject("msg", "이전 비밀번호와 같습니다.");
+			mav.setViewName("memberChangePwd");
+		}else {
+			int num = mDao.updatePwd(vo);
+			if(num == 1) { //수정된 컬럼의 갯수를 가져온다고 함
+				mav.addObject("msg", "비밀번호 변경이 완료되었습니다.");
+				mav.setViewName("memberLogin");
+			}else {
+				
+			}
+		}
+		
 		return mav;
 	}
 	

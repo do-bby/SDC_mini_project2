@@ -6,7 +6,7 @@
 <mapper namespace="MemberLoginMapper">
 
 	<!-- 로그인 -->
-	<select id="selectMemberLogin" parameterType="vo.MemberVO" resultType="int">
+	<select id="selectMemberLogin" parameterType="vo.MemberVO" resultType="_int">
 	select count(*) from member where id = #{id} and pwd = #{pwd}
 	</select>
 	
@@ -19,5 +19,25 @@
 	<delete id="deleteMember" parameterType="string">
 	delete from member where id = #{id}
 	</delete>
+	
+	<!-- 아이디로 질문조회 -->
+	<select id="selectMemberAnswer" parameterType="vo.MemberVO" resultType="String">
+	select question from member where id = #{id}
+	</select>
+	
+	<!-- 비밀번호수정 -->
+	<update id="updatePwd" parameterType="vo.MemberVO">
+	update member set pwd = #{pwd} where id= #{id}
+	</update>
+	
+	<!-- 질문 체크 -->
+	<select id="selectAnswerCheck" parameterType="vo.MemberVO" resultType="_int">
+	select count(*) from member where id = #{id} and answer = #{answer}
+	</select>
+	
+	<!-- 비밀번호 체크 -->
+	<select id="selectPwdCheck" parameterType="vo.MemberVO" resultType="_int">
+	select count(*) from member where id = #{id} and pwd = #{pwd}
+	</select>
 	
 </mapper>

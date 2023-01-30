@@ -88,36 +88,58 @@
 </style>
 </head>
 <body>
-<!-- <script>  
-    // 'login'라는 id를 가진 버튼 클릭 시 실행.
-    $("#login").click(function(){
-    	alert("통신중");
-            // json 형식으로 데이터 set
-            var params = {
-                      id      : $("#id").val()
-                    , pwd     : $("#pwd").val()
-            }
-            // ajax 통신
-            $.ajax({
-                type : "POST",            // HTTP method type(GET, POST) 형식이다.
-                url : "/selectLoginMember",      // 컨트롤러에서 대기중인 URL 주소이다.
-                data : params,            // Json 형식의 데이터이다.
-                success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
-                    // 응답코드 > 0000
-                    alert(res.code);
-                },
-                error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-                    alert("통신 실패.");
-                }
-            });
-        });  
-</script> -->
 <script>
-var input = document.getElementById(id);
+/* var input = document.getElementById(id);
 input.value = null;
+
+var nickname = '<c:out value="${nickname}" />';
+if(form.nickname.value != nickname){
+	if (form.idDuplication.value != "idCheck") {
+		alert("아이디 중복체크를 해주세요");
+		form.id.focus();
+		return false;
+	}
+} */
+/* var nickname = '<c:out value="${nickname}" />';
+세션에 저장된 닉네임을 nickname 변수에 저장합니다.
+if(form.nickname.value != nickname){
+폼에 입력된 닉네임과 세션에 저장된 닉네임이 다를 경우
+if (form.idDuplication.value != "idCheck") {
+idDuplication 필드의 값이 "idCheck"가 아니면,
+alert("아이디 중복체크를 해주세요");
+"아이디 중복체크를 해주세요" 메세지를 출력하고,
+form.id.focus();
+아이디 필드에 포커스를 줍니다.
+return false;
+폼 전송을 취소합니다. */
+
+/* function openIdCheck() {
+    var inputValue = document.getElementById("id").value;
+    if(inputValue==""){
+    	alert("아이디를 입력하세요");
+    }else{
+    var xhr = new XMLHttpRequest();
+	xhr.onload = function () {
+		if(xhr.status == 200) {				
+			let jsondom = JSON.parse(xhr.responseText);
+			if (jsondom.isDuplicate == true)
+				alert("이미 존재하는 아이디입니다");
+			else
+				alert("사용가능한 아이디입니다");
+				document.userInfo.idDuplication.value ="idCheck";
+		}
+	};
+	xhr.open("GET", "/bootcampmoa/duplicateCheck?input="+inputValue+"&type=id", true);
+//	xhr.open("POST", "/bootcampmoa/duplicateCheck", true);
+//	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//	xhr.send("input="+inputValue+"&type=id");
+	xhr.send();
+	}
+} */
+
 </script>
 <div class="wrap">
-	<form method="POST" name="userInfo" action="/bootcampmoa/memberFindPwd">
+	<form method="POST" action="/bootcampmoa/memberAnswer">
 	<table class="userinfo">
 		<tr>
 		<td>질문</td>
@@ -126,9 +148,10 @@ input.value = null;
 		<tr>
 		<td>답변</td>
 		<td><input type="text" name="answer" id="answer" placeholder="답변을 입력하세요" required/></td>
-		<td><input type="submit" class="infobutton" name="findPwd" id="findPwd" value="확인"/></td>
+		<td><input type="submit" class="infobutton" name="updatePwd" id="updatePwd" value="확인"/></td>
 		</tr>
 	</table>
+	<input type="hidden" name="id" id="id" value="${id}"/>
 	</form>
 	<c:if test="${ !empty msg }" >
 		<script>

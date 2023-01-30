@@ -101,15 +101,9 @@
 
     <!-- Template Javascript -->
     <script src="/bootcampmoa/resources/js/main.js"></script>
+    <script src="/bootcampmoa/resources/js/main.js"></script>
     
-    <!-- 관리자 부트캠프 등록 -->
-    <script>
-    function insertManager(){
-    	
-    	window.close();
-    }
-    
-    </script>
+   
     
 </body>
 

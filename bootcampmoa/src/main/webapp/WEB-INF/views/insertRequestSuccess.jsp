@@ -93,15 +93,10 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link" data-toggle="dropdown">백엔드 <i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <a href="" class="dropdown-item">HTML</a>
-                                <a href="" class="dropdown-item">CSS</a>
-                                <a href="" class="dropdown-item">jQuery</a>
+                        
                             </div>
                         </div>
-                        <a href="" class="nav-item nav-link">프론트엔드</a>
-                        <a href="" class="nav-item nav-link">AI</a>
-                        <a href="" class="nav-item nav-link">클라우드</a>
-                        <a href="" class="nav-item nav-link">빅데이터</a> 
+                    
                     </div>
                 </nav>
             </div>
@@ -145,9 +140,7 @@
                         	<c:when test="${sessionScope.svo != null }">
                         		<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="logoutButton" style="margin-right:20px;" onClick="logout()">로그아웃</a>
                         	</c:when>
-                        </c:choose>
-                    	<a href="/bootcampmoa/memberSignup" style="border-style:solid; padding:5px;">회원가입</a>
-                    	
+                        </c:choose>                    	
                     </div>
                 </nav>
             </div>
@@ -279,16 +272,9 @@
 
     <!-- Template Javascript -->
     <script src="/bootcampmoa/resources/js/main.js"></script>
+    <script src="/bootcampmoa/resources/js/main.js"></script>
     
-     <script>
-	function logout(){
-	    let form = document.createElement('form');//여기서 폼태그 만듬
-	    form.setAttribute('method', 'post'); //메서드는 포스트로
-	    form.setAttribute('action', 'memberlogout');//PostMapping 괄호안 값을 넣으면됨
-	    document.body.appendChild(form);
-	    form.submit();
-	}
-	</script>
+
 </body>
 
 </html>

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>부트모아 - 부트캠프 등록 요청</title>
+    <title></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -93,15 +93,10 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link" data-toggle="dropdown">백엔드 <i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <a href="" class="dropdown-item">HTML</a>
-                                <a href="" class="dropdown-item">CSS</a>
-                                <a href="" class="dropdown-item">jQuery</a>
+                        
                             </div>
                         </div>
-                        <a href="" class="nav-item nav-link">프론트엔드</a>
-                        <a href="" class="nav-item nav-link">AI</a>
-                        <a href="" class="nav-item nav-link">클라우드</a>
-                        <a href="" class="nav-item nav-link">빅데이터</a> 
+                    
                     </div>
                 </nav>
             </div>
@@ -146,7 +141,6 @@
                         		<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="logoutButton" style="margin-right:20px;" onClick="logout()">로그아웃</a>
                         	</c:when>
                         </c:choose>
-                    	<a href="/bootcampmoa/memberSignup" style="border-style:solid; padding:5px;">회원가입</a>
                     	
                     </div>
                 </nav>
@@ -188,9 +182,9 @@
 													
 										<td class="permitTd">${bvo.academy }</td>
 										<td class="permitTd">${bvo.program }</td>
-										<td class="permitTd"><a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="permit" href="/bootcampmoa/updateManager?bnum=${bvo.bnum }" style="margin-right:20px;" target="_blank" onClick="window.open(this.href, '', 'width=400, height=430');">수정</a>
+										<td class="permitTd"><a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="permit"  style="margin-right:20px;" target="_blank" onClick="newWindow(${bvo.bnum});return false">수정</a>
 										</td>
-										<td class="permitTd"><a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="permit" href="/bootcampmoa/bootcampDelete?bnum=${bvo.bnum}" style="margin-right:20px;">삭제</a>
+										<td class="permitTd"><a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="permit" href="javascript:bootcampDelete(${bvo.bnum })" style="margin-right:20px;">삭제</a>
 									</tr>
 								</c:forEach>
 								</table>
@@ -293,16 +287,8 @@
 
     <!-- Template Javascript -->
     <script src="/bootcampmoa/resources/js/main.js"></script>
-    
-     <script>
-	function logout(){
-	    let form = document.createElement('form');//여기서 폼태그 만듬
-	    form.setAttribute('method', 'post'); //메서드는 포스트로
-	    form.setAttribute('action', 'memberlogout');//PostMapping 괄호안 값을 넣으면됨
-	    document.body.appendChild(form);
-	    form.submit();
-	}
-	</script>
+    <script src="/bootcampmoa/resources/js/abc.js"></script>
+
 </body>
 
 </html>

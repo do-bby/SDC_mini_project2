@@ -84,17 +84,10 @@
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 9;">
                     <div class="navbar-nav w-100">
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">백엔드 <i class="fa fa-angle-down float-right mt-1"></i></a>
+                            <a href="#" class="nav-link" data-toggle="dropdown"> <i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <a href="" class="dropdown-item">HTML</a>
-                                <a href="" class="dropdown-item">CSS</a>
-                                <a href="" class="dropdown-item">jQuery</a>
                             </div>
                         </div>
-                        <a href="" class="nav-item nav-link">프론트엔드</a>
-                        <a href="" class="nav-item nav-link">AI</a>
-                        <a href="" class="nav-item nav-link">클라우드</a>
-                        <a href="" class="nav-item nav-link">빅데이터</a> 
                     </div>
                 </nav>
             </div>
@@ -293,18 +286,18 @@
             
             	<c:choose>
             		<c:when test="${ !empty requestScope.bootcampList}">
-            			<c:forEach var = "vo" items = "${requestScope.bootcampList}">
+            			<c:forEach var = "bvo" items = "${requestScope.bootcampList}">
 							<c:choose>
-								<c:when test="${vo.visible == 1 }">
+								<c:when test="${bvo.visible == 1 }">
 									<div class="col-lg-4 col-md-6 mb-4" >
 								<div class="rounded overflow-hidden mb-2">
-									<a href=""><img class="img-fluid" src="resources/images/${vo.img}"></a>
+									<a href=""><img class="img-fluid" src="resources/images/${bvo.img}"></a>
 									<div class="bg-secondary p-4">
 										<div class="d-flex justify-content-between mb-3">
-			                                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>${vo.academy }</small>
+			                                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>${bvo.academy }</small>
 			                                <small class="m-0"></i></small>
                            	 			</div>
-                            			<a class="h5" href="/bootcampmoa/bootcamp/${vo.bnum}">${vo.program }</a>
+                            			<a class="h5" href="/bootcampmoa/bootcamp/${bvo.bnum}">${bvo.program }</a>
                             			<div class="border-top mt-4 pt-4">
                                 			<div class="d-flex justify-content-between">
                                     			<h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(리뷰 개수)</small></h6>
@@ -488,15 +481,7 @@
 
     <!-- Template Javascript -->
     <script src="resources/js/main.js"></script>
-    
-    <script>
-	function logout(){
-	    let form = document.createElement('form');//여기서 폼태그 만듬
-	    form.setAttribute('method', 'post'); //메서드는 포스트로
-	    form.setAttribute('action', 'memberlogout');//PostMapping 괄호안 값을 넣으면됨
-	    document.body.appendChild(form);
-	    form.submit();
-	}
-	</script>
+    <script src="resources/js/abc.js"></script>
+ 
 </body>
 </html>

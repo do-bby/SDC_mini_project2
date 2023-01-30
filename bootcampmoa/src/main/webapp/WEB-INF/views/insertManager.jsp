@@ -44,7 +44,7 @@
                         <div id="success"></div>
                         <form id="insertManager" name="sentMessage" novalidate="novalidate" method="POST" action="/bootcampmoa/insertManager/result" enctype="multipart/form-data" >
                         	<input type="hidden" name="bnum" value="${bvo.bnum }">
-                        	<input type="hidden" name="mnum" value=${sessionScope.bvo.mnum }>  
+                        	<input type="hidden" name="mnum" value=${sessionScope.svo.mnum }>  
                             <div class="control-group">
                                 <input type="text" class="form-control border-0 p-4" name="academy" value="${bvo.academy }" id="academy" placeholder="학원 명" required="required" data-validation-required-message="학원 명을 입력해주세요" />
                                 <p class="help-block text-danger"></p>
@@ -101,8 +101,6 @@
 
     <!-- Template Javascript -->
     <script src="/bootcampmoa/resources/js/main.js"></script>
-    
-    <!-- 관리자 부트캠프 등록 -->
     <script src="/bootcampmoa/resources/js/abc.js"></script>
     
 </body>

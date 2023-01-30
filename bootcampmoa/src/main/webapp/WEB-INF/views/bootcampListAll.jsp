@@ -83,15 +83,9 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link" data-toggle="dropdown">백엔드 <i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <a href="" class="dropdown-item">HTML</a>
-                                <a href="" class="dropdown-item">CSS</a>
-                                <a href="" class="dropdown-item">jQuery</a>
+        
                             </div>
                         </div>
-                        <a href="" class="nav-item nav-link">프론트엔드</a>
-                        <a href="" class="nav-item nav-link">AI</a>
-                        <a href="" class="nav-item nav-link">클라우드</a>
-                        <a href="" class="nav-item nav-link">빅데이터</a> 
                     </div>
                 </nav>
             </div>
@@ -136,7 +130,6 @@
                         		<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="logoutButton" style="margin-right:20px;" onClick="logout()">로그아웃</a>
                         	</c:when>
                         </c:choose>
-                    	<a href="/bootcampmoa/memberSignup" style="border-style:solid; padding:5px;">회원가입</a>
                     	
                     </div>
                 </nav>
@@ -235,8 +228,8 @@
                     <div class="d-flex flex-column text-center bg-dark rounded mb-5 py-5 px-4">
                         <img src="resources/images/${sessionScope.svo.profile }.png" class=" rounded-circle mx-auto mb-3" style="width: 100px;">
                         <h3 class="text-primary mb-3">${sessionScope.svo.nickname }</h3>
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
-                        <p class="text-white m-0">Conset elitr erat vero dolor ipsum et diam, eos dolor lorem, ipsum sit no ut est  ipsum erat kasd amet elitr</p>
+                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Profile</h3>
+                        <p class="text-white m-0"></p>
                     </div>
     
                     <!-- Search Form -->
@@ -257,24 +250,36 @@
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Categories</h3>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Web Design</a>
-                                <span class="badge badge-primary badge-pill">150</span>
+                                <a href="" class="text-decoration-none h6 m-0">Front-End</a>
+                                <span class="badge badge-primary badge-pill"></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Web Development</a>
-                                <span class="badge badge-primary badge-pill">131</span>
+                                <a href="" class="text-decoration-none h6 m-0">Back-End</a>
+                                <span class="badge badge-primary badge-pill"></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Online Marketing</a>
-                                <span class="badge badge-primary badge-pill">78</span>
+                                <a href="" class="text-decoration-none h6 m-0">Full-Stack</a>
+                                <span class="badge badge-primary badge-pill"></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Keyword Research</a>
-                                <span class="badge badge-primary badge-pill">56</span>
+                                <a href="" class="text-decoration-none h6 m-0">Big-Data</a>
+                                <span class="badge badge-primary badge-pill"></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Email Marketing</a>
-                                <span class="badge badge-primary badge-pill">98</span>
+                                <a href="" class="text-decoration-none h6 m-0">IoT</a>
+                                <span class="badge badge-primary badge-pill"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <a href="" class="text-decoration-none h6 m-0">Cloud</a>
+                                <span class="badge badge-primary badge-pill"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <a href="" class="text-decoration-none h6 m-0">AI</a>
+                                <span class="badge badge-primary badge-pill"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <a href="" class="text-decoration-none h6 m-0">App</a>
+                                <span class="badge badge-primary badge-pill"></span>
                             </li>
                         </ul>
                     </div>
@@ -284,12 +289,14 @@
                     <div class="mb-5">
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
                         <div class="d-flex flex-wrap m-n1">
-                            <a href="" class="btn btn-outline-primary m-1">Design</a>
-                            <a href="" class="btn btn-outline-primary m-1">Development</a>
-                            <a href="" class="btn btn-outline-primary m-1">Marketing</a>
-                            <a href="" class="btn btn-outline-primary m-1">SEO</a>
-                            <a href="" class="btn btn-outline-primary m-1">Writing</a>
-                            <a href="" class="btn btn-outline-primary m-1">Consulting</a>
+                            <a href="" class="btn btn-outline-primary m-1">front-End</a>
+                            <a href="" class="btn btn-outline-primary m-1">Back-End</a>
+                            <a href="" class="btn btn-outline-primary m-1">full Stack</a>
+                            <a href="" class="btn btn-outline-primary m-1">Big-Data</a>
+                            <a href="" class="btn btn-outline-primary m-1">IoT</a>
+                            <a href="" class="btn btn-outline-primary m-1">Cloud</a>
+                            <a href="" class="btn btn-outline-primary m-1">AI</a>
+                            <a href="" class="btn btn-outline-primary m-1">App</a>
                         </div>
                     </div>
                 </div>
@@ -385,16 +392,7 @@
 
     <!-- Template Javascript -->
     <script src="resources/js/main.js"></script>
-    
-     <script>
-	function logout(){
-	    let form = document.createElement('form');//여기서 폼태그 만듬
-	    form.setAttribute('method', 'post'); //메서드는 포스트로
-	    form.setAttribute('action', 'memberlogout');//PostMapping 괄호안 값을 넣으면됨
-	    document.body.appendChild(form);
-	    form.submit();
-	}
-	</script>
+    <script src="resources/js/abc.js"></script>
 </body>
 
 </html>

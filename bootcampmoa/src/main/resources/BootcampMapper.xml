@@ -8,12 +8,17 @@
     </select>
   	
   	<select id="selectBootcamp"  resultType="vo.BootcampVO" parameterType="vo.PagingVO" >
-        <!-- 전체 부트캠프 목록 가져오기 -->
+        <!-- 페이징 firstRow와 lastRow 사이 값을 가져옴 -->
         select bnum,program,academy,logo, img, url, address,visible,mnum,rw from 
       (select bnum, program,academy, logo, img, url, address,visible,mnum, rownum rw from bootcamp)
       where rw between #{firstRow} and #{lastRow}
        
     </select>
+    
+    <select id="selectBootcampAll"  resultType="vo.BootcampVO" >
+        <!-- 전체 부트캠프 목록 가져오기 -->
+       	select * from bootcamp
+    </select> 
   	
  	
  	<select id="selectBootcampOne"  resultType="vo.BootcampVO" parameterType="_int" >

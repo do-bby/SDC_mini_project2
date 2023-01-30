@@ -13,22 +13,13 @@ function logout(){
 	}
 	
 	function newWindow(bnum){
-		alert(1);
 		abc = window.open('/bootcampmoa/insertManager?bnum='+bnum, '', 'width=400, height=430');
 	}
 	var abc;
 	
-	 function insertManager(){
-	    	
-	    	alert("ㅋㅋ");
-	   
-	  
+	function insertManager(){
 	    	var dom = document.getElementById("insertManager");
 	    	dom.submit();
-	    	alert(100);
-	    	abc.close();
-	    	
-	    
-	    	
-	    }
-	    
+	}
+	
+	

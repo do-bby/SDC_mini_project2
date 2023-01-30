@@ -20,7 +20,7 @@ public class BootcampDAO {
 	      return cnt;
 	   }
 
-	// 전체 부트캠프 리스트 반환
+	// 해당 페이지의 전체 부트캠프 리스트 반환
 	public List<BootcampVO> selectList(PagingVO paging){
 		List<BootcampVO> list = null;
 		try {
@@ -32,6 +32,20 @@ public class BootcampDAO {
 		
 		return list;
 	}
+	
+	// 페이지에 상관 없이 전체 부트캠프 리스트 반환
+	public List<BootcampVO> selectListAll(){
+		List<BootcampVO> list = null;
+		try {
+			String statement = "resource.BootcampMapper.selectBootcampAll";
+			list = session.selectList(statement); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return list;
+	} 
+	
 	
 	// 특정 부트캠프 번호(pk)에 해당하는 부트캠프 한 개 반환
 	public BootcampVO selectOne(int bnum) {

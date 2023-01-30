@@ -27,19 +27,19 @@ public class ReviewController {
 	@Autowired
 	BootcampDAO bdao;
 	@GetMapping("/bootcamp/{bnum}")
-	public ModelAndView list(@ModelAttribute("paging")PagingVO paging, @PathVariable int bnum) {
+	public ModelAndView list(@ModelAttribute("paging")PagingVO paging,@PathVariable int bnum) {
 		int rowcount = dao.getTotalRowCount(paging);		
 		paging.setTotalRowCount(rowcount);
 		paging.pageSetting();
 		List<ReviewVO> list = dao.selectall(paging);
 		BootcampVO bvo = bdao.selectOne(bnum);
-		ModelAndView mav = new ModelAndView();	
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("bvo",bvo);
 		if (list.size() != 0) {
-			mav.addObject("list", list);
-			mav.addObject("bvo",bvo);
+			mav.addObject("list", list);			
 		} else {
 			mav.addObject("msg", "추출된 결과가 없어요");
-		}
+		}		
 		mav.setViewName("bootcampInfo");
 		return mav;
 	}

@@ -19,7 +19,7 @@
             select reviewseq.nextval from dual     
        </selectKey>  
           insert into review (rnum, good, bad, total, teachsat, edusat, learnsat, rdate, mnum, bnum) values 
-          (#{rnum}, #{good}, #{bad}, #{total},#{teachsat},#{edusat},#{learnsat},#{rdate},#{mnum},#{bnum})
+          (#{rnum}, #{good}, #{bad}, #{total},#{teachsat},#{edusat},#{learnsat},to_char(sysdate, 'YYYYMMDD'),#{mnum},#{bnum})
    </insert>
    <delete id="deleteReview"  parameterType="_int"  >
        delete from review where rnum = #{rnum}

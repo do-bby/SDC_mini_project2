@@ -134,7 +134,7 @@
                 <div class="d-inline-flex text-white">
                     <p class="m-0 text-uppercase"><a class="text-white" href="/bootcampmoa/bootmoaMain">홈</a></p>
                     <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                    <p class="m-0 text-uppercase">${bvo.program }</p>${vo.bnum}
+                    <p class="m-0 text-uppercase">${bvo.program }</p>
                     <a href="/bootcampmoa/bootcamp/review/${bvo.bnum}" class="btn btn-outline-primary m-1">리뷰 등록하기</a>
                 </div>
             </div>
@@ -173,31 +173,31 @@
                             <nav aria-label="Page navigation">
                                 <ul class="pagination pagination-lg justify-content-center mb-0">
                                   <li class="page-item">
-                                    <a class="page-link" href="reviews?curPage=1" aria-label="Start">
+                                    <a class="page-link" href="${vo.bnum}?curPage=1" aria-label="Start">
                                       <span aria-hidden="true">&laquo;</span>
                                       <span class="sr-only">Start</span>                                     
                                     </a>                                    
                                   </li>
                                   <li class="page-item">
-                                  	<a class="page-link" href="reviews?curPage=${paging.curPage-1 }" aria-label="prev">
+                                  	<a class="page-link" href="${vo.bnum}?curPage=${paging.curPage-1 }" aria-label="prev">
                                       <span aria-hidden="true">&lt;</span>
                                       <span class="sr-only">prev</span>
                                     </a>
                                   </li>
                                   
                                   	<c:forEach begin="${paging.firstPage }"  end="${paging.lastPage }" var="i">
-								   		<a href="reviews?curPage=${i }"  >  
+								   		<a href="${vo.bnum}curPage=${i }"  >  
 								   		</a>
 									</c:forEach>
                                   <li class="page-item">
-                                  	<a class="page-link" href="reviews?curPage=${paging.curPage+1 }" aria-label="Next">
+                                  	<a class="page-link" href="${vo.bnum}?curPage=${paging.curPage+1 }" aria-label="Next">
                                       <span aria-hidden="true">&gt;</span>
                                       <span class="sr-only">Next</span>
                                     </a>
                                   </li>
                                   
                                   <li class="page-item">
-                                    <a class="page-link" href="reviews?curPage=${paging.totalPageCount }" aria-label="End">
+                                    <a class="page-link" href="${vo.bnum}?curPage=${paging.totalPageCount }" aria-label="End">
                                       <span aria-hidden="true">&raquo;</span>
                                       <span class="sr-only">End</span>
                                     </a>

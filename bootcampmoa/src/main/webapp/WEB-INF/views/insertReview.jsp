@@ -175,11 +175,7 @@
                             <div class="form-group">
                                 <label for="learnsat">학습만족도</label>
                                 <input id="learnsat" type="text" name="learnsat" class="form-control border-0">
-                            </div>
-                            <div class="form-group">
-                                <label for="rdate">작성날짜</label>
-                                <input id="rdate" type="text" name="rdate" class="form-control border-0">
-                            </div>
+                            </div>                            
                             <input type="hidden" name="bnum" value="${bvo.bnum}">
                             <input type="hidden" name="mnum" value="1">                                                       
                             <div class="form-group mb-0">

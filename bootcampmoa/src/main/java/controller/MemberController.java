@@ -138,12 +138,13 @@ public class MemberController {
 	 	
 	 @RequestMapping("/uploadProfile")
 	 @ResponseBody
-	 public Map<String, Object> saveFile(MemberVO vo, @RequestParam("uploadProfile") MultipartFile profile) {
-	     String fileName = profile.getOriginalFilename();
-	     int res = 0;
+		public Map<String, Object> saveFile(MemberVO vo, @RequestParam("uploadProfile") MultipartFile profile) {
+			String fileName = profile.getOriginalFilename();
 
-	     byte[] byteArray; 
-	     Map<String, Object> result = new HashMap<String, Object>();
+			int res = 0;
+
+			byte[] byteArray;
+			Map<String, Object> result = new HashMap<String, Object>();
 	     
 	     try {
 	         byteArray = profile.getBytes(); //파일 변환
@@ -160,12 +161,10 @@ public class MemberController {
 	     if (f.exists()) { //파일이 존재할 때
 	         res = 2;
 	         result.put("res", res);
-	     } else {
+	     } else {	    	 
 	         try {
 	             Files.write(path, byteArray); //파일 저장
-	             int startIndex = uploadDirectory.indexOf("/SDC_mini_project2") + "/SDC_mini_project2".length();
-	             String shortcut = uploadDirectory.substring(startIndex);
-	             vo.setProfile(shortcut);
+	             vo.setProfile(fileName);
 	             res = 3;
 	             result.put("res", res);
 	             result.put("vo", vo);

@@ -124,6 +124,14 @@ function checkvalue() {
 		form.email.focus();
 		return false;
 	}
+	
+	var emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+    if (!emailRegExp.test(form.email.value)) {
+            alert("이메일 형식이 올바르지 않습니다");
+            form.email.value = "";
+            form.email.focus();
+            return false;
+        }
 
 	if (form.phone.value == "") {
 		alert("전화번호를 입력하세요");
@@ -251,9 +259,9 @@ function confirmDelete() {
 			<tr>
 			<td>프로필 사진</td>
 			<td>
-			<input type="file" id = "a" name="uploadProfile" accept="image/*" />
+			<input type="file" id = "upload" name="uploadProfile" accept="image/*" />
 			<button id="upload-profile-btn">업로드</button>
-			<input type="hidden" id = "b" name="profile" value=''>
+			<input type="hidden" id = "hiddenProfile" name="profile" value='${val.profile}'>
 			
 			</td>	
 		</tr>
@@ -327,8 +335,8 @@ function confirmDelete() {
 function handleData(data){
 	console.log(data);
 	var profileContent=data; 
-	$("#a").attr("name", "");
-	$("#b").attr("value", data);
+	$("#upload").attr("name", "");
+	$("#hiddenProfile").attr("value", data);
 	
 }
 
@@ -336,7 +344,12 @@ function handleData(data){
 $(document).ready(function() {
 	$('#upload-profile-btn').click(function(e) {
 		e.preventDefault();
-
+		
+		/* const fileInput = document.querySelector('#upload');
+		var savedInput = ${vo.getProfile()};
+		if (!fileInput.files.length || fileInput.files[0].name ==savedInput){
+			$('#hiddenProfile').attr("value",savedInput);
+		}else{ */
 		var formData = new FormData();
 		formData.append('uploadProfile', $('input[name="uploadProfile"]')[0].files[0]);
 
@@ -361,7 +374,7 @@ $(document).ready(function() {
 			} 
 		});
 	});
-	
+ /*  } */
 });
 </script>
 <c:if test="${ !empty msg }" >

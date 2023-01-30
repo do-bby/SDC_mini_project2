@@ -122,6 +122,14 @@
 			form.email.focus();
 			return false;
 		}
+		
+		var emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+	    if (!emailRegExp.test(form.email.value)) {
+	            alert("이메일 형식이 올바르지 않습니다");
+	            form.email.value = "";
+	            form.email.focus();
+	            return false;
+	        }
 
 		if (form.phone.value == "") {
 			alert("전화번호를 입력하세요");
@@ -224,10 +232,9 @@
 			<input type="password" name="pwd" autocomplete="off"
 				placeholder="패스워드를 입력하세요" required><br> <input
 				type="text" name="name" autocomplete="off" placeholder="이름을 입력하세요"
-				required><br> <input type="text" name="email"
-				autocomplete="off" placeholder="이메일을 입력하세요(예시_myemail@naver.com)"
-				required><br> <input type="text" name="phone"
-				autocomplete="off" placeholder="전화번호를 입력하세요('-'없이 입력해주세요)"
+				required><br> 
+				<input type="text" name="email" autocomplete="off" placeholder="이메일을 입력하세요(예시_myemail@naver.com)"	required><br> 		
+				<input type="text" name="phone"	autocomplete="off" placeholder="전화번호를 입력하세요('-'없이 입력해주세요)"
 				maxlength="11" required><br> 
 				<input type="text" name="nickname" id="nickname" autocomplete="off" placeholder="닉네임을 입력하세요" required>
 			<input type="button" value="중복확인" onclick="opennickCheck()"> 

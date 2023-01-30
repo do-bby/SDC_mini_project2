@@ -121,14 +121,15 @@ public class MemberLoginController {
 	@PostMapping("/memberAnswer")//질문 완료하고 다음페이지 호출임
 	public ModelAndView memberAnswer(MemberVO vo) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(vo.getAnswer());
+		String question = mDao.selectMemberAnswer(vo);//질문불러옴
 		//이전 비밀번호랑 같은지 체크
 		int count = mDao.selectAnswerCheck(vo); // 아이디랑 답변을 넣어줌
 		if(count == 1) { //답변이 일치할경우 
 			mav.addObject("id",vo.getId());// 아이디 넘겨줌
 			mav.setViewName("memberChangePwd"); //비밀번호 변경페이지로 이동
 		}else { //답변이 다를경우
-			mav.addObject("answer",vo.getAnswer());
+			mav.addObject("id", vo.getId());
+			mav.addObject("question",question);
 			mav.addObject("msg", "답변이 일치하지 않습니다.");
 			mav.setViewName("memberAnswer"); //질문페이지로 이동
 		}
@@ -148,11 +149,8 @@ public class MemberLoginController {
 			mav.addObject("id",vo.getId());
 			mav.setViewName("memberChangePwd");
 		}else {
-			int num = mDao.updatePwd(vo);
-			System.out.println(num);
-			if(num == 1) { //수정된 컬럼의 갯수를 가져온다고 함
-				mav.addObject("msg", "비밀번호 변경이 완료되었습니다.");	
-			}
+			mDao.updatePwd(vo);
+			mav.addObject("msg", "비밀번호 변경이 완료되었습니다.");
 			mav.setViewName("memberLogin");
 		}
 		

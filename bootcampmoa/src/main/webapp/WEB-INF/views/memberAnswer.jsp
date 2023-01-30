@@ -139,6 +139,7 @@ return false;
 
 </script>
 <div class="wrap">
+	<h2>비밀번호 찾기 질문</h2>
 	<form method="POST" action="/bootcampmoa/memberAnswer">
 	<table class="userinfo">
 		<tr>

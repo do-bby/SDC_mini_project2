@@ -117,6 +117,7 @@ var input = document.getElementById(id);
 input.value = null;
 </script>
 <div class="wrap">
+	<h2>로그인</h2>
 	<form method="POST" name="userInfo" action="/bootcampmoa/selectLoginMember">
 	<table class="userinfo">
 		<tr>

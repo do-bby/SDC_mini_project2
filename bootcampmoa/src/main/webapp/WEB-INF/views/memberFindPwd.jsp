@@ -93,6 +93,7 @@ var input = document.getElementById(id);
 input.value = null;
 </script>
 <div class="wrap">
+	<h2>비밀번호 찾기</h2>
 	<form method="POST" action="/bootcampmoa/memberFindPwd">
 	<table>
 		<tr>

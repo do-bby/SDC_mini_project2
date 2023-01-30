@@ -179,18 +179,20 @@
                                     </a>                                    
                                   </li>
                                   <li class="page-item">
-                                  	<a class="page-link" href="${vo.bnum}?curPage=${paging.curPage-1 }" aria-label="prev">
+                                     <a class="page-link" href="${vo.bnum}?curPage=${paging.curPage-1 }" aria-label="prev">
                                       <span aria-hidden="true">&lt;</span>
                                       <span class="sr-only">prev</span>
                                     </a>
                                   </li>
                                   
-                                  	<c:forEach begin="${paging.firstPage }"  end="${paging.lastPage }" var="i">
-								   		<a href="${vo.bnum}curPage=${i }"  >  
-								   		</a>
-									</c:forEach>
+                                     <c:forEach begin="${paging.firstPage }"  end="${paging.lastPage }" var="i">
+                                 <a class="page-link" href="${vo.bnum}?curPage=${i }"  >  
+                                    <c:if test="${i eq paging.curPage }">  <span style="color: red">  ${i } </span> </c:if>
+                                    <c:if test="${i ne paging.curPage }">  ${i } </c:if> 
+                                 </a>
+                           </c:forEach>
                                   <li class="page-item">
-                                  	<a class="page-link" href="${vo.bnum}?curPage=${paging.curPage+1 }" aria-label="Next">
+                                     <a class="page-link" href="${vo.bnum}?curPage=${paging.curPage+1 }" aria-label="Next">
                                       <span aria-hidden="true">&gt;</span>
                                       <span class="sr-only">Next</span>
                                     </a>
@@ -204,7 +206,8 @@
                                   </li>
                                 </ul>
                               </nav>
-                        </div>
+                   </div>
+                        
                     </div>
                 </div>
     

@@ -11,6 +11,7 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ import dao.BootcampDAO;
 import dao.MemberMyBatisDao;
 import vo.BootcampVO;
 import vo.MemberVO;
+import vo.PagingVO;
 
 
 
@@ -30,10 +32,13 @@ public class BootcampController {
 	@Autowired
 	ServletContext context;
 	@GetMapping("/bootmoaMain") // 최신 등록된 부트캠프 리스트 6개 출력  - 아직 구현 x
-	public ModelAndView selectRecentList() {
-		
+	public ModelAndView selectRecentList(@ModelAttribute("paging")PagingVO paging) {
+		int rowcount = bootcampDao.getTotalRowCount(paging);      
+	    paging.setTotalRowCount(rowcount);
+	    paging.pageSetting();
+
 		List<BootcampVO> list = null;
-		list = bootcampDao.selectList();
+		list = bootcampDao.selectList(paging);
 		ModelAndView mav = new ModelAndView();
 		if(list.size() != 0) {
 			mav.addObject("bootcampList",list);
@@ -42,9 +47,12 @@ public class BootcampController {
 		return mav;
 	}
 	@GetMapping("/bootcampListAll") // 모든 부트캠프 리스트 출력  
-	public ModelAndView selectList() {
+	public ModelAndView selectList(@ModelAttribute("paging")PagingVO paging) {
+		int rowcount = bootcampDao.getTotalRowCount(paging);      
+	    paging.setTotalRowCount(rowcount);
+	    paging.pageSetting();
 		List<BootcampVO> list = null;
-		list = bootcampDao.selectList();
+		list = bootcampDao.selectList(paging);
 		ModelAndView mav = new ModelAndView();
 		if(list.size() != 0) {
 			mav.addObject("bootcampListAll",list);
@@ -77,9 +85,9 @@ public class BootcampController {
 	} 
 	
 	@GetMapping("/bootcampInsertResponse") //부트캠프 등록 허용 결정 페이지 에서 등록 요청을 받은 부트캠프들만 볼 수 있음   
-	public ModelAndView insertResponse(BootcampVO bootcamp) {
+	public ModelAndView insertResponse(@ModelAttribute("paging")PagingVO paging,BootcampVO bootcamp) {
 		List<BootcampVO> invisibleList = new ArrayList<BootcampVO>();
-		List<BootcampVO> list = bootcampDao.selectList();
+		List<BootcampVO> list = bootcampDao.selectList(paging);
 		ModelAndView mav = new ModelAndView();
 		if(list.size() != 0) {
 			for(BootcampVO vo: list) {
@@ -98,8 +106,8 @@ public class BootcampController {
 	}
 	
 	@GetMapping("/requestDelete") // 등록 요청 삭제
-	public ModelAndView requestDelete(BootcampVO bootcamp) {
-		List<BootcampVO> list = bootcampDao.selectList();
+	public ModelAndView requestDelete(@ModelAttribute("paging")PagingVO paging,BootcampVO bootcamp) {
+		List<BootcampVO> list = bootcampDao.selectList(paging);
 		List<BootcampVO> invisibleList = new ArrayList<BootcampVO>();
 		ModelAndView mav = new ModelAndView();
 		boolean result = bootcampDao.delete(bootcamp.getBnum());
@@ -214,8 +222,8 @@ public class BootcampController {
 	}
 	
 	@GetMapping("/bootcampDelete") // 등록 요청 삭제
-	public ModelAndView bootcampDelete(BootcampVO bootcamp) {
-		List<BootcampVO> list = bootcampDao.selectList();
+	public ModelAndView bootcampDelete(@ModelAttribute("paging")PagingVO paging,BootcampVO bootcamp) {
+		List<BootcampVO> list = bootcampDao.selectList(paging);
 		List<BootcampVO> visibleList = new ArrayList<BootcampVO>();
 		ModelAndView mav = new ModelAndView();
 		boolean result = bootcampDao.delete(bootcamp.getBnum());
@@ -263,9 +271,9 @@ public class BootcampController {
 	
 	
 	@GetMapping("/bootcampManagement") //관리자 로그인 시 관리 페이지 에서 등록된 부트캠프만 볼 수 있음   
-	public ModelAndView bootcampManagement(BootcampVO bootcamp) {
+	public ModelAndView bootcampManagement(@ModelAttribute("paging")PagingVO paging,BootcampVO bootcamp) {
 		List<BootcampVO> visibleList = new ArrayList<BootcampVO>();
-		List<BootcampVO> list = bootcampDao.selectList();
+		List<BootcampVO> list = bootcampDao.selectList(paging);
 		ModelAndView mav = new ModelAndView();
 		if(list.size() != 0) {
 			for(BootcampVO vo: list) {

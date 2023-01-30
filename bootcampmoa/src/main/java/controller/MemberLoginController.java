@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,7 @@ import dao.BootcampDAO;
 import dao.MemberLoginDAO;
 import vo.BootcampVO;
 import vo.MemberVO;
+import vo.PagingVO;
 
 @Controller
 public class MemberLoginController {
@@ -41,10 +43,10 @@ public class MemberLoginController {
 	//로그인
 	@PostMapping("/selectLoginMember")
 	@ResponseBody //여기 값을 jsp body로 넘길때 사용
-	public ModelAndView selectLoginMember(HttpServletRequest request ,MemberVO vo) {
+	public ModelAndView selectLoginMember(@ModelAttribute("paging")PagingVO paging,HttpServletRequest request ,MemberVO vo) {
 		HttpSession session;
 		ModelAndView mav = new ModelAndView();
-		List<BootcampVO> list = bootcampDao.selectList();
+		List<BootcampVO> list = bootcampDao.selectList(paging);
 		MemberVO voList = mDao.selectMemberInfo(vo);
 		int count = mDao.selectLoginMember(vo);
 		//로그인 성공시 세션에 정보 담아줌
@@ -67,10 +69,10 @@ public class MemberLoginController {
 	
 	//로그아웃
 	@PostMapping("/memberlogout")
-	public ModelAndView logout(HttpServletRequest request) {
+	public ModelAndView logout(@ModelAttribute("paging")PagingVO paging,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession(false);
-		List<BootcampVO> list = bootcampDao.selectList();
+		List<BootcampVO> list = bootcampDao.selectList(paging);
 	    if (session != null) {
 	        session.invalidate();
 	    }

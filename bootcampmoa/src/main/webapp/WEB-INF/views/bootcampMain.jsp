@@ -319,6 +319,45 @@
 						</c:forEach>
             		</c:when>
             	</c:choose>
+            	<div class="col-12">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination pagination-lg justify-content-center mb-0">
+                                  <li class="page-item">
+                                    <a class="page-link" href="${vo.bnum}?curPage=1" aria-label="Start">
+                                      <span aria-hidden="true">&laquo;</span>
+                                      <span class="sr-only">Start</span>                                     
+                                    </a>                                    
+                                  </li>
+                                  <li class="page-item">
+                                     <a class="page-link" href="${vo.bnum}?curPage=${paging.curPage-1 }" aria-label="prev">
+                                      <span aria-hidden="true">&lt;</span>
+                                      <span class="sr-only">prev</span>
+                                    </a>
+                                  </li>
+                                  
+                                     <c:forEach begin="${paging.firstPage }"  end="${paging.lastPage }" var="i">
+                                 <a class="page-link" href="${vo.bnum}?curPage=${i }"  >  
+                                    <c:if test="${i eq paging.curPage }">  <span style="color: red">  ${i } </span> </c:if>
+                                    <c:if test="${i ne paging.curPage }">  ${i } </c:if> 
+                                 </a>
+                           </c:forEach>
+                                  <li class="page-item">
+                                     <a class="page-link" href="${vo.bnum}?curPage=${paging.curPage+1 }" aria-label="Next">
+                                      <span aria-hidden="true">&gt;</span>
+                                      <span class="sr-only">Next</span>
+                                    </a>
+                                  </li>
+                                  
+                                  <li class="page-item">
+                                    <a class="page-link" href="${vo.bnum}?curPage=${paging.totalPageCount }" aria-label="End">
+                                      <span aria-hidden="true">&raquo;</span>
+                                      <span class="sr-only">End</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </nav>
+                   </div>
+            	
                 
             </div>
         </div>

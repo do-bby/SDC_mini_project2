@@ -130,12 +130,7 @@
     <div class="container-fluid page-header" style="margin-bottom: 90px;">
         <div class="container">
             <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
-                <h3 class="display-4 text-white text-uppercase">Single</h3>
-                <div class="d-inline-flex text-white">
-                    <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
-                    <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                    <p class="m-0 text-uppercase">Single</p>
-                </div>
+                <h3 class="display-4 text-white text-uppercase">리뷰 수정</h3>                
             </div>
         </div>
     </div>
@@ -149,7 +144,7 @@
                 <div class="col-lg-8">
                     <!-- review update Form -->
                     <div class="bg-secondary rounded p-5">
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Leave a comment</h3>
+                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Modify a Review</h3>
                         <form method = "post" action = "/bootcampmoa/review/updatereview">                        	
                             <div class="form-group">
                             	<input type="hidden" name="rnum" value="${vo.rnum}">
@@ -175,15 +170,11 @@
                             <div class="form-group">
                                 <label for="learnsat">learn</label>
                                 <input id="learnsat" type="text" name="learnsat" value="${ vo.learnsat }" class="form-control border-0">
-                            </div>
-                            <div class="form-group">
-                                <label for="rdate">date</label>
-                                <input id="rdate" type="text" name="rdate" value="${ vo.rdate }" class="form-control border-0">
-                            </div>
-                            <input type="text" name="bnum" value="${ vo.bnum }">
-                            <input type="text" name="mnum" value="${ vo.mnum }">                                                       
+                            </div>                            
+                            <input type="hidden" name="bnum" value="${ vo.bnum }">
+                            <input type="hidden" name="mnum" value="${ vo.mnum }">                                                       
                             <div class="form-group mb-0">
-                                <input type="submit" value="Leave Review" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold">
+                                <input type="submit" value="Modify Review" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold">
                             </div>
                         </form>
                     </div>

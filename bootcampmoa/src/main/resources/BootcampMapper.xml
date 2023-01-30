@@ -3,10 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="resource.BootcampMapper">
-  	<select id="selectBootcamp"  resultType="vo.BootcampVO">
-  		<!-- 전체 부트캠프 목록 가져오기 -->
-    	select * from bootcamp
- 	</select>
+  	 <select id = "totalRowCount" parameterType="vo.BootcampVO" resultType="int">
+       select count(*) from bootcamp
+    </select>
+  	
+  	<select id="selectBootcamp"  resultType="vo.BootcampVO" parameterType="vo.PagingVO" >
+        <!-- 전체 부트캠프 목록 가져오기 -->
+        select bnum,program,academy,logo, img, url, address,visible,mnum,rw from 
+      (select bnum, program,academy, logo, img, url, address,visible,mnum, rownum rw from bootcamp)
+      where rw between #{firstRow} and #{lastRow}
+       
+    </select>
+  	
  	
  	<select id="selectBootcampOne"  resultType="vo.BootcampVO" parameterType="_int" >
  		<!-- 부트캠프 고유번호로 부트캠프 찾기 -->

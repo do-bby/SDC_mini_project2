@@ -5,18 +5,27 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import vo.BootcampVO;
+import vo.PagingVO;
 
 @Repository 
 public class BootcampDAO {
 	@Autowired
 	SqlSession session;
-	
+	//저장된 부트 캠프 수
+	   public int getTotalRowCount(PagingVO paging)
+	   {   int cnt = 0;
+	      String statement = "resource.BootcampMapper.totalRowCount";
+	      cnt = session.selectOne(statement);
+	      
+	      return cnt;
+	   }
+
 	// 전체 부트캠프 리스트 반환
-	public List<BootcampVO> selectList(){
+	public List<BootcampVO> selectList(PagingVO paging){
 		List<BootcampVO> list = null;
 		try {
 			String statement = "resource.BootcampMapper.selectBootcamp";
-			list = session.selectList(statement); 
+			list = session.selectList(statement,paging); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 

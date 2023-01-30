@@ -108,13 +108,13 @@
                             <a href="/bootcampmoa/bootcampSearch" class="nav-item nav-link">부트캠프 검색</a>
                             <a href="/bootcampmoa/bootcampInsertRequest" class="nav-item nav-link">등록요청</a>
                             <c:choose>
-                            	<c:when test="${sessionScope.vo != null}">
+                            	<c:when test="${sessionScope.svo != null}">
                             		<div class="nav-item dropdown">
                                 		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">마이페이지</a>
                                 		<div class="dropdown-menu rounded-0 m-0">
                                     		<a href="viewMemberInfo" class="dropdown-item">회원정보 수정</a>
                                     		<c:choose>
-                                    			<c:when test="${sessionScope.vo.mlevel == 1 }">
+                                    			<c:when test="${sessionScope.svo.mlevel == 1 }">
                                     				<a href="/bootcampmoa/bootcampInsertResponse" class="dropdown-item">등록 요청 승인 관리</a>
                                     				<a href="/bootcampmoa/bootcampManagement" class="dropdown-item"> 설정 </a>
                                     			</c:when> 
@@ -125,12 +125,12 @@
                             </c:choose>
                         </div>
                         <c:choose>
-                        	<c:when test="${sessionScope.vo == null }">
+                        	<c:when test="${sessionScope.svo == null }">
                     			<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="loginButton" href="/bootcampmoa/memberLogin" style="margin-right:20px;">로그인</a>	
                         	</c:when>
                         </c:choose>
                         <c:choose>
-                        	<c:when test="${sessionScope.vo != null }">
+                        	<c:when test="${sessionScope.svo != null }">
                         		<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="logoutButton" style="margin-right:20px;" onClick="logout()">로그아웃</a>
                         	</c:when>
                         </c:choose>
@@ -170,7 +170,7 @@
                     <div class="contact-form bg-secondary rounded p-5">
                         <div id="success"></div>
                         <form name="sentMessage" novalidate="novalidate" method="POST" action="/bootcampmoa/bootcampInsertRequest/success">
-                        	<input type="hidden" name="mnum" value="${sessionScope.vo.mnum }"> 
+                        	<input type="hidden" name="mnum" value="${sessionScope.svo.mnum }"> 
                             <div class="control-group">
                                 <input type="text" class="form-control border-0 p-4" name="academy" id="academy" placeholder="학원 명" required="required" data-validation-required-message="학원 명을 입력해주세요" />
                                 <p class="help-block text-danger"></p>

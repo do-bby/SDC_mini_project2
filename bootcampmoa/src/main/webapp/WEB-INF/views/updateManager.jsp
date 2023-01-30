@@ -43,22 +43,22 @@
                     <div class="contact-form bg-secondary rounded p-5">
                         <div id="success"></div>
                         <form name="sentMessage" novalidate="novalidate" method="POST" action="/bootcampmoa/updateManager/result" enctype="multipart/form-data" >
-                        	<input type="hidden" name="bnum" value="${vo.bnum }">
-                        	<input type="hidden" name="mnum" value=${sessionScope.vo.mnum }>  
+                        	<input type="hidden" name="bnum" value="${bvo.bnum }">
+                        	<input type="hidden" name="mnum" value=${sessionScope.svo.mnum }>  
                             <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" name="academy" value="${vo.academy }" id="academy" placeholder="학원 명" required="required" data-validation-required-message="학원 명을 입력해주세요" />
+                                <input type="text" class="form-control border-0 p-4" name="academy" value="${bvo.academy }" id="academy" placeholder="학원 명" required="required" data-validation-required-message="학원 명을 입력해주세요" />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" name="program" value="${vo.program }" id="program" placeholder="부트캠프 프로그램 명" required="required" data-validation-required-message="부트캠프 프로그램 이름을 입력해주세요" />
+                                <input type="text" class="form-control border-0 p-4" name="program" value="${bvo.program }" id="program" placeholder="부트캠프 프로그램 명" required="required" data-validation-required-message="부트캠프 프로그램 이름을 입력해주세요" />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" name="url" value="${vo.url }"id="url" placeholder="부트캠프 학원 사이트 주소" required="required" data-validation-required-message="학원 사이트 주소를입력해주세요" />
+                                <input type="text" class="form-control border-0 p-4" name="url" value="${bvo.url }"id="url" placeholder="부트캠프 학원 사이트 주소" required="required" data-validation-required-message="학원 사이트 주소를입력해주세요" />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" name="address" value="${vo.address} " id="address" placeholder="오프라인 수업 주소" required="required" data-validation-required-message="오프라인 수업 주소를입력해주세요" />
+                                <input type="text" class="form-control border-0 p-4" name="address" value="${bvo.address} " id="address" placeholder="오프라인 수업 주소" required="required" data-validation-required-message="오프라인 수업 주소를입력해주세요" />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="control-group">

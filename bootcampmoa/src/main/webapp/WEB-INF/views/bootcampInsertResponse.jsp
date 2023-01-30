@@ -120,13 +120,13 @@
                             <a href="/bootcampmoa/bootcampSearch" class="nav-item nav-link">부트캠프 검색</a>
                             <a href="/bootcampmoa/bootcampInsertRequest" class="nav-item nav-link">등록요청</a>
                             <c:choose>
-                            	<c:when test="${sessionScope.vo != null}">
+                            	<c:when test="${sessionScope.svo != null}">
                             		<div class="nav-item dropdown">
                                 		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">마이페이지</a>
                                 		<div class="dropdown-menu rounded-0 m-0">
                                     		<a href="viewMemberInfo" class="dropdown-item">회원정보 수정</a>
                                     		<c:choose>
-                                    			<c:when test="${sessionScope.vo.mlevel == 1 }">
+                                    			<c:when test="${sessionScope.svo.mlevel == 1 }">
                                     				<a href="/bootcampmoa/bootcampInsertResponse" class="dropdown-item">등록 요청 승인 관리</a>
                                     				<a href="/bootcampmoa/bootcampManagement" class="dropdown-item"> 설정 </a>
                                     			</c:when> 
@@ -137,12 +137,12 @@
                             </c:choose>
                         </div>
                         <c:choose>
-                        	<c:when test="${sessionScope.vo == null }">
+                        	<c:when test="${sessionScope.svo == null }">
                     			<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="loginButton" href="/bootcampmoa/memberLogin" style="margin-right:20px;">로그인</a>	
                         	</c:when>
                         </c:choose>
                         <c:choose>
-                        	<c:when test="${sessionScope.vo != null }">
+                        	<c:when test="${sessionScope.svo != null }">
                         		<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="logoutButton" style="margin-right:20px;" onClick="logout()">로그아웃</a>
                         	</c:when>
                         </c:choose>
@@ -183,14 +183,14 @@
                        <c:choose>
 					   		<c:when test="${ !empty requestScope.invisibleList}">
 								<table id="permitTable">
-								<c:forEach var = "vo" items = "${requestScope.invisibleList }">
+								<c:forEach var = "bvo" items = "${requestScope.invisibleList }">
 									<tr>
-										<td class="permitTd">${vo.mnum }</td>					
-										<td class="permitTd">${vo.academy }</td>
-										<td class="permitTd">${vo.program }</td>
-										<td class="permitTd"><a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="permit" href="/bootcampmoa/insertManager?bnum=${vo.bnum }" style="margin-right:20px;" target="_blank" onClick="window.open(this.href, '', 'width=400, height=430');">등록</a>
+										<td class="permitTd">${bvo.mnum }</td>					
+										<td class="permitTd">${bvo.academy }</td>
+										<td class="permitTd">${bvo.program }</td> 
+										<td class="permitTd"><a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="permit" onclick="alert(0);newWindow(${bvo.bnum});return false" style="margin-right:20px;" target="_blank">등록</a>
 										</td>
-										<td class="permitTd"><a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="permit" href="/bootcampmoa/requestDelete?bnum=${vo.bnum}" style="margin-right:20px;">삭제</a>
+										<td class="permitTd"><a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="permit" href="javascript:bootcampDelete(${bvo.bnum})" style="margin-right:20px;">삭제</a>
 									</tr>
 								</c:forEach>
 								</table>
@@ -294,15 +294,7 @@
     <!-- Template Javascript -->
     <script src="/bootcampmoa/resources/js/main.js"></script>
     
-     <script>
-	function logout(){
-	    let form = document.createElement('form');//여기서 폼태그 만듬
-	    form.setAttribute('method', 'post'); //메서드는 포스트로
-	    form.setAttribute('action', 'memberlogout');//PostMapping 괄호안 값을 넣으면됨
-	    document.body.appendChild(form);
-	    form.submit();
-	}
-	</script>
+    <script src="/bootcampmoa/resources/js/abc.js"></script>
 </body>
 
 </html>

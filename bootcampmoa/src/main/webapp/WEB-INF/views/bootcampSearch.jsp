@@ -108,13 +108,13 @@
                             <a href="/bootcampmoa/bootcampSearch" class="nav-item nav-link">부트캠프 검색</a>
                             <a href="/bootcampmoa/bootcampInsertRequest" class="nav-item nav-link">등록요청</a>
                             <c:choose>
-                            	<c:when test="${sessionScope.vo != null}">
+                            	<c:when test="${sessionScope.svo != null}">
                             		<div class="nav-item dropdown">
                                 		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">마이페이지</a>
                                 		<div class="dropdown-menu rounded-0 m-0">
                                     		<a href="viewMemberInfo" class="dropdown-item">회원정보 수정</a>
                                     		<c:choose>
-                                    			<c:when test="${sessionScope.vo.mlevel == 1 }">
+                                    			<c:when test="${sessionScope.svo.mlevel == 1 }">
                                     				<a href="/bootcampmoa/bootcampInsertResponse" class="dropdown-item">등록 요청 승인 관리</a>
                                     				<a href="/bootcampmoa/bootcampManagement" class="dropdown-item"> 설정 </a>
                                     			</c:when> 
@@ -125,12 +125,12 @@
                             </c:choose>
                         </div>
                         <c:choose>
-                        	<c:when test="${sessionScope.vo == null }">
+                        	<c:when test="${sessionScope.svo == null }">
                     			<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="loginButton" href="/bootcampmoa/memberLogin" style="margin-right:20px;">로그인</a>	
                         	</c:when>
                         </c:choose>
                         <c:choose>
-                        	<c:when test="${sessionScope.vo != null }">
+                        	<c:when test="${sessionScope.svo != null }">
                         		<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="logoutButton" style="margin-right:20px;" onClick="logout()">로그아웃</a>
                         	</c:when>
                         </c:choose>
@@ -190,18 +190,18 @@
             
             	<c:choose>
             		<c:when test="${ !empty requestScope.searchList}">
-            			<c:forEach var = "vo" items = "${requestScope.searchList}">
+            			<c:forEach var = "bvo" items = "${requestScope.searchList}">
 							<c:choose>
-								<c:when test="${vo.visible == 1 }">
+								<c:when test="${bvo.visible == 1 }">
 									<div class="col-lg-4 col-md-6 mb-4" >
 								<div class="rounded overflow-hidden mb-2">
-									<a href=""><img class="img-fluid" src="resources/images/${vo.img}"></a>
+									<a href=""><img class="img-fluid" src="resources/images/${bvo.img}"></a>
 									<div class="bg-secondary p-4">
 										<div class="d-flex justify-content-between mb-3">
-			                                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>${vo.academy }</small>
+			                                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>${bvo.academy }</small>
 			                                <small class="m-0"></i></small>
                            	 			</div>
-                            			<a class="h5" href="/bootcampmoa/bootcamp/${vo.bnum}">${vo.program }</a>
+                            			<a class="h5" href="/bootcampmoa/bootcamp/${bvo.bnum}">${bvo.program }</a>
                             			<div class="border-top mt-4 pt-4">
                                 			<div class="d-flex justify-content-between">
                                     			<h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(리뷰 개수)</small></h6>

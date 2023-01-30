@@ -110,13 +110,13 @@
                             <a href="/bootcampmoa/bootcampSearch" class="nav-item nav-link">부트캠프 검색</a>
                             <a href="/bootcampmoa/bootcampInsertRequest" class="nav-item nav-link">등록요청</a>
                             <c:choose>
-                            	<c:when test="${sessionScope.vo != null}">
+                            	<c:when test="${sessionScope.svo != null}">
                             		<div class="nav-item dropdown">
                                 		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">마이페이지</a>
                                 		<div class="dropdown-menu rounded-0 m-0">
                                     		<a href="viewMemberInfo" class="dropdown-item">회원정보 수정</a>
                                     		<c:choose>
-                                    			<c:when test="${sessionScope.vo.mlevel == 1 }">
+                                    			<c:when test="${sessionScope.svo.mlevel == 1 }">
                                     				<a href="/bootcampmoa/bootcampInsertResponse" class="dropdown-item">등록 요청 승인 관리</a>
                                     				<a href="/bootcampmoa/bootcampManagement" class="dropdown-item"> 설정 </a>
                                     			</c:when> 
@@ -127,12 +127,12 @@
                             </c:choose>
                         </div>
                         <c:choose>
-                        	<c:when test="${sessionScope.vo == null }">
+                        	<c:when test="${sessionScope.svo == null }">
                     			<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="loginButton" href="/bootcampmoa/memberLogin" style="margin-right:20px;">로그인</a>	
                         	</c:when>
                         </c:choose>
                         <c:choose>
-                        	<c:when test="${sessionScope.vo != null }">
+                        	<c:when test="${sessionScope.svo != null }">
                         		<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" id="logoutButton" style="margin-right:20px;" onClick="logout()">로그아웃</a>
                         	</c:when>
                         </c:choose>
@@ -170,15 +170,15 @@
                         
                         <c:choose>
             				<c:when test="${ !empty requestScope.bootcampListAll}">
-            					<c:forEach var = "vo" items = "${requestScope.bootcampListAll}">
+            					<c:forEach var = "bvo" items = "${requestScope.bootcampListAll}">
             						<c:choose>
-            							<c:when test="${vo.visible == 1}">
+            							<c:when test="${bvo.visible == 1}">
             								<div class="col-lg-6 mb-4">
                             					<div class="blog-item position-relative overflow-hidden rounded mb-2">
-                                					<img class="img-fluid" src="/bootcampmoa/resources/images/${vo.logo}">
-                                					<a class="blog-overlay text-decoration-none" href="/bootcampmoa/bootcamp/${vo.bnum}">
-                                    				<h5 class="text-white mb-3">${vo.academy }</h5>
-                                    				<p class="text-primary m-0">${vo.program }</p>
+                                					<img class="img-fluid" src="/bootcampmoa/resources/images/${bvo.logo}">
+                                					<a class="blog-overlay text-decoration-none" href="/bootcampmoa/bootcamp/${bvo.bnum}">
+                                    				<h5 class="text-white mb-3">${bvo.academy }</h5>
+                                    				<p class="text-primary m-0">${bvo.program }</p>
                                 					</a>
                             					</div>
                         					</div>
@@ -233,8 +233,8 @@
                 <div class="col-lg-4 mt-5 mt-lg-0">
                     <!-- Author Bio -->
                     <div class="d-flex flex-column text-center bg-dark rounded mb-5 py-5 px-4">
-                        <img src="resources/images/${sessionScope.vo.profile }.png" class=" rounded-circle mx-auto mb-3" style="width: 100px;">
-                        <h3 class="text-primary mb-3">${sessionScope.vo.nickname }</h3>
+                        <img src="resources/images/${sessionScope.svo.profile }.png" class=" rounded-circle mx-auto mb-3" style="width: 100px;">
+                        <h3 class="text-primary mb-3">${sessionScope.svo.nickname }</h3>
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
                         <p class="text-white m-0">Conset elitr erat vero dolor ipsum et diam, eos dolor lorem, ipsum sit no ut est  ipsum erat kasd amet elitr</p>
                     </div>

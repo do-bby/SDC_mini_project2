@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import dao.BootcampDAO;
 import dao.MemberMyBatisDao;
@@ -86,10 +87,14 @@ public class BootcampController {
 	
 	@GetMapping("/bootcampInsertResponse") //부트캠프 등록 허용 결정 페이지 에서 등록 요청을 받은 부트캠프들만 볼 수 있음   
 	public ModelAndView insertResponse(@ModelAttribute("paging")PagingVO paging,BootcampVO bootcamp) {
+		int rowcount = bootcampDao.getTotalRowCount(paging);      
+	    paging.setTotalRowCount(rowcount);
+	    paging.pageSetting();
 		List<BootcampVO> invisibleList = new ArrayList<BootcampVO>();
 		List<BootcampVO> list = bootcampDao.selectList(paging);
 		ModelAndView mav = new ModelAndView();
 		if(list.size() != 0) {
+			System.out.println(list.size());
 			for(BootcampVO vo: list) {
 				if(vo.getVisible() == 0) {
 					
@@ -107,6 +112,9 @@ public class BootcampController {
 	
 	@GetMapping("/requestDelete") // 등록 요청 삭제
 	public ModelAndView requestDelete(@ModelAttribute("paging")PagingVO paging,BootcampVO bootcamp) {
+		int rowcount = bootcampDao.getTotalRowCount(paging);      
+	    paging.setTotalRowCount(rowcount);
+	    paging.pageSetting();
 		List<BootcampVO> list = bootcampDao.selectList(paging);
 		List<BootcampVO> invisibleList = new ArrayList<BootcampVO>();
 		ModelAndView mav = new ModelAndView();
@@ -133,13 +141,14 @@ public class BootcampController {
 	public ModelAndView insertManager(BootcampVO bootcamp) {
 		ModelAndView mav = new ModelAndView();
 		BootcampVO vo = bootcampDao.selectOne(bootcamp.getBnum());
-		mav.addObject("vo", vo);
+		mav.addObject("bvo", vo);
 		mav.setViewName("insertManager");
 		return mav;
 	}
 	
-	@PostMapping("/insertManager/result")// 부트캠프 등록 창 => 등록 버튼 클릭 => 사이트 메인 페이지에 등록
-	   public void InsertManagerResult(BootcampVO bootcamp) {
+	@PostMapping(value="/insertManager/result",produces="text/plain; charset=utf-8")// 부트캠프 등록 창 => 등록 버튼 클릭 => 사이트 메인 페이지에 등록
+	@ResponseBody
+	   public String InsertManagerResult(BootcampVO bootcamp) {
 	      
 	      String logoName = bootcamp.getLogoFile().getOriginalFilename(); // 넘겨 받은 파일 이름 추출
 	      String imgName = bootcamp.getImgFile().getOriginalFilename();
@@ -167,6 +176,12 @@ public class BootcampController {
 	      }catch(Exception e) {
 	         e.printStackTrace();
 	      }
+		return "<script>\r\n" + 
+				"  window.onload = function() {\r\n" + 
+				"   alert('~~~');\r\n" + 
+				"   self.close();\r\n" + 
+				"  }\r\n" + 
+				"</script>";
 	      
 	      
 	   }
@@ -176,7 +191,7 @@ public class BootcampController {
 	public ModelAndView updateManager(BootcampVO bootcamp) {
 		ModelAndView mav = new ModelAndView();
 		BootcampVO vo = bootcampDao.selectOne(bootcamp.getBnum());
-		mav.addObject("vo", vo);
+		mav.addObject("bvo", vo);
 		mav.setViewName("updateManager");
 		return mav;
 	}
@@ -223,6 +238,9 @@ public class BootcampController {
 	
 	@GetMapping("/bootcampDelete") // 등록 요청 삭제
 	public ModelAndView bootcampDelete(@ModelAttribute("paging")PagingVO paging,BootcampVO bootcamp) {
+		int rowcount = bootcampDao.getTotalRowCount(paging);      
+	    paging.setTotalRowCount(rowcount);
+	    paging.pageSetting();
 		List<BootcampVO> list = bootcampDao.selectList(paging);
 		List<BootcampVO> visibleList = new ArrayList<BootcampVO>();
 		ModelAndView mav = new ModelAndView();
@@ -271,25 +289,30 @@ public class BootcampController {
 	
 	
 	@GetMapping("/bootcampManagement") //관리자 로그인 시 관리 페이지 에서 등록된 부트캠프만 볼 수 있음   
-	public ModelAndView bootcampManagement(@ModelAttribute("paging")PagingVO paging,BootcampVO bootcamp) {
-		List<BootcampVO> visibleList = new ArrayList<BootcampVO>();
-		List<BootcampVO> list = bootcampDao.selectList(paging);
-		ModelAndView mav = new ModelAndView();
-		if(list.size() != 0) {
-			for(BootcampVO vo: list) {
-				if(vo.getVisible() == 1) {
-					
-					visibleList.add(vo);
-				}
-			}
-			mav.addObject("visibleList",visibleList);
-		}else {
-			mav.addObject("msg", "등록된 부트캠프가 없습니다.");
-		}
-		mav.setViewName("bootcampManagement");
-		return mav;
-		
-	}
-
+	   public ModelAndView bootcampManagement(@ModelAttribute("paging")PagingVO paging,BootcampVO bootcamp) {
+		  int rowcount = bootcampDao.getTotalRowCount(paging);      
+		  paging.setTotalRowCount(rowcount);
+		  paging.pageSetting();     
+		     
+	      List<BootcampVO> visibleList = new ArrayList<BootcampVO>();
+	      List<BootcampVO> list = null;
+	      list = bootcampDao.selectList(paging);
+	      ModelAndView mav = new ModelAndView();
+	      
+	      if(list.size() != 0) {
+	         for(BootcampVO vo: list) {
+	            if(vo.getVisible() == 1) {
+	              
+	               visibleList.add(vo);
+	            }
+	         }
+	         mav.addObject("visibleList",visibleList);
+	      }else {
+	         mav.addObject("msg", "등록된 부트캠프가 없습니다.");
+	      }
+	      mav.setViewName("bootcampManagement");
+	      return mav;
+	      
+	   }
 
 }

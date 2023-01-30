@@ -42,19 +42,19 @@
                 <div class="col-lg-8">
                     <div class="contact-form bg-secondary rounded p-5">
                         <div id="success"></div>
-                        <form name="sentMessage" novalidate="novalidate" method="POST" action="/bootcampmoa/insertManager/result" enctype="multipart/form-data" >
-                        	<input type="hidden" name="bnum" value="${vo.bnum }">
-                        	<input type="hidden" name="mnum" value=${sessionScope.vo.mnum }>  
+                        <form id="insertManager" name="sentMessage" novalidate="novalidate" method="POST" action="/bootcampmoa/insertManager/result" enctype="multipart/form-data" >
+                        	<input type="hidden" name="bnum" value="${bvo.bnum }">
+                        	<input type="hidden" name="mnum" value=${sessionScope.bvo.mnum }>  
                             <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" name="academy" value="${vo.academy }" id="academy" placeholder="학원 명" required="required" data-validation-required-message="학원 명을 입력해주세요" />
+                                <input type="text" class="form-control border-0 p-4" name="academy" value="${bvo.academy }" id="academy" placeholder="학원 명" required="required" data-validation-required-message="학원 명을 입력해주세요" />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" name="program" value="${vo.program }" id="program" placeholder="부트캠프 프로그램 명" required="required" data-validation-required-message="부트캠프 프로그램 이름을 입력해주세요" />
+                                <input type="text" class="form-control border-0 p-4" name="program" value="${bvo.program }" id="program" placeholder="부트캠프 프로그램 명" required="required" data-validation-required-message="부트캠프 프로그램 이름을 입력해주세요" />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" name="url" value="${vo.url }"id="url" placeholder="부트캠프 학원 사이트 주소" required="required" data-validation-required-message="학원 사이트 주소를입력해주세요" />
+                                <input type="text" class="form-control border-0 p-4" name="url" value="${bvo.url }"id="url" placeholder="부트캠프 학원 사이트 주소" required="required" data-validation-required-message="학원 사이트 주소를입력해주세요" />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="control-group">
@@ -73,7 +73,7 @@
                                 <input type="file" class="form-control border-0 p-4" name="imgFile" id="img" required="required" data-validation-required-message="파일을 업로드 해주세요" />
                             <br>    
              				<div class="text-center">
-                                <button class="btn btn-primary py-3 px-5" type="submit" id="sendMessageButton" >등록</button>
+                                <button class="btn btn-primary py-3 px-5" type="submit" id="sendMessageButton" onclick="insertManager();return false">등록</button>
                             </div>
                         </form>
                     </div>
@@ -103,13 +103,7 @@
     <script src="/bootcampmoa/resources/js/main.js"></script>
     
     <!-- 관리자 부트캠프 등록 -->
-    <script>
-    function insertManager(){
-    	
-    	window.close();
-    }
-    
-    </script>
+    <script src="/bootcampmoa/resources/js/abc.js"></script>
     
 </body>
 

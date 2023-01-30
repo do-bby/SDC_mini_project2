@@ -226,7 +226,7 @@
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
                         <img class="img-fluid" src="/bootcampmoa/resources/images/인공지능.png" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="/bootcampmoa/bootcampSearch?keyword=풀스택">
+                        <a class="cat-overlay text-white text-decoration-none" href="/bootcampmoa/bootcampSearch?keyword=인공지능">
                             <h4 class="text-white font-weight-medium">인공지능</h4>
                             <span></span>
                         </a>

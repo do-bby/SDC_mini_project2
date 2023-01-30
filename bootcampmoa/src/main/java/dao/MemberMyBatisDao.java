@@ -12,10 +12,10 @@ import vo.MemberVO;
 public class MemberMyBatisDao {
 	@Autowired
 	SqlSession session = null;
-	public boolean insertM(MemberVO vo) {
+	public boolean insertM(MemberVO mvo) {
 		boolean res = true;
 		String statement = "members.insertMember"; //회원가입
-		if(session.insert(statement,vo) != 1) {
+		if(session.insert(statement,mvo) != 1) {
 			res = false;
 		}
 		return res;
@@ -41,21 +41,21 @@ public class MemberMyBatisDao {
 	
 	
 	public MemberVO getMembervo(int mnum) {
-		MemberVO vo = null;
+		MemberVO mvo = null;
 		try {
 			String statement = "members.getOneMemberInfo";
-			vo = session.selectOne(statement,mnum);
+			mvo = session.selectOne(statement,mnum);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return vo;
+		return mvo;
 	}
 	
-	public boolean updateM(MemberVO vo) {
+	public boolean updateM(MemberVO mvo) {
 		boolean res = false;
 		try {
 			String statement = "members.updateMember"; //회원정보 수정
-			session.update(statement,vo);
+			session.update(statement,mvo);
 			res = true;
 		}catch(Exception e) {
 			e.printStackTrace();

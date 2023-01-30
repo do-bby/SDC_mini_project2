@@ -38,8 +38,8 @@ public class MemberController {
 	
 	
 	@PostMapping("/insertNewmember") /// 회원가입 기능
-	public ModelAndView insert(MemberVO vo) {
-		boolean res = dao.insertM(vo);
+	public ModelAndView insert(MemberVO mvo) {
+		boolean res = dao.insertM(mvo);
 		ModelAndView mav = new ModelAndView();
 		if (res) {
 			mav.addObject("msg", "성공적으로 회원가입이 완료되었습니다");
@@ -52,19 +52,19 @@ public class MemberController {
 	
 	@PostMapping("/memberinfo")
 	public ModelAndView viewinfo(int mnum) {
-		MemberVO vo = dao.getMembervo(mnum);
+		MemberVO mvo = dao.getMembervo(mnum);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("val",vo);
+		mav.addObject("val",mvo);
 		mav.setViewName("updateMemberInfo");
 		return mav;
 	}
 	
 	@PostMapping("/updateMemberInfo") /// 회원정보 수정 기능
-	public ModelAndView update(MemberVO vo) { 
-		boolean res = dao.updateM(vo);
+	public ModelAndView update(MemberVO mvo) { 
+		boolean res = dao.updateM(mvo);
 		ModelAndView mav = new ModelAndView();
 		if (res) {
-			mav.addObject("list",dao.getMemberInfo(vo.getId()));
+			mav.addObject("list",dao.getMemberInfo(mvo.getId()));
 			mav.addObject("msg", "회원정보 수정이 완료되었습니다");
 			mav.setViewName("memberInfo"); // 회원정보 수정 후 회원정보 조회창 이동
 		} else {
@@ -81,11 +81,11 @@ public class MemberController {
 		HttpSession session = request.getSession(false);
 		int res = 0;
 		if (session != null) {
-			MemberVO svo = (MemberVO) session.getAttribute("vo");
-			MemberVO val = dao.getMembervo(svo.getMnum());
+			MemberVO mvo = (MemberVO) session.getAttribute("svo");
+			MemberVO val = dao.getMembervo(mvo.getMnum());
 			String actualPassword = val.getPwd(); // password출력
 			if (actualPassword.equals(password)) { // 실제 비번과 입력비번 비교
-				dao.deleteMember(svo.getId());
+				dao.deleteMember(mvo.getId());
 				session.invalidate();
 				res = 1; //성공
 			} else {
@@ -103,8 +103,8 @@ public class MemberController {
 	@ResponseBody
 	public ModelAndView list_info(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        MemberVO vo = (MemberVO) session.getAttribute("vo");
-		List<MemberVO> list = dao.getMemberInfo(vo.getId());
+        MemberVO mvo = (MemberVO) session.getAttribute("svo");
+		List<MemberVO> list = dao.getMemberInfo(mvo.getId());
         ModelAndView mav = new ModelAndView();
         if (list.size() != 0) {
 			mav.addObject("list", list);
@@ -138,7 +138,7 @@ public class MemberController {
 	 	
 	 @RequestMapping("/uploadProfile")
 	 @ResponseBody
-		public Map<String, Object> saveFile(MemberVO vo, @RequestParam("uploadProfile") MultipartFile profile) {
+		public Map<String, Object> saveFile(MemberVO mvo, @RequestParam("uploadProfile") MultipartFile profile) {
 			String fileName = profile.getOriginalFilename();
 
 			int res = 0;
@@ -164,10 +164,10 @@ public class MemberController {
 	     } else {	    	 
 	         try {
 	             Files.write(path, byteArray); //파일 저장
-	             vo.setProfile(fileName);
+	             mvo.setProfile(fileName);
 	             res = 3;
 	             result.put("res", res);
-	             result.put("vo", vo);
+	             result.put("vo", mvo);
 	         } catch (IOException e) { //파일 저장 중 예외 발생
 	             e.printStackTrace();
 	             res = 4;

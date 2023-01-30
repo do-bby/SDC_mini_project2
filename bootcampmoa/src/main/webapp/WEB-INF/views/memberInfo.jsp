@@ -88,16 +88,16 @@
 <c:if test="${ !empty list }" > 
 	<h2 onload="location.href='/bootcampmoa/viewMemberInfo">회원정보 조회</h2>
 	<table class="userinfo">
-		<c:forEach var="vo" items="${list}">
+		<c:forEach var="e" items="${list}">
 		<tr>
 			<td>프로필 사진</td>	
-			<td><img src="resources/profiles/${vo.profile}" width="100" height="100"></td>
+			<td><img src="resources/profiles/${e.profile}" width="100" height="100"></td>
 			
 		</tr>
 		
 			<tr>
 			<td>아이디</td>
-			<td>${vo.id}</td>
+			<td>${e.id}</td>
 			</tr>
 			
 			<tr>
@@ -107,34 +107,34 @@
 			
 			<tr>
 			<td>이름</td>
-			<td>${vo.name}</td>
+			<td>${e.name}</td>
 			</tr>
 			
 			<tr>
 			<td>이메일</td>
-			<td>${vo.email}</td>
+			<td>${e.email}</td>
 			</tr>
 			
 			<tr>
 			<td>전화번호</td>
-			<td>${vo.phone}</td>
+			<td>${e.phone}</td>
 			</tr>
 			
 			<tr>
 			<td>닉네임</td>
-			<td>${vo.nickname}</td>
+			<td>${e.nickname}</td>
 			</tr>
 			
 			<tr>
 			<td>보안 질문</td>
-			<td>${vo.question}</td>
+			<td>${e.question}</td>
 			</tr>
 			
 			<tr>
 			<td>답변</td>
-			<td>${vo.answer}</td>
+			<td>${e.answer}</td>
 			</tr>
-			<c:set var="mnum" value="${vo.mnum}"/>
+			<c:set var="mnum" value="${e.mnum}"/>
 		</c:forEach>
 	</table>
 </c:if>
@@ -147,7 +147,6 @@
 
 	
 	<button type="button" onclick= "location.href='bootmoaMain'">메인페이지로 돌아가기</button>
-	<%-- <button type="button" onclick="location.href='/bootcampmoa/memberinfo?mnum=${mnum}'">회원정보 수정</button> --%>
 	<form action="/bootcampmoa/memberinfo" method="post">
   <input type="hidden" name="mnum" value="${mnum}">
   <button type="submit">회원정보 수정</button>

@@ -344,12 +344,7 @@ function handleData(data){
 $(document).ready(function() {
 	$('#upload-profile-btn').click(function(e) {
 		e.preventDefault();
-		
-		/* const fileInput = document.querySelector('#upload');
-		var savedInput = ${vo.getProfile()};
-		if (!fileInput.files.length || fileInput.files[0].name ==savedInput){
-			$('#hiddenProfile').attr("value",savedInput);
-		}else{ */
+
 		var formData = new FormData();
 		formData.append('uploadProfile', $('input[name="uploadProfile"]')[0].files[0]);
 

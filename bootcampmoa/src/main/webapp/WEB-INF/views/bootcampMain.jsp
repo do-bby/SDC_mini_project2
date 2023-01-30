@@ -304,7 +304,7 @@
 			                                <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>${vo.academy }</small>
 			                                <small class="m-0"></i></small>
                            	 			</div>
-                            			<a class="h5" href="/bootcampmoa/bootcamp/${vo.bnum}/reviews">${vo.program }</a>
+                            			<a class="h5" href="/bootcampmoa/bootcamp/${vo.bnum}">${vo.program }</a>
                             			<div class="border-top mt-4 pt-4">
                                 			<div class="d-flex justify-content-between">
                                     			<h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(리뷰 개수)</small></h6>

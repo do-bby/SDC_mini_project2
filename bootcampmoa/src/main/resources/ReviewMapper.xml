@@ -13,12 +13,7 @@
 	</select>
 	<select id="selectOneReview"  resultType="vo.ReviewVO" parameterType="_int" >
        select rnum, good, bad, total, teachsat, edusat, learnsat, rdate, mnum, bnum from review where rnum = #{rnum}
-    </select>
-    <select id = "pagingReview">
-    	select rnum,good,bad,total, teachsat, edusat, learnsat,rdate,mnum,bnum,rownum from 
-		(select rnum, good,bad, total, teachsat, edusat, learnsat,rdate,mnum,bnum, rownum from review)
-		where rownum between 1 and 7;
-    </select>
+    </select>    
     <insert id="insertReview"  parameterType="vo.ReviewVO">
         <selectKey resultType="_int" keyProperty="rnum" order="BEFORE">
             select reviewseq.nextval from dual     

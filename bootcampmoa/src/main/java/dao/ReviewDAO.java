@@ -47,7 +47,7 @@ public class ReviewDAO {
 		boolean result = false;
 		try {
 			String statement = "review.insertReview";
-			session.insert(statement, vo);
+			session.insert(statement, vo);				
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();

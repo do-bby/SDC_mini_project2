@@ -149,48 +149,49 @@
                 <div class="col-lg-8">
                     <!-- review update Form -->
                     <div class="bg-secondary rounded p-5">
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Leave a comment</h3>
-                        <form method = "post" action = "/bootcampmoa/review/updatereview">                        	
+                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Leave a review</h3>
+                        <form method = "post" action = "/bootcampmoa/review/insertreview">
+                        	                        	                         	                       
                             <div class="form-group">
-                            	<input type="hidden" name="rnum" value="${vo.rnum}">
-                                <label for="good">good</label>                                
-                                <input id="good" type="text"  name="good" value="${ vo.good }" class="form-control border-0">
+                                <label for="good">장점</label>                                
+                                <input id="good" type="text"  name="good" class="form-control border-0">
                             </div>
                             <div class="form-group">
-                                <label for="bad">bad</label>                                
-                                <input id="bad" type="text"  name="bad" value="${ vo.bad }" class="form-control border-0">
+                                <label for="bad">단점</label>                                
+                                <input id="bad" type="text"  name="bad" class="form-control border-0">
                             </div>
                             <div class="form-group">
-                                <label for="total">total</label>
-                                <input id="total" type="text" name="total" value="${ vo.total }" class="form-control border-0">
+                                <label for="total">총 점</label>
+                                <input id="total" type="text" name="total" class="form-control border-0">
                             </div>
 							<div class="form-group">
-                                <label for="teachsat">teach</label>
-                                <input id="teachsat" type="text" name="teachsat" value="${ vo.teachsat }" class="form-control border-0">
+                                <label for="teachsat">강사진</label>
+                                <input id="teachsat" type="text" name="teachsat" class="form-control border-0">
                             </div>
                             <div class="form-group">
-                                <label for="edusat">edu</label>
-                                <input id="edusat" type="text" name="edusat" value="${ vo.edusat }" class="form-control border-0">
+                                <label for="edusat">교육환경</label>
+                                <input id="edusat" type="text" name="edusat" class="form-control border-0">
                             </div>
                             <div class="form-group">
-                                <label for="learnsat">learn</label>
-                                <input id="learnsat" type="text" name="learnsat" value="${ vo.learnsat }" class="form-control border-0">
+                                <label for="learnsat">학습만족도</label>
+                                <input id="learnsat" type="text" name="learnsat" class="form-control border-0">
                             </div>
                             <div class="form-group">
-                                <label for="rdate">date</label>
-                                <input id="rdate" type="text" name="rdate" value="${ vo.rdate }" class="form-control border-0">
+                                <label for="rdate">작성날짜</label>
+                                <input id="rdate" type="text" name="rdate" class="form-control border-0">
                             </div>
-                            <input type="text" name="bnum" value="${ vo.bnum }">
-                            <input type="text" name="mnum" value="${ vo.mnum }">                                                       
+                            <input type="hidden" name="bnum" value="${bvo.bnum}">
+                            <input type="hidden" name="mnum" value="1">                                                       
                             <div class="form-group mb-0">
                                 <input type="submit" value="Leave Review" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold">
                             </div>
                         </form>
+                        
                     </div>
                 </div>
 
-                <div class="col-lg-4 mt-5 mt-lg-0">                    
-
+                <div class="col-lg-4 mt-5 mt-lg-0">
+                    
                     <!-- Search Form -->
                     <div class="mb-5">
                         <form action="">
@@ -261,8 +262,8 @@
                     <div class="mb-5">
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
                         <div class="d-flex flex-wrap m-n1">
-                            <a href="" class="btn btn-outline-primary m-1">Design</a>
-                            <a href="" class="btn btn-outline-primary m-1">Development</a>                            
+                            <a href="" class="btn btn-outline-primary m-1">${bvo.academy}</a>
+                            <a href="" class="btn btn-outline-primary m-1">${bvo.program}</a>                            
                         </div>
                     </div>
                 </div>

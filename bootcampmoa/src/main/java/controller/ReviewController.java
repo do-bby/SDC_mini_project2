@@ -26,7 +26,7 @@ public class ReviewController {
 	ReviewDAO dao;
 	@Autowired
 	BootcampDAO bdao;
-	@GetMapping("/bootcamp/{bnum}/reviews")
+	@GetMapping("/bootcamp/{bnum}")
 	public ModelAndView list(@ModelAttribute("paging")PagingVO paging, @PathVariable int bnum) {
 		int rowcount = dao.getTotalRowCount(paging);		
 		paging.setTotalRowCount(rowcount);
@@ -52,42 +52,29 @@ public class ReviewController {
 		return mav;
 	}
 	
-	@GetMapping("/review/delete")
+	@GetMapping("/review/deletereview")
 	public String delete(@ModelAttribute("paging")PagingVO paging,int id) {
-		boolean result = dao.delete(id);
-		ModelAndView mav = new ModelAndView();	
-		if (result) {
-			mav.addObject("list", dao.selectall(paging));
-		} else {
-			mav.addObject("msg", "삭제를 처리하는 동안 오류 발생");
-		}
+		dao.delete(id);			
 		return "redirect:/bootmoaMain";
 	}
-	
-	@PostMapping("/review/insert")
-	public String insert(@ModelAttribute("paging")PagingVO paging,ReviewVO vo) {
-		boolean result = dao.insert(vo);
+	@GetMapping("/bootcamp/review/{bnum}")
+	public ModelAndView insertreview(@PathVariable int bnum) {		
 		ModelAndView mav = new ModelAndView();
-		if(result) {
-			mav.addObject("list",dao.selectall(paging));
-		}
-		else {
-			mav.addObject("msg","등록에 실패했습니다.");
-		}
-		return "redirect:/reviews";
+		BootcampVO bvo = bdao.selectOne(bnum); 
+		mav.addObject("bvo",bvo);
+		mav.setViewName("insertReview");
+		return mav;
 	}
-	
-	@PostMapping("/review/update")
-	public String update(@ModelAttribute("paging")PagingVO paging,ReviewVO vo) {
-		boolean result = dao.update(vo);		
-		ModelAndView mav = new ModelAndView();
-		if(result) {
-			mav.addObject("list",dao.selectall(paging));
-		}
-		else {
-			mav.addObject("msg","등록에 실패했습니다.");
-		}
+	@PostMapping("/review/insertreview")
+	public String insert(ReviewVO vo) {
+		dao.insert(vo);		
 		return "redirect:/bootmoaMain";
 	}
-	
+
+	@PostMapping("/review/updatereview")
+	public String update(ReviewVO vo) {
+		dao.update(vo);				
+		return "redirect:/bootmoaMain";
+	}
+
 }

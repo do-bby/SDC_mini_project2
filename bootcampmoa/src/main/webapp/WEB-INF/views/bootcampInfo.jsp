@@ -134,7 +134,8 @@
                 <div class="d-inline-flex text-white">
                     <p class="m-0 text-uppercase"><a class="text-white" href="/bootcampmoa/bootmoaMain">홈</a></p>
                     <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                    <p class="m-0 text-uppercase">${bvo.program }</p>
+                    <p class="m-0 text-uppercase">${bvo.program }</p>${vo.bnum}
+                    <a href="/bootcampmoa/bootcamp/review/${bvo.bnum}" class="btn btn-outline-primary m-1">리뷰 등록하기</a>
                 </div>
             </div>
         </div>
@@ -151,7 +152,7 @@
             				<c:forEach var = "vo" items = "${list}">            						
 		            			<div class="col-lg-6 mb-4">
 		                            <div class="blog-item position-relative overflow-hidden rounded mb-2">
-		                            	<img class="img-fluid" src="/bootcampmoa/resources/images/플레이데이터로고.png">		          
+		                            	<img class="img-fluid" src="/bootcampmoa/resources/images/${bvo.logo}">		          
 		                                <a class="blog-overlay text-decoration-none" href="">
 		                                <h5 class="text-white mb-3">장점 : ${vo.good }</h5>
 		                                <h5 class="text-white mb-3">단점 : ${vo.bad }</h5>		                                
@@ -162,7 +163,7 @@
 		                                <p class="text-primary m-0">작성 날짜 : ${vo.rdate }</p>		                                
 										</a>										
 		                            </div>
-		                            <a href="/bootcampmoa/review/delete?id=${vo.rnum}" class="btn btn-outline-primary m-1">삭제</a>
+		                            <a href="/bootcampmoa/review/deletereview?id=${vo.rnum}" class="btn btn-outline-primary m-1">삭제</a>
 		                            <a href="/bootcampmoa/review?id=${vo.rnum}" class="btn btn-outline-primary m-1">수정</a>
 		                        </div>		                     
 							</c:forEach>

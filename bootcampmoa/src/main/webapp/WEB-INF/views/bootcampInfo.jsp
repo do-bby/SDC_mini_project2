@@ -163,8 +163,10 @@
 		                                <p class="text-primary m-0">작성 날짜 : ${rvo.rdate }</p>		                                
 										</a>										
 		                            </div>
-		                            <a href="/bootcampmoa/review/deletereview?id=${rvo.rnum}" class="btn btn-outline-primary m-1">삭제</a>
-		                            <a href="/bootcampmoa/review?id=${rvo.rnum}" class="btn btn-outline-primary m-1">수정</a>
+		                            <c:if test="${rvo.mnum} eq ${sessionScope.svo.mnum}">
+			                            <a href="/bootcampmoa/review/deletereview?id=${rvo.rnum}" class="btn btn-outline-primary m-1">삭제</a>
+			                            <a href="/bootcampmoa/review?id=${rvo.rnum}" class="btn btn-outline-primary m-1">수정</a>
+		                            </c:if>
 		                        </div>		                     
 							</c:forEach>
             			</c:if>

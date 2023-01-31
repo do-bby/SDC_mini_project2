@@ -197,8 +197,8 @@
                                 <input id="learnsat" type="text" name="learnsat" class="form-control border-0">
                             </div>                            
                             <input type="hidden" name="bnum" value="${bvo.bnum}">
-                            <input type="hidden" name="mnum" value="1">
-                            <input type="hidden" name="mnum2" value="${sessionScope.svo.mnum}">                                                        
+                            
+                            <input type="hidden" name="mnum" value="${sessionScope.svo.mnum}">                                                        
                             <div class="form-group mb-0">
                                 <input type="submit" value="Leave Review" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold">
                             </div>

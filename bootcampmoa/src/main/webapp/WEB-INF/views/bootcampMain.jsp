@@ -218,7 +218,7 @@
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
                         <img class="img-fluid" src="/bootcampmoa/resources/images/풀스택.png"  alt="">
                         <a class="cat-overlay text-white text-decoration-none" href="/bootcampmoa/bootcampSearch?keyword=풀스택">
-                            <h4 class="text-white font-weight-medium">풀스텍</h4>
+                            <h4 class="text-white font-weight-medium">풀스택</h4>
                             <span></span>
                         </a>
                     </div>

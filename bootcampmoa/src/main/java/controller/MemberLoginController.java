@@ -44,6 +44,10 @@ public class MemberLoginController {
 	@PostMapping("/selectLoginMember")
 	@ResponseBody //여기 값을 jsp body로 넘길때 사용
 	public ModelAndView selectLoginMember(@ModelAttribute("paging")PagingVO paging,HttpServletRequest request ,MemberVO vo) {
+		int rowcount = bootcampDao.getTotalRowCount(paging);      
+	    paging.setTotalRowCount(rowcount);
+	    paging.pageSetting();
+	    
 		HttpSession session;
 		ModelAndView mav = new ModelAndView();
 		List<BootcampVO> list = bootcampDao.selectList(paging);

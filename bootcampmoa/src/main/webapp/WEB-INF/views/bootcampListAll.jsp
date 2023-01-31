@@ -226,7 +226,7 @@
                 <div class="col-lg-4 mt-5 mt-lg-0">
                     <!-- Author Bio -->
                     <div class="d-flex flex-column text-center bg-dark rounded mb-5 py-5 px-4">
-                        <img src="resources/images/${sessionScope.svo.profile }.png" class=" rounded-circle mx-auto mb-3" style="width: 100px;">
+                        <img src="resources/profiles/${svo.profile}" class=" rounded-circle mx-auto mb-3" style="width: 100px;">
                         <h3 class="text-primary mb-3">${sessionScope.svo.nickname }</h3>
                         <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Profile</h3>
                         <p class="text-white m-0"></p>

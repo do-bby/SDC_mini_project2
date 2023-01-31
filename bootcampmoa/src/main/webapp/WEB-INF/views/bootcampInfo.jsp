@@ -107,7 +107,7 @@
                         <div class="navbar-nav py-0">
                             <a href="/bootcampmoa/bootmoaMain" class="nav-item nav-link active">홈</a>
                             <a href="/bootcampmoa/bootcampListAll" class="nav-item nav-link">부트캠프 리스트 </a>
-                            <a href="course.html" class="nav-item nav-link">부트캠프 검색</a>
+                            <a href="/bootcampmoa/bootcampSearch" class="nav-item nav-link">부트캠프 검색</a>
                             <a href="/bootcampmoa/bootcampInsertRequest" class="nav-item nav-link">등록요청</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">마이페이지</a>
@@ -163,10 +163,9 @@
 		                                <p class="text-primary m-0">작성 날짜 : ${rvo.rdate }</p>		                                
 										</a>										
 		                            </div>
-		                            <c:if test="${rvo.mnum} eq ${sessionScope.svo.mnum}">
-			                            <a href="/bootcampmoa/review/deletereview?id=${rvo.rnum}" class="btn btn-outline-primary m-1">삭제</a>
-			                            <a href="/bootcampmoa/review?id=${rvo.rnum}" class="btn btn-outline-primary m-1">수정</a>
-		                            </c:if>
+			                        <a href="/bootcampmoa/review/deletereview?id=${rvo.rnum}" class="btn btn-outline-primary m-1">삭제</a>
+			                        <a href="/bootcampmoa/review?id=${rvo.rnum}" class="btn btn-outline-primary m-1">수정</a>
+		                            
 		                        </div>		                     
 							</c:forEach>
             			</c:if>
@@ -214,67 +213,21 @@
                 </div>
     
                 <div class="col-lg-4 mt-5 mt-lg-0">
-                    <!-- Author Bio -->
-                    <div class="d-flex flex-column text-center bg-dark rounded mb-5 py-5 px-4">
-                        <img src="/bootcampmoa/resources/images/${sessionScope.vo.profile }.png" class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px;">
-                        <h3 class="text-primary mb-3">${sessionScope.vo.nickname }</h3>
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
-                        <p class="text-white m-0">Conset elitr erat vero dolor ipsum et diam, eos dolor lorem, ipsum sit no ut est  ipsum erat kasd amet elitr</p>
-                    </div>
+                    
     
                     <!-- Search Form -->
                     <div class="mb-5">
-                        <form action="">
-                            <div class="input-group">
-                                <input type="text" class="form-control form-control-lg" placeholder="학원 /부트캠프 명을 검색하세요">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-transparent text-primary"><i
-                                            class="fa fa-search"></i></span>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-    
-                    <!-- Category List -->
-                    <div class="mb-5">
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Categories</h3>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Web Design</a>
-                                <span class="badge badge-primary badge-pill">150</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Web Development</a>
-                                <span class="badge badge-primary badge-pill">131</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Online Marketing</a>
-                                <span class="badge badge-primary badge-pill">78</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Keyword Research</a>
-                                <span class="badge badge-primary badge-pill">56</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Email Marketing</a>
-                                <span class="badge badge-primary badge-pill">98</span>
-                            </li>
-                        </ul>
+                        <form action="/bootcampmoa/bootcampSearch">
+				        	<div class="input-group">
+				            	<input type="text" name="keyword" class="form-control form-control-lg" placeholder="부트캠프 명을 검색하세요 ex)인공지능,백엔드">
+				                <button type="submit" class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block">
+				              			search
+				            	</button>
+				           </div>
+	     				</form>
                     </div>
     
     
-                    <!-- Tag Cloud -->
-                    <div class="mb-5">
-                        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h3>
-                        <div class="d-flex flex-wrap m-n1">
-                            <a href="" class="btn btn-outline-primary m-1">Design</a>
-                            <a href="" class="btn btn-outline-primary m-1">Development</a>
-                            <a href="" class="btn btn-outline-primary m-1">Marketing</a>
-                            <a href="" class="btn btn-outline-primary m-1">SEO</a>
-                            <a href="" class="btn btn-outline-primary m-1">Writing</a>
-                            <a href="" class="btn btn-outline-primary m-1">Consulting</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
